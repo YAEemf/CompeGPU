@@ -1,5 +1,5 @@
-import {compareCC, speedup} from './model.mjs';
-import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs';
+import {compareCC, speedup} from './model.mjs?v=20261112-accelerators';
+import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261112-accelerators';
 import {displayGPUName} from './gpu-name.mjs';
 
 const $ = id => document.getElementById(id);
@@ -24,6 +24,12 @@ export class TableUI {
     try {this.addPriceColumn=localStorage.getItem('gpu-compare.price-column.v1')!=='true';} catch {}
     this.addDetailColumns=true;
     try {this.addDetailColumns=localStorage.getItem('gpu-compare.detail-columns.v1')!=='true';} catch {}
+    this.addAPUColumns=true;
+    try {this.addAPUColumns=localStorage.getItem('gpu-compare.apu-columns.v1')!=='true';} catch {}
+    this.addAcceleratorColumns=true;
+    try {this.addAcceleratorColumns=localStorage.getItem('gpu-compare.accelerator-columns.v1')!=='true';} catch {}
+    this.addAcceleratorMeasurements=true;
+    try {this.addAcceleratorMeasurements=localStorage.getItem('gpu-compare.accelerator-measurements.v1')!=='true';} catch {}
     $('valueMode').value=this.mode;
     this.transposed = layout?.transposed !== false;
     this.gpuOrder = Array.isArray(layout?.gpuOrder) ? layout.gpuOrder.filter(id=>typeof id==='string') : [];
@@ -39,7 +45,7 @@ export class TableUI {
     this.rangeIds = ['cc','memory_gb','power_w']; this.ranges = {}; this.columns = []; this.selected = [];
     $('showColumns').onclick = () => {this.renderColumns(); $('columnsDialog').showModal();};
     $('closeColumns').onclick = () => $('columnsDialog').close();
-    $('defaultColumns').onclick = () => {this.selected = cleanColumns(this.mode==='measured'?this.getDefinitions().map(m=>m.id):DEFAULT_COLUMNS,this.columns); this.changed();};
+    $('defaultColumns').onclick = () => {this.selected = cleanColumns(this.mode==='measured'?this.getDefinitions().map(m=>m.id):this.nominalDefaults(),this.columns); this.changed();};
     $('clearColumns').onclick = () => {this.selected = []; this.changed();};
     $('columnSearch').oninput = () => this.renderAvailable();
     $('availableColumns').onchange = event => {
@@ -146,10 +152,12 @@ export class TableUI {
   sortGPUs(gpus) {return this.manualOrder ? orderGPUs(gpus,orderGPUs(this.getData().gpus,this.gpuOrder).map(g=>g.id)) : gpus;}
   useSortedOrder() {this.manualOrder=false; $('gpuOrderMode').value='sorted'; this.saveLayout();}
   gpuHandle(gpu) {return `<span class="dragHandle" draggable="true" tabindex="0" role="button" data-drag-gpu="${esc(gpu.id)}" title="ドラッグ・矢印キーでGPUを移動" aria-label="${esc(displayGPUName(gpu.name))}の順序を変更">⠿</span>`;}
+  hasAccelerators() {return this.getData().gpus.some(g=>g.category==='AI Accelerator' || g.architecture?.startsWith('CDNA'));}
+  nominalDefaults() {return [...DEFAULT_COLUMNS,...(this.getData().gpus.some(g=>g.category==='APU')?APU_COLUMNS:[]),...(this.hasAccelerators()?ACCELERATOR_COLUMNS:[])];}
   refresh() {
     this.columns = discoverColumns(this.getData().gpus, this.getDefinitions(),{includeCC:this.mode!=='measured'});
     this.byId = new Map(this.columns.map(c=>[c.id,c]));
-    this.selected = cleanColumns(this.saved ?? (this.mode==='measured'?this.getDefinitions().map(m=>m.id):DEFAULT_COLUMNS), this.columns);
+    this.selected = cleanColumns(this.saved ?? (this.mode==='measured'?this.getDefinitions().map(m=>m.id):this.nominalDefaults()), this.columns);
     if (this.mode==='nominal' && this.addPriceColumn && this.byId.has('price_jpy')) {
       if (!this.selected.includes('price_jpy')) this.selected.push('price_jpy');
       this.saved=[...this.selected]; this.modeSelections.nominal=[...this.selected]; this.saveModeColumns();
@@ -162,6 +170,25 @@ export class TableUI {
       this.addDetailColumns=false;
       try {localStorage.setItem('gpu-compare.detail-columns.v1','true');} catch {}
     }
+    if (this.mode==='nominal' && this.addAPUColumns && this.getData().gpus.some(g=>g.category==='APU')) {
+      for (const id of APU_COLUMNS) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+      this.saved=[...this.selected]; this.modeSelections.nominal=[...this.selected]; this.saveModeColumns();
+      this.addAPUColumns=false;
+      try {localStorage.setItem('gpu-compare.apu-columns.v1','true');} catch {}
+    }
+    if (this.mode==='nominal' && this.addAcceleratorColumns && this.hasAccelerators()) {
+      for (const id of ACCELERATOR_COLUMNS) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+      this.saved=[...this.selected]; this.modeSelections.nominal=[...this.selected]; this.saveModeColumns();
+      this.addAcceleratorColumns=false;
+      try {localStorage.setItem('gpu-compare.accelerator-columns.v1','true');} catch {}
+    }
+    if (this.mode==='measured' && this.addAcceleratorMeasurements && this.hasAccelerators()) {
+      const ids=this.getData().gpus.filter(g=>g.category==='AI Accelerator' || g.architecture?.startsWith('CDNA')).flatMap(g=>Object.keys(g.results || {}));
+      for (const id of ids) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+      this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
+      this.addAcceleratorMeasurements=false;
+      try {localStorage.setItem('gpu-compare.accelerator-measurements.v1','true');} catch {}
+    }
     this.rangeIds = this.rangeIds.filter(id=>this.byId.has(id));
     for (const id of Object.keys(this.ranges)) if (!this.byId.has(id)) delete this.ranges[id];
     const old = $('rangeMetric').value;
@@ -173,7 +200,7 @@ export class TableUI {
   value(gpu,id) {
     if (id === 'ratio') {
       const metric = this.getMetric(), baseline = this.getBaseline();
-      if (!metric || metric.type!=='number' || ['ai_tops','ratio'].includes(metric.id) || !baseline) return null;
+      if (!metric || metric.type!=='number' || metric.comparable===false || ['ai_tops','ratio'].includes(metric.id) || !baseline) return null;
       return speedup(this.value(gpu,metric.id),this.value(baseline,metric.id),metric.direction);
     }
     return columnValue(this.getScopedGPU(gpu),this.byId.get(id));

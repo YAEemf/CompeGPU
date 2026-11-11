@@ -2,11 +2,37 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {compareCC, metricValue, selectGPUs, speedup, csv, matchesRange, missingMetricMarker} from '../web/model.mjs';
 import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, orderGPUs, mergeVisibleOrder} from '../web/columns.mjs';
-import {scopedGPU, modeMetrics} from '../web/value-modes.mjs';
+import {scopedGPU, modeMetrics, gpuReferenceURL} from '../web/value-modes.mjs';
 import {formatNumericValue} from '../web/number-format.mjs';
 
 const gpu = (id, cc, value, power=100) => ({id,name:id,cc,architecture:'A',category:'test',form_factor:'PCIe',memory_gb:16,power_w:power,price_jpy:null,performance:value == null ? {} : {cuda_fp32:{value}},results:{}});
 const gpus = [gpu('old','8.9',10),gpu('new','12.0',100),gpu('unknown','9.0',null),gpu('minor','8.10',50)];
+
+test('non-CUDA APU has no invented CC and is excluded by CC filters in either ordering', () => {
+  const apu={...gpu('apu',null,null),field_status:{cc:{status:'not_supported'}}};
+  const mixed=[...gpus,apu];
+  assert.equal(missingMetricMarker(apu,'cc'),'x');
+  for (const direction of ['asc','desc']) {
+    assert.equal(selectGPUs(mixed,{},'cc',direction).at(-1).id,'apu');
+    assert.ok(!selectGPUs(mixed,{cc:'8.0'},'cc',direction).some(g=>g.id==='apu'));
+    assert.ok(!selectGPUs(mixed,{ranges:{cc:{min:'0.0'}}},'cc',direction).some(g=>g.id==='apu'));
+    assert.ok(!selectGPUs(mixed,{exactCC:'8.9'},'cc',direction).some(g=>g.id==='apu'));
+  }
+});
+
+test('GPU reference URL is stable across metrics/modes while per-value provenance stays intact', () => {
+  const reference='https://www.techpowerup.com/gpu-specs/geforce-rtx-4090.c3889';
+  const sample={...gpu('test','8.9',1),reference_url:reference,
+    sources:[{id:'spec',url:'https://example.org/spec'}, {id:'measurement',url:'https://example.org/measurement'}],
+    performance:{cuda_fp32:{value:1,kind:'published',source:'spec'}},
+    results:{bench:{value:2,kind:'measured',source:'measurement'}}};
+  assert.equal(gpuReferenceURL(sample,'cuda_fp32','nominal'),reference);
+  assert.equal(gpuReferenceURL(sample,'bench','measured'),reference);
+  assert.equal(sample.performance.cuda_fp32.source,'spec');
+  assert.equal(gpuReferenceURL({...sample,reference_url:null},'bench','measured'),'https://example.org/measurement');
+  assert.equal(gpuReferenceURL({...sample,reference_url:null},'missing','nominal'),'https://example.org/spec');
+  assert.equal(gpuReferenceURL({...sample,reference_url:'javascript:alert(1)'},'cuda_fp32','nominal'),null);
+});
 
 test('one-decimal rounding applies only to compute performance and its comparisons', () => {
   const performance={id:'cuda_fp32',unit:'TFLOPS'};

@@ -55,10 +55,11 @@ def validate(data):
         gpu_ids.add(gpu['id'])
         for key in ('name', 'architecture', 'category', 'form_factor'):
             require(nonempty(gpu.get(key)), f"{gpu['id']}: {key} が必要です")
-        require(isinstance(gpu.get('cc'), str) and re.fullmatch(r'\d+\.\d+', gpu['cc']), 'CC は 8.9 のような文字列です')
+        require(gpu.get('cc') is None or (isinstance(gpu.get('cc'), str) and re.fullmatch(r'\d+\.\d+', gpu['cc'])), 'CC は 8.9 のような文字列、CUDA非対応機種は null です')
         for key in ('memory_gb', 'bandwidth_gbs', 'power_w', 'price_jpy'):
             require(gpu.get(key) is None or number(gpu[key]), f'{key} は非負の数値か null です')
         require(gpu.get('purchase_url') in (None, '') or url(gpu['purchase_url']), '購入リンクは http(s) URL を1件指定してください')
+        require(gpu.get('reference_url') in (None, '') or url(gpu['reference_url']), 'GPU名から開く出典リンクは http(s) URL を1件指定してください')
         require(isinstance(gpu.get('sources'), list), 'sources は配列です')
         source_ids = set()
         for source in gpu['sources']:
@@ -93,12 +94,16 @@ def make_handler(data_path):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=str(ROOT / 'web'), **kwargs)
 
+        def end_headers(self):
+            # Local UI files change in place; never reuse an earlier UI bundle.
+            self.send_header('Cache-Control', 'no-store')
+            super().end_headers()
+
         def json_response(self, status, body):
             raw = json.dumps(body, ensure_ascii=False).encode('utf-8')
             self.send_response(status)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.send_header('Content-Length', str(len(raw)))
-            self.send_header('Cache-Control', 'no-store')
             self.end_headers()
             self.wfile.write(raw)
 
@@ -108,6 +113,10 @@ def make_handler(data_path):
                     raw = data_path.read_bytes()
                 self.json_response(200, {'data': json.loads(raw), 'revision': revision(raw)})
             else:
+                # Also refresh clients that cached files before no-store was added.
+                for header in ('If-Modified-Since', 'If-None-Match'):
+                    if header in self.headers:
+                        del self.headers[header]
                 super().do_GET()
 
         def do_POST(self):

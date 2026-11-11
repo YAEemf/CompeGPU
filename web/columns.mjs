@@ -1,11 +1,15 @@
-import {metricValue} from './model.mjs';
+import {metricValue} from './model.mjs?v=20261112-accelerators';
 
 export const GPU_DETAIL_COLUMNS = ['field:/architecture', 'field:/connection_type', 'field:/cooling_type', 'field:/board_variant', 'field:/slot_count'];
+export const APU_COLUMNS = ['gpu_fp64','gpu_fp32','gpu_fp16','gpu_matrix_fp16_acc16_dense','field:/cpu_cores','field:/cpu_threads','npu_ai_tops','platform_ai_tops'];
+export const ACCELERATOR_COLUMNS = ['matrix_fp64_dense','matrix_fp32_dense','matrix_tf32_acc32_dense','matrix_fp16_acc32_dense','matrix_bf16_acc32_dense','matrix_fp8_acc32_dense','matrix_int8_acc32_dense','vector_bf16','gpu_fp32_packed'];
 export const DEFAULT_COLUMNS = ['cc', 'memory_gb', 'bandwidth_gbs', 'cuda_fp64', 'cuda_fp32', 'cuda_fp16',
   'tensor_fp32_dense', 'tensor_tf32_dense', 'tensor_fp16_dense', 'tensor_bf16_dense', 'price_jpy', ...GPU_DETAIL_COLUMNS];
 const names = {id:'GPU ID', architecture:'世代（アーキテクチャ）', category:'カテゴリ', form_factor:'構成（元の表記）',
   connection_type:'接続形式', cooling_type:'冷却方式', board_variant:'ボード仕様', slot_count:'占有スロット数', notes:'GPUメモ',
-  sources:'出典一覧 (JSON)', performance:'理論性能一覧 (JSON)', results:'実測結果一覧 (JSON)',purchase_url:'購入リンク'};
+  sources:'出典一覧 (JSON)', performance:'理論性能一覧 (JSON)', results:'実測結果一覧 (JSON)',purchase_url:'購入リンク',reference_url:'GPU名から開く出典URL',
+  cpu_cores:'CPUコア数',cpu_threads:'CPUスレッド数',cpu_architecture:'CPU世代',cpu_base_clock_ghz:'CPUベースクロック',cpu_max_boost_ghz:'CPU最大Boost',
+  compute_units:'GPU CU数',gpu_model:'内蔵GPU',llvm_target:'ROCmターゲット',memory_scope:'メモリの対象範囲',power_scope:'電力の対象範囲',power_min_w:'電力設定の下限',power_max_w:'電力設定の上限'};
 const pointer = path => 'field:' + path.map(part => '/' + part.replaceAll('~','~0').replaceAll('/','~1')).join('');
 export function fieldValue(gpu, path) {
   let value = gpu;

@@ -19,7 +19,7 @@ export function metricValue(gpu, key) {
 }
 
 export function missingMetricMarker(gpu, key) {
-  return gpu.metric_status?.[key]?.status === 'not_supported' ? 'x' : '—';
+  return (gpu.metric_status?.[key] || gpu.field_status?.[key])?.status === 'not_supported' ? 'x' : '—';
 }
 
 export function matchesRange(value, range, isCC = false) {
@@ -42,7 +42,7 @@ export function selectGPUs(gpus, filters, key, direction = 'desc', getValue = me
     (!filters.query || `${g.name} ${displayGPUName(g.name)} ${g.architecture} ${g.form_factor} ${g.connection_type||''} ${g.cooling_type||''} ${g.board_variant||''}`.toLowerCase().includes(filters.query.toLowerCase())) &&
     (!filters.architecture || g.architecture === filters.architecture) &&
     (!filters.category || g.category === filters.category) &&
-    (!filters.cc || compareCC(g.cc, filters.cc) >= 0) &&
+    (!filters.cc || (g.cc != null && compareCC(g.cc, filters.cc) >= 0)) &&
     (!filters.exactCC || g.cc === filters.exactCC) &&
     (!(filters.memory > 0) || (g.memory_gb != null && g.memory_gb >= filters.memory)) &&
     (!(filters.power > 0) || (g.power_w != null && g.power_w <= filters.power)) &&

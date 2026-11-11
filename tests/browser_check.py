@@ -45,6 +45,23 @@ def run(channel=None):
                     button=page.locator(f'[data-baseline="{id}"]')
                     if button.get_attribute('aria-pressed')!='true':
                         button.click()
+                    expect(button).to_have_attribute('aria-pressed','true')
+                def check_gpu_name_actions():
+                    expect(page.locator('[data-edit], .gpuActions, .sourceLink')).to_have_count(0)
+                    name=page.locator('[data-baseline="rtx5090"]')
+                    baseline=name.get_attribute('aria-pressed')
+                    page.evaluate('window.originalOpen=window.open; window.open=(...args)=>{window.openedSource=args[0];}')
+                    name.click(modifiers=['Control'])
+                    source=page.evaluate('window.openedSource')
+                    assert source and source.startswith('https://')
+                    page.evaluate('() => {window.open=window.originalOpen;}')
+                    expect(name).to_have_attribute('aria-pressed',baseline)
+                    name.dblclick()
+                    expect(page.locator('#editor')).to_be_visible()
+                    expect(page.locator('#gpuForm [name="id"]')).to_have_value('rtx5090')
+                    page.keyboard.press('Escape')
+                    page.wait_for_timeout(450)
+                    expect(name).to_have_attribute('aria-pressed',baseline)
                 page.goto(f'http://127.0.0.1:{server.server_port}')
                 expect(page.locator('table.transposed')).to_have_count(1)
                 expect(page.locator('#tableHead > th[data-gpu]')).to_have_count(8)
@@ -61,6 +78,7 @@ def run(channel=None):
                 expect(page.locator('#saveState')).to_have_text('表示設定を保存済み')
                 assert data_path.read_bytes()==initial_file
                 assert not (data_path.parent/'backups').exists()
+                check_gpu_name_actions()
                 expect(page.locator('.gpuHeader .sub')).to_have_count(0)
                 expect(page.locator('[data-cell="field:/architecture"][data-gpu="rtx5090"]')).to_have_text('Blackwell')
                 toggle_box=page.locator('#toggleFilters').bounding_box()
@@ -114,6 +132,7 @@ def run(channel=None):
                 page.click('#closeColumns')
                 page.click('#transpose')
                 expect(page.locator('table.transposed')).to_have_count(0)
+                check_gpu_name_actions()
                 page.locator('#tableBody [data-drag-gpu="l40s"]').drag_to(page.locator('#tableBody > tr[data-gpu="rtx5090"]'))
                 assert page.locator('#tableBody > tr[data-gpu]').first.get_attribute('data-gpu')=='l40s'
                 page.select_option('#gpuOrderMode','sorted')
@@ -237,7 +256,7 @@ def run(channel=None):
                 page.locator('#purchaseLinkForm button[type=submit]').click()
                 expect(page.locator('#purchaseLinkDialog')).not_to_be_visible()
                 # Editing a note must preserve a derived metric's provenance.
-                page.locator('[data-edit="rtx5090"]').click()
+                page.locator('[data-baseline="rtx5090"]').dblclick()
                 page.locator('#gpuForm [name="notes"]').fill('QA note')
                 page.keyboard.press('Control+s')
                 expect(page.locator('#editor')).not_to_be_visible()
@@ -246,12 +265,12 @@ def run(channel=None):
                 record = next(g for g in saved['gpus'] if g['id'] == 'rtx5090')['performance']['cuda_fp32']
                 assert record['kind'] == 'derived' and record['note']
                 assert next(g for g in saved['gpus'] if g['id']=='rtx5090')['notes']=='QA note'
-                page.locator('[data-edit="qa-gpu"]').click()
+                page.locator('[data-baseline="qa-gpu"]').dblclick()
                 page.locator('#gpuForm [name="name"]').fill('QA GPU edited')
                 page.locator('#gpuForm button[type=submit]').click()
                 expect(page.locator('#editor')).not_to_be_visible()
                 assert 'QA GPU edited' in page.locator('#tableBody').inner_text()
-                page.locator('[data-edit="qa-gpu"]').click()
+                page.locator('[data-baseline="qa-gpu"]').dblclick()
                 page.click('#deleteGpu')
                 expect(page.locator('#tableBody tr')).to_have_count(8)
                 page.click('#addBenchmark')
@@ -264,7 +283,7 @@ def run(channel=None):
                 expect(page.locator('[data-sort="cuda_fp32"]')).to_have_count(0)
                 expect(page.locator('#tableHead [data-column="memory_gb"]')).to_have_count(0)
                 for gpu, value in [('t4','10'), ('l4','5')]:
-                    page.locator(f'[data-edit="{gpu}"]').click()
+                    page.locator(f'[data-baseline="{gpu}"]').dblclick()
                     page.locator('[data-result="qa-latency"]').fill(value)
                     page.locator('[data-result-source="qa-latency"]').fill('https://example.org/qa-measurement')
                     page.locator('#gpuForm button[type=submit]').click()
@@ -331,3 +350,4 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--channel', help='Use an installed browser, e.g. chrome or msedge')
     run(parser.parse_args().channel)
+

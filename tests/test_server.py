@@ -60,6 +60,17 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(response.headers.get_content_type(), 'text/javascript')
             self.assertIn(b'import ', response.read())
 
+    def test_ui_files_refresh_even_with_old_cache_validators(self):
+        for path in ('/', '/app.mjs', '/style.css', '/model.mjs'):
+            with self.subTest(path=path):
+                request = Request(self.url + path, headers={
+                    'If-Modified-Since': 'Wed, 01 Jan 2098 00:00:00 GMT',
+                    'If-None-Match': '"old-ui"'})
+                with urlopen(request) as response:
+                    self.assertEqual(response.status, 200)
+                    self.assertEqual(response.headers['Cache-Control'], 'no-store')
+                    self.assertTrue(response.read())
+
     def test_invalid_data_and_foreign_origin_never_write(self):
         raw = self.path.read_bytes()
         self.assertEqual(self.request('/api/data', {'data': self.original}, origin=False)[0], 403)
@@ -72,6 +83,9 @@ class ServerTests(unittest.TestCase):
         for invalid_link in ('javascript:alert(1)', 'data:text/html,bad', ['https://example.org/one', 'https://example.org/two']):
             bad = copy.deepcopy(self.original)
             bad['gpus'][0]['purchase_url'] = invalid_link
+            self.assertEqual(self.request('/api/validate', {'data': bad})[0], 400)
+            bad = copy.deepcopy(self.original)
+            bad['gpus'][0]['reference_url'] = invalid_link
             self.assertEqual(self.request('/api/validate', {'data': bad})[0], 400)
         self.assertEqual(self.path.read_bytes(), raw)
 

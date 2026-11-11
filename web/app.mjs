@@ -1,6 +1,6 @@
-import {compareCC, selectGPUs, csv, missingMetricMarker} from './model.mjs';
-import {TableUI, columnLabel} from './table-ui.mjs';
-import {modeMetrics, scopedGPU} from './value-modes.mjs';
+import {compareCC, selectGPUs, csv, missingMetricMarker} from './model.mjs?v=20261112-accelerators';
+import {TableUI, columnLabel} from './table-ui.mjs?v=20261112-accelerators';
+import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';
 
@@ -23,7 +23,7 @@ try {filtersOpen=localStorage.getItem('gpu-compare.filters-open.v1')!=='false';}
 setFiltersOpen(filtersOpen,false);
 $('toggleFilters').onclick=()=>setFiltersOpen($('filterSidebar').hidden);
 const baseMetrics = [
-  {id:'memory_gb',name:'VRAM',unit:'GB',direction:'higher'},
+  {id:'memory_gb',name:'VRAM / 共有メモリ',unit:'GB',direction:'higher'},
   {id:'bandwidth_gbs',name:'メモリ帯域',unit:'GB/s',direction:'higher'},
   {id:'power_w',name:'TDP / TGP',unit:'W',direction:'lower'},
   {id:'price_jpy',name:'価格',unit:'円',direction:'lower',note:'ユーザー入力の購入・見積価格。価格をダブルクリックすると購入リンクを編集、Ctrl＋クリックで購入ページを開きます。税・時点・GPU単体/システム全体などの条件をGPUメモに記録してください。'},
@@ -71,7 +71,7 @@ function options(id, values, label = 'すべて') {
 function refreshOptions() {
   options('architecture', [...new Set(data.gpus.map(g => g.architecture))].sort());
   options('category', [...new Set(data.gpus.map(g => g.category))].sort());
-  const capabilities = [...new Set(data.gpus.map(g => g.cc))].sort(compareCC);
+  const capabilities = [...new Set(data.gpus.map(g => g.cc).filter(cc=>cc!=null))].sort(compareCC);
   options('exactCC', capabilities);
   const definitions=metricDefinitions();
   tableUI.refresh();
@@ -108,12 +108,12 @@ function cellHTML(g, c, metric) {
   return `<td data-cell="${esc(c.id)}" data-gpu="${esc(g.id)}" class="${g.id===baselineId?'baseline ':''}${isPrice?'priceCell ':''}${['text','json'].includes(c.type)?'textCell':''}"${isPrice?' tabindex="0" title="ダブルクリックでリンクを編集、Ctrl＋クリックで購入ページを開く"':''}><span class="${c.id===metric.id?'value':''}">${content}</span></td>`;
 }
 function gpuNameHTML(g, baseline) {
-  return `<button class="gpuName gpuNameButton" data-baseline="${esc(g.id)}" aria-pressed="${g.id===baseline?.id}" title="${esc(g.name)}：クリックで基準GPUに設定、再クリックで解除">${esc(displayGPUName(g.name))}</button>${g.id===baseline?.id?'<span class="baselineMark">基準</span>':''}`;
+  return `<button class="gpuName gpuNameButton" data-baseline="${esc(g.id)}" aria-pressed="${g.id===baseline?.id}" title="${esc(g.name)}：クリックで基準GPUを切替、Ctrl＋クリックで出典を開く、ダブルクリックで編集">${esc(displayGPUName(g.name))}</button>${g.id===baseline?.id?'<span class="baselineMark">基準</span>':''}`;
 }
-function gpuActionsHTML(g, metric) {
-  const gpu=viewGPU(g), record=gpu.performance[metric.id]||gpu.results[metric.id];
-  const source=gpu.sources.find(s=>s.id===record?.source)||gpu.sources[0];
-  return `${source?`<a class="sourceLink" href="${esc(source.url)}" target="_blank" rel="noopener">出典 ↗</a> `:''}<button data-edit="${esc(g.id)}">編集</button>`;
+function openGPUSource(id) {
+  const g=data.gpus.find(g=>g.id===id); if (!g) return;
+  const url=gpuReferenceURL(g,selectedMetric().id,currentMode());
+  if (url) window.open(url,'_blank','noopener,noreferrer');
 }
 function render() {
   const metric = selectedMetric(), baseline = data.gpus.find(g=>g.id===baselineId);
@@ -128,22 +128,23 @@ function render() {
   table.classList.toggle('transposed',tableUI.transposed);
   const direction = $('sortDirection').value;
   if (tableUI.transposed) {
-    $('tableHead').innerHTML = '<th scope="col">比較項目 / GPU</th>' + rows.map(g=>`<th scope="col" data-gpu="${esc(g.id)}" class="gpuHeader ${g.id===baseline?.id?'baseline':''}">${tableUI.gpuHandle(g)}${gpuNameHTML(g,baseline)}<div class="gpuActions">${gpuActionsHTML(g,metric)}</div></th>`).join('');
+    $('tableHead').innerHTML = '<th scope="col">比較項目 / GPU</th>' + rows.map(g=>`<th scope="col" data-gpu="${esc(g.id)}" class="gpuHeader ${g.id===baseline?.id?'baseline':''}">${tableUI.gpuHandle(g)}${gpuNameHTML(g,baseline)}</th>`).join('');
     $('tableBody').innerHTML = !rows.length ? '<tr><td class="empty">条件に一致するGPUがありません。絞り込みを変更してください。</td></tr>' : cols.map(c=>`<tr data-column="${esc(c.id)}">${tableUI.header(c,sortKey,direction)}${rows.map(g=>cellHTML(g,c,metric)).join('')}</tr>`).join('') || `<tr><td colspan="${rows.length+1}" class="empty">${!metric.id?'実測値は未登録です。実測定義を追加して測定結果を登録してください。':'「表示項目を編集」から比較する項目を選択してください。'}</td></tr>`;
   } else {
-    $('tableHead').innerHTML = `<th scope="col"${sortKey==='name'&&!tableUI.manualOrder?` aria-sort="${direction==='asc'?'ascending':'descending'}"`:''}><button data-sort="name">GPU / 構成 ${sortKey==='name'&&!tableUI.manualOrder?(direction==='asc'?'↑':'↓'):'↕'}</button></th>` + cols.map(c=>tableUI.header(c,sortKey,direction)).join('') + '<th scope="col">出典 / 編集</th>';
-    $('tableBody').innerHTML = rows.map(g=>`<tr data-gpu="${esc(g.id)}" class="${g.id===baseline?.id?'baseline':''}"><td>${tableUI.gpuHandle(g)}${gpuNameHTML(g,baseline)}</td>${cols.map(c=>cellHTML(g,c,metric)).join('')}<td>${gpuActionsHTML(g,metric)}</td></tr>`).join('') || `<tr><td colspan="${cols.length+2}" class="empty">条件に一致するGPUがありません。絞り込みを変更してください。</td></tr>`;
+    $('tableHead').innerHTML = `<th scope="col"${sortKey==='name'&&!tableUI.manualOrder?` aria-sort="${direction==='asc'?'ascending':'descending'}"`:''}><button data-sort="name">GPU / 構成 ${sortKey==='name'&&!tableUI.manualOrder?(direction==='asc'?'↑':'↓'):'↕'}</button></th>` + cols.map(c=>tableUI.header(c,sortKey,direction)).join('');
+    $('tableBody').innerHTML = rows.map(g=>`<tr data-gpu="${esc(g.id)}" class="${g.id===baseline?.id?'baseline':''}"><td>${tableUI.gpuHandle(g)}${gpuNameHTML(g,baseline)}</td>${cols.map(c=>cellHTML(g,c,metric)).join('')}</tr>`).join('') || `<tr><td colspan="${cols.length+1}" class="empty">条件に一致するGPUがありません。絞り込みを変更してください。</td></tr>`;
   }
 }
 
 const basicFields = [
   ['id','GPU ID（重複不可）','text',true],['name','GPU名','text',true],
   ['architecture','世代（アーキテクチャ）','text',true],['category','カテゴリ（例：GeForce / Data Center）','text',true],
-  ['cc','Compute Capability（例：8.9）','text',true],['form_factor','構成（例：PCIe / SXM）','text',true],
+  ['cc','Compute Capability（CUDA非対応は空欄）','text'],['form_factor','構成（例：PCIe / SXM）','text',true],
   ['connection_type','接続形式（例：PCIe 4.0 x16 / SXM4）','text'],['cooling_type','冷却方式（例：アクティブ / パッシブ）','text'],
   ['board_variant','ボード仕様（例：Founders Edition）','text'],['slot_count','占有スロット数','number'],
-  ['memory_gb','VRAM（GB）','number'],['bandwidth_gbs','メモリ帯域（GB/s）','number'],
-  ['power_w','TDP / TGP（W）','number'],['price_jpy','価格（円）','number'],['purchase_url','購入リンク（価格のリンク先・1件）','url']
+  ['memory_gb','VRAM / 共有メモリ（GB）','number'],['bandwidth_gbs','メモリ帯域（GB/s）','number'],
+  ['power_w','TDP / TGP（W）','number'],['price_jpy','価格（円）','number'],['purchase_url','購入リンク（価格のリンク先・1件）','url'],
+  ['reference_url','GPU名から開く出典URL','url']
 ];
 function fillEditor() {
   $('fields').innerHTML = basicFields.map(([key,label,type,required]) => `<label>${esc(label)}<input name="${key}" type="${type}" ${required ? 'required' : ''} ${type === 'number' ? 'min="0" step="any"' : ''} value="${esc(draft[key])}"></label>`).join('') +
@@ -170,6 +171,7 @@ function readEditor() {
   const next = structuredClone(draft), form = new FormData($('gpuForm'));
   for (const [key,,type] of basicFields) next[key] = type === 'number' ? (form.get(key) === '' ? null : Number(form.get(key))) : type==='url' ? String(form.get(key)).trim()||null : String(form.get(key)).trim();
   for (const key of ['connection_type','cooling_type','board_variant']) if (!next[key]) next[key]=null;
+  if (!next.cc) next.cc=null;
   next.notes = String(form.get('notes'));
   const spec = {id:'spec',title:String(form.get('spec_title')),url:String(form.get('spec_url')).trim(),checked_on:String(form.get('spec_date'))};
   next.sources = next.sources.filter(s => s.id !== 'spec'); next.sources.unshift(spec);
@@ -204,16 +206,23 @@ function withGPU(gpu) {
 for (const id of ['search','architecture','category','exactCC','known']) $(id).addEventListener('input', render);
 $('valueMode').onchange=()=>{tableUI.setMode($('valueMode').value); refreshOptions(); sortKey=metricId; $('sortDirection').value=selectedMetric().direction==='lower'?'asc':'desc'; saveSelection(); render();};
 $('sortDirection').addEventListener('input',()=>{tableUI.useSortedOrder(); saveSelection(); render();});
+let baselineClickTimer;
+function toggleBaseline(id) {
+  baselineId=baselineId===id?'':id;
+  if (baselineId && selectedMetric().type==='number') tableUI.ensure('ratio');
+  saveSelection(); render();
+}
 for (const root of [$('tableHead'),$('tableBody')]) root.addEventListener('click',event=>{
   const price=event.target.closest('[data-cell="price_jpy"]');
   if (price) {event.preventDefault(); if (event.ctrlKey && event.detail<=1) openPurchaseLink(price.dataset.gpu); return;}
-  const edit=event.target.closest('[data-edit]');
-  if (edit) {openEditor(edit.dataset.edit); return;}
   const gpu=event.target.closest('[data-baseline]');
   if (gpu) {
-    baselineId=baselineId===gpu.dataset.baseline?'':gpu.dataset.baseline;
-    if (baselineId && selectedMetric().type==='number') tableUI.ensure('ratio');
-    saveSelection(); render(); return;
+    event.preventDefault(); clearTimeout(baselineClickTimer);
+    if (event.ctrlKey) {if (event.detail<=1) openGPUSource(gpu.dataset.baseline); return;}
+    // Keep the name in the DOM until a potential second click arrives.
+    if (event.detail===0) toggleBaseline(gpu.dataset.baseline);
+    else if (event.detail===1) baselineClickTimer=setTimeout(()=>toggleBaseline(gpu.dataset.baseline),400);
+    return;
   }
   const button=event.target.closest('[data-sort]'); if (!button) return;
   const key=button.dataset.sort, column=tableUI.byId.get(key);
@@ -224,6 +233,8 @@ for (const root of [$('tableHead'),$('tableBody')]) root.addEventListener('click
 });
 for (const root of [$('tableHead'),$('tableBody')]) {
   root.addEventListener('dblclick',event=>{
+    const gpu=event.target.closest('[data-baseline]');
+    if (gpu) {event.preventDefault(); clearTimeout(baselineClickTimer); if (!event.ctrlKey) openEditor(gpu.dataset.baseline); return;}
     const price=event.target.closest('[data-cell="price_jpy"]');
     if (price) {event.preventDefault(); if (!event.ctrlKey) editPurchaseLink(price.dataset.gpu);}
   });

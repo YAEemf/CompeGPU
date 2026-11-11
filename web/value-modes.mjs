@@ -1,6 +1,17 @@
 const measuredKinds = new Set(['measured','aggregate']);
 export const isMeasured = record => measuredKinds.has(record?.kind);
 
+export function gpuReferenceURL(gpu, metricId, mode) {
+  const scoped = scopedGPU(gpu, mode);
+  const record = scoped.performance[metricId] || scoped.results[metricId];
+  const source = scoped.sources.find(s=>s.id===record?.source) || scoped.sources[0];
+  const candidate = gpu.reference_url || source?.url;
+  try {
+    const parsed = new URL(candidate);
+    return ['https:', 'http:'].includes(parsed.protocol) ? parsed.href : null;
+  } catch { return null; }
+}
+
 export function scopedGPU(gpu, mode) {
   const measured = mode === 'measured';
   const performance = Object.fromEntries(Object.entries(gpu.performance).filter(([,record])=>isMeasured(record)===measured));

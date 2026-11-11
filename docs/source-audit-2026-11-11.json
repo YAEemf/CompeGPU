@@ -1,0 +1,1386 @@
+{
+  "checked_on": "2026-11-11",
+  "scope": "all 16 GPUs; identity, core hardware fields and native precision values; Tensor precision/source metadata",
+  "limitations": [
+    "TechPowerUp live page bodies are restricted in this environment. No GPU is marked directly verified against TechPowerUp.",
+    "Index values are third-party snapshots, not current TechPowerUp assertions. Tensor precision-specific peaks are not present in the index.",
+    "Unknowns, conditional estimates and seller-only records remain unresolved where evidence is insufficient."
+  ],
+  "index_url": "https://huggingface.co/datasets/Jr23xd23/gpu-database/blob/main/data/all-gpus.json",
+  "index_sha256": "be4f2313caac53404c2f13648e75bddc9e07a062eb2f462554ccd97922f7d4ba",
+  "gpus": [
+    {
+      "id": "rtx3090",
+      "name": "NVIDIA GeForce RTX 3090",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/geforce-rtx-3090.c3622",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-3090.c3622",
+      "reference_live_status": "restricted",
+      "finding": "rounding_only_in_index_fields",
+      "explanation": "帯域936と索引936.2、CUDA FP32/FP16 35.6と35.58は公称丸め・Boost計算差。容量・CC・コア数・電力は一致。TensorはBlackwell白書Appendix Aの入力/蓄積別表を保持。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.6",
+          "index_snapshot": "8.6",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 24,
+          "index_snapshot": 24.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 936,
+          "index_snapshot": 936.2,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 350,
+          "index_snapshot": 350,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 10496,
+          "index_snapshot": 10496,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 328,
+          "index_snapshot": 328,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1695.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.55625,
+          "index_snapshot": 0.56,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 35.6,
+          "index_snapshot": 35.58,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 35.6,
+          "index_snapshot": 35.58,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 15,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf"
+      ]
+    },
+    {
+      "id": "rtx4090",
+      "name": "NVIDIA GeForce RTX 4090",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4090.c3889",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-4090.c3889",
+      "reference_live_status": "restricted",
+      "finding": "rounding_only_in_index_fields",
+      "explanation": "帯域1008と索引1010、CUDA 82.6と82.58は桁数差。Tensor FP16→FP32 165.2とFP16→FP16 330.3は別項目であり混同しない。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.9",
+          "index_snapshot": "8.9",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 24,
+          "index_snapshot": 24.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 1008,
+          "index_snapshot": 1010.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 450,
+          "index_snapshot": 450,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 16384,
+          "index_snapshot": 16384,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 512,
+          "index_snapshot": 512,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 2520.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 1.290625,
+          "index_snapshot": 1.29,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 82.6,
+          "index_snapshot": 82.58,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 82.6,
+          "index_snapshot": 82.58,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 20,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf"
+      ]
+    },
+    {
+      "id": "rtx5090",
+      "name": "NVIDIA GeForce RTX 5090",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216",
+      "reference_live_status": "restricted",
+      "finding": "rounding_only_in_index_fields",
+      "explanation": "帯域1792と索引1790は丸め差。CC 12.0・32GB・21760 cores・575W・CUDA FP32/FP16 104.8は整合。Tensor FP4 3352はSparseでありDense 1676と区別。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "12.0",
+          "index_snapshot": "12.0",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 32,
+          "index_snapshot": 32.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 1792,
+          "index_snapshot": 1790.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 575,
+          "index_snapshot": 575,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 21760,
+          "index_snapshot": 21760,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 680,
+          "index_snapshot": 680,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 2407.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe",
+          "index_snapshot": "PCIe 5.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 1.6375,
+          "index_snapshot": 1.64,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 104.8,
+          "index_snapshot": 104.8,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 104.8,
+          "index_snapshot": 104.8,
+          "result": "equal"
+        }
+      ],
+      "performance_records": 20,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf"
+      ]
+    },
+    {
+      "id": "v100-sxm2-16gb",
+      "name": "NVIDIA Tesla V100 16GB SXM2",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/tesla-v100-sxm2-16-gb.c3471",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/tesla-v100-sxm2-16-gb.c3018",
+      "reference_live_status": "restricted",
+      "finding": "reference_index_conflict",
+      "explanation": "旧索引の1130GB/s・250W・FP32 16.35は、公式SXM2の900GB/s・300W・15.7と不一致。旧c3471を独立したSXM2 16GB URL引用のc3018へ訂正。リンク本文は直接未確認。索引値へ数値を置き換えない。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.0",
+          "index_snapshot": "7.0",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 16,
+          "index_snapshot": 16.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 900,
+          "index_snapshot": 1130.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 300,
+          "index_snapshot": 250,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 5120,
+          "index_snapshot": 5120,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 640,
+          "index_snapshot": 640,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1597.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "SXM2",
+          "index_snapshot": "PCIe 3.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 7.8,
+          "index_snapshot": 8.18,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 15.7,
+          "index_snapshot": 16.35,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 31.4,
+          "index_snapshot": 32.71,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 5,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/content/technologies/volta/pdf/volta-v100-datasheet-update-us-1165301-r5.pdf",
+        "https://developer.nvidia.com/cuda/gpus/legacy",
+        "https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf"
+      ]
+    },
+    {
+      "id": "t4",
+      "name": "NVIDIA Tesla T4",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/tesla-t4.c3316",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/tesla-t4.c3316",
+      "reference_live_status": "restricted",
+      "finding": "precision_and_document_difference",
+      "explanation": "索引FP16 65.13はCUDA FP16 16.2として転記不可。公式データシートの65はTensor混合FP16/FP32。帯域はMAR19データシート300、Ada白書320で公式資料自体に差があり300を維持。容量・CC・コア数・70Wは整合。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.5",
+          "index_snapshot": "7.5",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 16,
+          "index_snapshot": 16.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 300,
+          "index_snapshot": 320.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 70,
+          "index_snapshot": 70,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 2560,
+          "index_snapshot": 2560,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 320,
+          "index_snapshot": 320,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1590.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 3.0 x16",
+          "index_snapshot": "PCIe 3.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.253125,
+          "index_snapshot": 0.25,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 8.1,
+          "index_snapshot": 8.14,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 16.2,
+          "index_snapshot": 65.13,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 7,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-t4/t4-tensor-core-datasheet-951643.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+        "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf"
+      ]
+    },
+    {
+      "id": "t10",
+      "name": "NVIDIA Tesla T10 16GB",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/tesla-t10-16-gb.c4036",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/tesla-t10-16-gb.c4036",
+      "reference_live_status": "restricted",
+      "finding": "reported_hardware_only",
+      "explanation": "16GB・3584 cores・1395MHz・403.2GB/s・CUDA FP32約10/FP16約20は索引と実機公開画像で整合。GRID仮想GPU版と区別。150Wは所有者報告であり、SKU公式保証のTDPを確認したという意味ではない。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.5",
+          "index_snapshot": "7.5",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 16,
+          "index_snapshot": 16.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 403.2,
+          "index_snapshot": 403.2,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 150,
+          "index_snapshot": 150,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 3584,
+          "index_snapshot": 3584,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 448,
+          "index_snapshot": 448,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": 1395,
+          "index_snapshot": 1395.0,
+          "result": "equal"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 3.0 x16",
+          "index_snapshot": "PCIe 3.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.31248,
+          "index_snapshot": 0.31,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 9.99936,
+          "index_snapshot": 10.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 19.99872,
+          "index_snapshot": 20.0,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 6,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://post.smzdm.com/p/aoq4olv6/",
+        "https://developer.nvidia.com/blog/nvidia-turing-architecture-in-depth/",
+        "https://docs.nvidia.com/cuda/archive/11.8.0/turing-tuning-guide/index.html",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+        "https://qnam.smzdm.com/202503/05/67c72db7e6e7a8439.png_e1080.jpg",
+        "https://campfires.cc/nas/upgrade-server"
+      ]
+    },
+    {
+      "id": "t40",
+      "name": "NVIDIA Tesla T40 24GB",
+      "reference_url_before": "https://serverflow.ru/catalog/komplektuyushchie/videokarty/videokarta-nvidia-tesla-t40-24-gb/",
+      "reference_url": "https://serverflow.ru/catalog/komplektuyushchie/videokarty/videokarta-nvidia-tesla-t40-24-gb/",
+      "reference_live_status": "seller_page_available",
+      "finding": "seller_conflict_unresolved",
+      "explanation": "直接取得できた販売元の24GB・4608 cores・1560MHz・FP32 14.38は登録の14.37696と整合。販売元説明のTensor世代はTuringの公式第2世代と矛盾するが採用していない。250/260Wの出典間相違は未解決のためpower_wはnullを維持。帯域624は別売主のクロックからの換算。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.5",
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 24,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 624.0,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "power_w",
+          "catalog": null,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 4608,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 576,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": 1560,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 3.0 x16",
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.44928,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 14.37696,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 28.75392,
+          "index_snapshot": null,
+          "result": "not_compared_missing"
+        }
+      ],
+      "performance_records": 6,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://serverflow.ru/catalog/komplektuyushchie/videokarty/videokarta-nvidia-tesla-t40-24-gb/",
+        "https://developer.nvidia.com/blog/nvidia-turing-architecture-in-depth/",
+        "https://docs.nvidia.com/cuda/archive/11.8.0/turing-tuning-guide/index.html",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+        "https://itm.ebaydesc.com/itmdesc/306994369597?category=27386&cspheader=1&descgauge=1&domain=ebay.com&excSoj=1&excTrk=1&ittenable=true&lang=en&lsite=0&oneClk=2&secureDesc=1&seller=backup_servers&t=1748881557000&ver=1",
+        "https://forums.developer.nvidia.com/t/nvidia-t40-rtx-6000-drivers-support/279076"
+      ]
+    },
+    {
+      "id": "quadro-rtx6000",
+      "name": "NVIDIA Quadro RTX 6000",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/quadro-rtx-6000.c3307",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/quadro-rtx-6000.c3307",
+      "reference_live_status": "restricted",
+      "finding": "power_scope_difference",
+      "explanation": "24GB・CC 7.5・4608/576 cores・672GB/s・FP32 16.3は整合。索引260WはTGP、登録295WはVirtualLink込みTBP。公式資料は両方を掲載し、数値誤りではない。別フィールドと電力範囲を追加。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.5",
+          "index_snapshot": "7.5",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 24,
+          "index_snapshot": 24.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 672,
+          "index_snapshot": 672.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 295,
+          "index_snapshot": 260,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 4608,
+          "index_snapshot": 4608,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 576,
+          "index_snapshot": 576,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1770.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 3.0 x16",
+          "index_snapshot": "PCIe 3.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.509375,
+          "index_snapshot": 0.51,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 16.3,
+          "index_snapshot": 16.31,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 32.6,
+          "index_snapshot": 32.62,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 7,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/quadro-rtx-6000-us-nvidia-704093-r4-web.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+        "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf"
+      ]
+    },
+    {
+      "id": "quadro-rtx8000",
+      "name": "NVIDIA Quadro RTX 8000",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/quadro-rtx-8000.c3306",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/quadro-rtx-8000.c3306",
+      "reference_live_status": "restricted",
+      "finding": "power_scope_difference",
+      "explanation": "48GB・CC 7.5・4608/576 cores・672GB/s・FP32 16.3は整合。260W(TGP)/295W(TBP)は仕様範囲の違い。NVIDIA公式データシートも追加して両方を記録。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "7.5",
+          "index_snapshot": "7.5",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 48,
+          "index_snapshot": 48.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 672,
+          "index_snapshot": 672.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 295,
+          "index_snapshot": 260,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 4608,
+          "index_snapshot": 4608,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 576,
+          "index_snapshot": 576,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1770.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 3.0 x16",
+          "index_snapshot": "PCIe 3.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.509375,
+          "index_snapshot": 0.51,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 16.3,
+          "index_snapshot": 16.31,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 32.6,
+          "index_snapshot": 32.62,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 7,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.leadtek.com/eng/products/workstation_graphics%282%29/NVIDIA_Quadro_RTX8000%2820830%29/detail",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+        "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf",
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/quadro-rtx-8000-us-nvidia-876688-r5-web.pdf"
+      ]
+    },
+    {
+      "id": "rtx4000-ada",
+      "name": "NVIDIA RTX 4000 Ada",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/rtx-4000-ada-generation.c4171",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/rtx-4000-ada-generation.c4171",
+      "reference_live_status": "restricted",
+      "finding": "official_document_conflict_and_provenance_fix",
+      "explanation": "20GB・6144 cores・360GB/s・130Wのフルハイト版と整合。製品ページTensor 427.6と同社PDF 327.6は資料間不整合（427.6採用）。非Tensor FP16 26.7はFP32からの算出であるためpublished→derivedへ訂正。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.9",
+          "index_snapshot": "8.9",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 20,
+          "index_snapshot": 20.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 360,
+          "index_snapshot": 360.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 130,
+          "index_snapshot": 130,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 6144,
+          "index_snapshot": 6144,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 192,
+          "index_snapshot": 192,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 2175.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 4.0 x16",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.4171875,
+          "index_snapshot": 0.42,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 26.7,
+          "index_snapshot": 26.73,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 26.7,
+          "index_snapshot": 26.73,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 17,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/en-us/products/workstations/rtx-4000/",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+        "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-4000-datasheet.pdf",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions"
+      ]
+    },
+    {
+      "id": "rtx5000-ada",
+      "name": "NVIDIA RTX 5000 Ada",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/rtx-5000-ada-generation.c4152",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/rtx-5000-ada-generation.c4152",
+      "reference_live_status": "restricted",
+      "finding": "provenance_fix",
+      "explanation": "32GB・12800 cores・576GB/s・250W・FP32 65.3は索引と公称丸め内で整合。Tensor 1044.4はFP8 Sparse。非Tensor FP16 65.3をpublished→derivedへ訂正。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.9",
+          "index_snapshot": "8.9",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 32,
+          "index_snapshot": 32.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 576,
+          "index_snapshot": 576.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 250,
+          "index_snapshot": 250,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 12800,
+          "index_snapshot": 12800,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 400,
+          "index_snapshot": 400,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 2550.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 4.0 x16",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 1.0203125,
+          "index_snapshot": 1.02,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 65.3,
+          "index_snapshot": 65.28,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 65.3,
+          "index_snapshot": 65.28,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 17,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/en-us/products/workstations/rtx-5000/",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+        "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+        "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions"
+      ]
+    },
+    {
+      "id": "rtx6000-ada",
+      "name": "NVIDIA RTX 6000 Ada",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/rtx-6000-ada-generation.c3933",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/rtx-6000-ada-generation.c3933",
+      "reference_live_status": "restricted",
+      "finding": "provenance_fix",
+      "explanation": "48GB・18176 cores・960GB/s・300W・CUDA 91.1は索引と公称丸め内で整合。非Tensor FP16のsourceを直接掲載のPRO白書へ訂正。Tensor 364/728とFP8 728.5/1457の丸め差を維持。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.9",
+          "index_snapshot": "8.9",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 48,
+          "index_snapshot": 48.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 960,
+          "index_snapshot": 960.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 300,
+          "index_snapshot": 300,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 18176,
+          "index_snapshot": 18176,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 568,
+          "index_snapshot": 568,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 2505.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 4.0 x16",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 1.4234375,
+          "index_snapshot": 1.42,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 91.1,
+          "index_snapshot": 91.06,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 91.1,
+          "index_snapshot": 91.06,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 17,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/en-us/products/workstations/rtx-6000/",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+        "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/pdf/NVIDIA-RTX-Blackwell-PRO-GPU-Architecture-v1_1.pdf"
+      ]
+    },
+    {
+      "id": "rtx-a4500",
+      "name": "NVIDIA RTX A4500",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/rtx-a4500.c3849",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/rtx-a4500.c3849",
+      "reference_live_status": "restricted",
+      "finding": "rounding_only_in_index_fields",
+      "explanation": "デスクトップ20GB・7168 cores・640GB/s・200Wで整合。CUDA FP32 23.7と索引23.65は丸め差。元のPDFファイル名はA5000だが本文がA4500であることを確認済み。16GBモバイル版と区別。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.6",
+          "index_snapshot": "8.6",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 20,
+          "index_snapshot": 20.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 640,
+          "index_snapshot": 640.0,
+          "result": "equal"
+        },
+        {
+          "field": "power_w",
+          "catalog": 200,
+          "index_snapshot": 200,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 7168,
+          "index_snapshot": 7168,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 224,
+          "index_snapshot": 224,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1650.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 4.0 x16",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.3703125,
+          "index_snapshot": 0.37,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 23.7,
+          "index_snapshot": 23.65,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 23.7,
+          "index_snapshot": 23.65,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 15,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs21/rtx-a5000/nvidia-rtx-a5000-datasheet.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf",
+        "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf"
+      ]
+    },
+    {
+      "id": "a40",
+      "name": "NVIDIA A40",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/a40-pcie.c3700",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/a40-pcie.c3700",
+      "reference_live_status": "restricted",
+      "finding": "rounding_and_note_fix",
+      "explanation": "48GB・10752 cores・300W・FP32 37.4は整合。帯域696対695.8は丸め差。FP16→FP32は別資料の条件からのderivedであり、以前の「代入しない」という古いGPUメモと現データの説明を整合させた。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.6",
+          "index_snapshot": "8.6",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 48,
+          "index_snapshot": 48.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 696,
+          "index_snapshot": 695.8,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 300,
+          "index_snapshot": 300,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 10752,
+          "index_snapshot": 10752,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 336,
+          "index_snapshot": 336,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1740.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "PCIe 4.0 x16",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "equal"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.584375,
+          "index_snapshot": 0.58,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 37.4,
+          "index_snapshot": 37.42,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 37.4,
+          "index_snapshot": 37.42,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 15,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/content/Solutions/data-center/a40/nvidia-a40-datasheet.pdf",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf",
+        "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf"
+      ]
+    },
+    {
+      "id": "a100-sxm4-40gb",
+      "name": "NVIDIA A100 40GB SXM4",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/a100-sxm4-40-gb.c3506",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/a100-sxm4-40-gb.c3506",
+      "reference_live_status": "restricted",
+      "finding": "rounding_and_interface_scope",
+      "explanation": "40GB・6912 cores・400W・FP32 19.5は整合。帯域1555対索引1560、CUDA FP16 78対77.97は丸め差。索引PCIe 4.0 x16はホストI/O情報で、SXM4モジュール形状をPCIeカードへ置き換える根拠にしない。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "8.0",
+          "index_snapshot": "8.0",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 40,
+          "index_snapshot": 40.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 1555,
+          "index_snapshot": 1560.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 400,
+          "index_snapshot": 400,
+          "result": "equal"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 6912,
+          "index_snapshot": 6912,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 432,
+          "index_snapshot": 432,
+          "result": "equal"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": null,
+          "index_snapshot": 1410.0,
+          "result": "not_compared_missing"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "SXM4",
+          "index_snapshot": "PCIe 4.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 9.7,
+          "index_snapshot": 9.75,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 19.5,
+          "index_snapshot": 19.49,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": 78,
+          "index_snapshot": 77.97,
+          "result": "difference_requires_context"
+        }
+      ],
+      "performance_records": 14,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf",
+        "https://developer.nvidia.com/cuda/gpus"
+      ]
+    },
+    {
+      "id": "jetson-agx-thor",
+      "name": "NVIDIA Jetson AGX Thor (T5000 128GB)",
+      "reference_url_before": "https://www.techpowerup.com/gpu-specs/jetson-t5000.c4370",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/jetson-t5000.c4370",
+      "reference_live_status": "restricted",
+      "finding": "reference_index_conflict",
+      "explanation": "索引2525MHz・CUDA FP32 12.93・FP64 6.46・FP16 51.71・40Wは、公式MAXN 1575MHz・FP32 8.064・CC 11.0 FP64比64:1・40～130Wと不整合。公式確認値を保持。Tensor数80対96は既知の資料差で未解消。条件付きTensor推定を保証値とみなさない。古い未確認説明を訂正。",
+      "comparisons": [
+        {
+          "field": "cc",
+          "catalog": "11.0",
+          "index_snapshot": "11.0",
+          "result": "equal"
+        },
+        {
+          "field": "memory_gb",
+          "catalog": 128,
+          "index_snapshot": 128.0,
+          "result": "equal"
+        },
+        {
+          "field": "bandwidth_gbs",
+          "catalog": 273,
+          "index_snapshot": 273.2,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "power_w",
+          "catalog": 130,
+          "index_snapshot": 40,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_cores",
+          "catalog": 2560,
+          "index_snapshot": 2560,
+          "result": "equal"
+        },
+        {
+          "field": "tensor_cores",
+          "catalog": 80,
+          "index_snapshot": 96,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "boost_clock_mhz",
+          "catalog": 1575,
+          "index_snapshot": 2525.0,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "connection_type",
+          "catalog": "Jetsonモジュール",
+          "index_snapshot": "PCIe 5.0 x16",
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp64",
+          "catalog": 0.126,
+          "index_snapshot": 6.46,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp32",
+          "catalog": 8.064,
+          "index_snapshot": 12.93,
+          "result": "difference_requires_context"
+        },
+        {
+          "field": "cuda_fp16",
+          "catalog": null,
+          "index_snapshot": 51.71,
+          "result": "not_compared_missing"
+        }
+      ],
+      "performance_records": 24,
+      "numeric_performance_changed": false,
+      "evidence_urls": [
+        "https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/",
+        "https://developer.nvidia.com/cuda/gpus",
+        "https://docs.nvidia.com/jetson/archives/r38.2/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonThor.html",
+        "https://dam-cdn.nvd.orangelogic.com/AssetLink/v686u306w26ftuk863xjeimilimtx55e.pdf",
+        "https://cdck-file-uploads-global.s3.dualstack.us-west-2.amazonaws.com/nvidia/original/4X/a/0/8/a0808d84bcb2524b5ee54ddea208b294887cd42e.pdf",
+        "https://docs.nvidia.com/cuda/parallel-thread-execution/index.html#tcgen05-mma",
+        "https://github.com/NVlabs/SOLAR/blob/master/configs/arch/Jetson_Thor_T5000.yaml",
+        "https://www.nvidia.com/en-us/autonomous-machines/embedded-systems/jetson-thor/",
+        "https://forums.developer.nvidia.com/t/performance-benchmarking-on-jetson-thor/349494/5",
+        "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#throughput-of-native-arithmetic-instructions",
+        "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html"
+      ]
+    }
+  ]
+}

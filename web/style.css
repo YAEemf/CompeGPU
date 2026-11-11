@@ -104,7 +104,7 @@ tbody tr:hover, tbody tr:hover td:first-child { background: var(--hover); }
 .ccBadge { display: inline-block; padding: 1px 5px; border: 1px solid var(--button-border); border-radius: 3px; color: var(--green); background: var(--light); }
 .value { font-weight: 700; color: var(--green); font-size: 13px; }
 .baselineMark { padding-left: 6px; color: var(--green); font-size: 9px; }
-.sourceLink, a { color: var(--green); }
+a { color: var(--green); }
 .empty { padding: 28px; text-align: center; white-space: normal; color: var(--muted); }
 dialog { background: var(--surface); width: calc(100% - 30px); max-width: 800px; max-height: 90vh; padding: 24px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); box-shadow: 0 20px 70px #0006; }
 dialog::backdrop { background: #0009; }
@@ -170,8 +170,6 @@ th:last-child { min-width: 0; }
 .transposed .gpuHeader { min-width: 0; max-width: none; white-space: nowrap; text-align: center; vertical-align: top; }
 .gpuHeader > .dragHandle { display: inline-block; margin: 0 3px 0 0; width: auto; }
 .gpuHeader .gpuName { display: inline; }
-.gpuActions { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 3px; }
-.gpuActions button { width: auto; padding: 3px 9px; }
 .transposed thead th:first-child { z-index: 4; min-width: 0; }
 .transposed td { text-align: center; }
 .transposed .textCell { text-align: left; }

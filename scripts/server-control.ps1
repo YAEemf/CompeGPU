@@ -49,7 +49,7 @@ try {
     } elseif ($null -ne $ownedServer) {
         $localUrl = "http://127.0.0.1:$($state.port)"
         Write-Host "GPU Compare is already running: $localUrl"
-        if (-not $NoBrowser) { Start-Process $localUrl }
+        if (-not $NoBrowser) { Start-Process "$localUrl/?_launch=$([DateTime]::UtcNow.Ticks)" }
     } else {
         $pythonPath = $null
         foreach ($commandName in @('python', 'py')) {
@@ -86,7 +86,7 @@ try {
         if (-not $ready) { throw "Server startup timed out. See $stderrPath. Use stop.bat before retrying." }
         Write-Host "GPU Compare started: $localUrl"
         Write-Host 'Use stop.bat to stop the server. Save edits in the browser first.'
-        if (-not $NoBrowser) { Start-Process $localUrl }
+        if (-not $NoBrowser) { Start-Process "$localUrl/?_launch=$([DateTime]::UtcNow.Ticks)" }
     }
 } catch {
     Write-Host "ERROR: $($_.Exception.Message)" -ForegroundColor Red
