@@ -1,0 +1,762 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-11-11",
+  "metrics": [
+    {
+      "id": "cuda_fp64",
+      "name": "CUDA FP64",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "CUDAコアの倍精度理論ピーク。Tensor FP64とは別です。"
+    },
+    {
+      "id": "cuda_fp32",
+      "name": "CUDA FP32",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "CUDAコアの単精度理論ピーク。FMAを2演算として数えます。RTX 5090は公式のコア数と丸められたBoostクロックから算出しています。"
+    },
+    {
+      "id": "cuda_fp16",
+      "name": "CUDA FP16",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "CUDAコアによるFP16。Tensor FP16と混同しないでください。初期データは未収集です。"
+    },
+    {
+      "id": "tensor_fp32_sparse",
+      "name": "Tensor FP32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP32入力のTensor演算として別途仕様・蓄積精度を確認して登録します。TF32とは別項目です。初期データは未収集です。"
+    },
+    {
+      "id": "tensor_fp32_dense",
+      "name": "Tensor FP32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP32入力のTensor演算として別途仕様・蓄積精度を確認して登録します。TF32とは別項目です。初期データは未収集です。"
+    },
+    {
+      "id": "tensor_fp64_dense",
+      "name": "Tensor FP64 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp64_sparse",
+      "name": "Tensor FP64 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_tf32_dense",
+      "name": "Tensor TF32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_tf32_sparse",
+      "name": "Tensor TF32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_bf16_dense",
+      "name": "Tensor BF16 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_bf16_sparse",
+      "name": "Tensor BF16 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_fp16_dense",
+      "name": "Tensor FP16 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp16_sparse",
+      "name": "Tensor FP16 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_fp8_dense",
+      "name": "Tensor FP8 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp8_sparse",
+      "name": "Tensor FP8 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_fp4_dense",
+      "name": "Tensor FP4 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp4_sparse",
+      "name": "Tensor FP4 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_int8_dense",
+      "name": "Tensor INT8 / Dense",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_int8_sparse",
+      "name": "Tensor INT8 / Sparse",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_int4_dense",
+      "name": "Tensor INT4 / Dense",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_int4_sparse",
+      "name": "Tensor INT4 / Sparse",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "ai_tops",
+      "name": "広告 AI TOPS（条件別・単純比較不可）",
+      "unit": "AI TOPS",
+      "direction": "higher",
+      "note": "製品ページの広告値。精度・疎性・蓄積条件がこのページだけでは確定しないため、INT8 TOPSや精度別Tensor性能には転記していません。世代間の倍率を性能向上率とみなさないでください。"
+    }
+  ],
+  "benchmarks": [],
+  "gpus": [
+    {
+      "id": "t4",
+      "name": "NVIDIA T4",
+      "architecture": "Turing",
+      "category": "Data Center",
+      "cc": "7.5",
+      "form_factor": "PCIe",
+      "memory_gb": 16,
+      "bandwidth_gbs": 300,
+      "power_w": 70,
+      "price_jpy": null,
+      "notes": "メモリ帯域はMAR19版T4データシートの300 GB/sを採用。Ada白書のT4比較欄は320 GB/sで記載が異なる。電力70WはAda白書Appendix DのT4欄。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-t4/t4-tensor-core-datasheet-951643.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada whitepaper Appendix D（T4電力70W）",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/Data-Center/l4/nvidia-ada-gpu-architecture-whitepaper-V2.02.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 8.1,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 65,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 130,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 260,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "l4",
+      "name": "NVIDIA L4",
+      "architecture": "Ada Lovelace",
+      "category": "Data Center",
+      "cc": "8.9",
+      "form_factor": "PCIe",
+      "memory_gb": 24,
+      "bandwidth_gbs": 300,
+      "power_w": 72,
+      "price_jpy": null,
+      "notes": "Ada白書Appendix Dを採用。丸め済みのDense/Sparseをそれぞれ記録し、半分への一律換算はしない。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/Data-Center/l4/nvidia-ada-gpu-architecture-whitepaper-V2.02.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 30.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 60,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 120,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 121,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 242,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 121,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 242,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_dense": {
+          "value": 242,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 485,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 242,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 485,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 484,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_sparse": {
+          "value": 969,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "l40s",
+      "name": "NVIDIA L40S",
+      "architecture": "Ada Lovelace",
+      "category": "Data Center",
+      "cc": "8.9",
+      "form_factor": "PCIe",
+      "memory_gb": 48,
+      "bandwidth_gbs": 864,
+      "power_w": 350,
+      "price_jpy": null,
+      "notes": "公式詳細表のBF16/FP16は362.05 | 733*と記載。2倍関係と不整合だが原文のまま登録。INT4欄もINT8と同値のため未収集扱い。導入判断前にベンダーへの確認を推奨。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://www.nvidia.com/en-us/data-center/l40s/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 91.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 183,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 366,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 362.05,
+          "source": "spec",
+          "kind": "published",
+          "note": "要確認：公式記載362.05を転記。Sparse 733の半分と一致しない。"
+        },
+        "tensor_bf16_sparse": {
+          "value": 733,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 362.05,
+          "source": "spec",
+          "kind": "published",
+          "note": "要確認：公式記載362.05を転記。Sparse 733の半分と一致しない。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 733,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_dense": {
+          "value": 733,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 1466,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 733,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1466,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "a100-pcie",
+      "name": "NVIDIA A100 80GB PCIe",
+      "architecture": "Ampere",
+      "category": "Data Center",
+      "cc": "8.0",
+      "form_factor": "PCIe",
+      "memory_gb": 80,
+      "bandwidth_gbs": 1935,
+      "power_w": 300,
+      "price_jpy": null,
+      "notes": "80GB PCIe版。40GB版と区別。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://resources.nvidia.com/en-us-gpu/nvidia-a100-datashee-1",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp64": {
+          "value": 9.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp32": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp64_dense": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 156,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1248,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "a100-sxm",
+      "name": "NVIDIA A100 80GB SXM4",
+      "architecture": "Ampere",
+      "category": "Data Center",
+      "cc": "8.0",
+      "form_factor": "SXM4",
+      "memory_gb": 80,
+      "bandwidth_gbs": 2039,
+      "power_w": 400,
+      "price_jpy": null,
+      "notes": "標準構成400W。CTS構成は最大500Wの注記あり。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://resources.nvidia.com/en-us-gpu/nvidia-a100-datashee-1",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp64": {
+          "value": 9.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp32": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp64_dense": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 156,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1248,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "SXM4",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "h100-sxm",
+      "name": "NVIDIA H100 80GB SXM",
+      "architecture": "Hopper",
+      "category": "Data Center",
+      "cc": "9.0",
+      "form_factor": "SXM",
+      "memory_gb": 80,
+      "bandwidth_gbs": 3350,
+      "power_w": 700,
+      "price_jpy": null,
+      "notes": "H100 SXM版。TDPは最大700Wで構成可能。H100 PCIe/NVLとは区別。Dense値は公式Sparse表からの一律推定を避け、初期データでは未収集。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://www.nvidia.com/en-us/data-center/h100/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp64": {
+          "value": 34,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp32": {
+          "value": 67,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp64_dense": {
+          "value": 67,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 989,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 1979,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 1979,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 3958,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 3958,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "SXM",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "rtx4090",
+      "name": "GeForce RTX 4090",
+      "architecture": "Ada Lovelace",
+      "category": "GeForce",
+      "cc": "8.9",
+      "form_factor": "PCIe",
+      "memory_gb": 24,
+      "bandwidth_gbs": null,
+      "power_w": 450,
+      "price_jpy": null,
+      "notes": "Founders Edition / reference。FP32は製品ページの丸め値83 TFLOPS。AI TOPSは精度別の値に展開せず独立管理。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 83,
+          "source": "spec",
+          "kind": "published"
+        },
+        "ai_tops": {
+          "value": 1321,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "rtx5090",
+      "name": "GeForce RTX 5090",
+      "architecture": "Blackwell",
+      "category": "GeForce",
+      "cc": "12.0",
+      "form_factor": "PCIe",
+      "memory_gb": 32,
+      "bandwidth_gbs": null,
+      "power_w": 575,
+      "price_jpy": null,
+      "notes": "Founders Edition / reference。帯域と精度別Tensor性能は未収集。Boostクロックは負荷・温度・電力等により変動。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA 公式仕様",
+          "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 104.8832,
+          "source": "spec",
+          "kind": "derived",
+          "note": "21760 CUDA cores × 2.41 GHz（公式の丸め値）× 2（FMA）/1000 = 104.8832 TFLOPS。実測値ではない。"
+        },
+        "ai_tops": {
+          "value": 3352,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "purchase_url": null,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    }
+  ]
+}

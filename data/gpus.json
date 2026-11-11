@@ -1,0 +1,4012 @@
+{
+  "schema_version": 1,
+  "research_date": "2026-11-11",
+  "metrics": [
+    {
+      "id": "cuda_fp64",
+      "name": "CUDA FP64",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "CUDAコアの倍精度理論ピーク。Tensor FP64とは別です。"
+    },
+    {
+      "id": "cuda_fp32",
+      "name": "CUDA FP32",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "CUDAコアの単精度理論ピーク。FMAを2演算として数える。"
+    },
+    {
+      "id": "cuda_fp16",
+      "name": "CUDA FP16",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "非TensorのFP16理論ピーク。packed演算を含む。アーキテクチャとSKUでスループットが異なる。"
+    },
+    {
+      "id": "tensor_fp32_sparse",
+      "name": "Tensor FP32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "IEEE FP32を丸めず入力するネイティブTensor演算。FP32蓄積やTF32入力とは別。対応またはピーク値を確認できない場合は空欄。"
+    },
+    {
+      "id": "tensor_fp32_dense",
+      "name": "Tensor FP32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "IEEE FP32を丸めず入力するネイティブTensor演算。FP32蓄積やTF32入力とは別。対応またはピーク値を確認できない場合は空欄。"
+    },
+    {
+      "id": "tensor_fp64_dense",
+      "name": "Tensor FP64 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp64_sparse",
+      "name": "Tensor FP64 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_tf32_dense",
+      "name": "Tensor TF32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_tf32_sparse",
+      "name": "Tensor TF32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_bf16_dense",
+      "name": "Tensor BF16 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_bf16_sparse",
+      "name": "Tensor BF16 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_fp16_dense",
+      "name": "Tensor FP16 → FP32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP16入力・FP32蓄積のTensor理論ピーク。Sparseは所定の構造化疎行列での実効値。FP16蓄積のピークと混在させない。"
+    },
+    {
+      "id": "tensor_fp16_sparse",
+      "name": "Tensor FP16 → FP32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP16入力・FP32蓄積のTensor理論ピーク。Sparseは所定の構造化疎行列での実効値。FP16蓄積のピークと混在させない。"
+    },
+    {
+      "id": "tensor_fp8_dense",
+      "name": "Tensor FP8 → FP32 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP8入力・FP32蓄積のTensor理論ピーク。Sparseは所定の構造化疎行列での実効値。FP16蓄積のピークと混在させない。"
+    },
+    {
+      "id": "tensor_fp8_sparse",
+      "name": "Tensor FP8 → FP32 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP8入力・FP32蓄積のTensor理論ピーク。Sparseは所定の構造化疎行列での実効値。FP16蓄積のピークと混在させない。"
+    },
+    {
+      "id": "tensor_fp4_dense",
+      "name": "Tensor FP4 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_fp4_sparse",
+      "name": "Tensor FP4 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_int8_dense",
+      "name": "Tensor INT8 / Dense",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_int8_sparse",
+      "name": "Tensor INT8 / Sparse",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "tensor_int4_dense",
+      "name": "Tensor INT4 / Dense",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+    },
+    {
+      "id": "tensor_int4_sparse",
+      "name": "Tensor INT4 / Sparse",
+      "unit": "TOPS",
+      "direction": "higher",
+      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+    },
+    {
+      "id": "ai_tops",
+      "name": "広告 AI TOPS（条件別・単純比較不可）",
+      "unit": "AI TOPS",
+      "direction": "higher",
+      "note": "製品ページの広告値。精度・疎性・蓄積条件がこのページだけでは確定しないため、INT8 TOPSや精度別Tensor性能には転記していません。世代間の倍率を性能向上率とみなさないでください。"
+    },
+    {
+      "id": "tensor_fp16_acc16_dense",
+      "name": "Tensor FP16 → FP16 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP16入力・FP16蓄積の理論ピーク。FP32蓄積とは別項目。"
+    },
+    {
+      "id": "tensor_fp16_acc16_sparse",
+      "name": "Tensor FP16 → FP16 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP16入力・FP16蓄積の理論ピーク。FP32蓄積とは別項目。"
+    },
+    {
+      "id": "tensor_fp8_acc16_dense",
+      "name": "Tensor FP8 → FP16 / Dense",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP8入力・FP16蓄積の理論ピーク。FP32蓄積とは別項目。"
+    },
+    {
+      "id": "tensor_fp8_acc16_sparse",
+      "name": "Tensor FP8 → FP16 / Sparse",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "FP8入力・FP16蓄積の理論ピーク。FP32蓄積とは別項目。"
+    },
+    {
+      "id": "tensor_fp16_unspecified_dense",
+      "name": "Tensor FP16 / Dense (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    },
+    {
+      "id": "tensor_fp16_unspecified_sparse",
+      "name": "Tensor FP16 / Sparse (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    },
+    {
+      "id": "tensor_fp8_unspecified_dense",
+      "name": "Tensor FP8 / Dense (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    },
+    {
+      "id": "tensor_fp8_unspecified_sparse",
+      "name": "Tensor FP8 / Sparse (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    },
+    {
+      "id": "tensor_fp4_unspecified_dense",
+      "name": "Tensor FP4 / Dense (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    },
+    {
+      "id": "tensor_fp4_unspecified_sparse",
+      "name": "Tensor FP4 / Sparse (蓄積精度未公表)",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "note": "入力精度とDense/Sparseのみ確認でき、蓄積精度が明示されていない公称値。蓄積精度をそろえた比較には使用しない。"
+    }
+  ],
+  "benchmarks": [],
+  "gpus": [
+    {
+      "id": "rtx3090",
+      "name": "NVIDIA GeForce RTX 3090",
+      "architecture": "Ampere",
+      "category": "GeForce",
+      "cc": "8.6",
+      "form_factor": "PCIe reference / Founders Edition",
+      "memory_gb": 24,
+      "bandwidth_gbs": 936,
+      "power_w": 350,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "NVIDIA RTX Blackwell白書V1.1の世代比較表を優先。Boost時の理論ピーク。FP16入力でも蓄積精度によりTensor性能が異なる。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA RTX Blackwell architecture V1.1: Appendix A",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ampere",
+          "title": "NVIDIA Ampere GA102 architecture: SM / precision throughput",
+          "url": "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 35.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 35.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 0.55625,
+          "source": "ampere",
+          "kind": "derived",
+          "note": "公称CUDA FP32 35.6 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_tf32_dense": {
+          "value": 35.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 71.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 71.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 142.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 71.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 142.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 142.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 284.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 284.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 569.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 568,
+          "source": "ampere",
+          "kind": "published",
+          "note": "Ampere白書Appendix Aの公表丸め値。後年Blackwell白書のINT8丸め値から逆算しない。"
+        },
+        "tensor_int4_sparse": {
+          "value": 1136,
+          "source": "ampere",
+          "kind": "published",
+          "note": "Ampere白書Appendix Aの公表丸め値。後年Blackwell白書のINT8丸め値から逆算しない。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 10496,
+      "tensor_cores": 328,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": "reference / Founders Edition"
+    },
+    {
+      "id": "rtx4090",
+      "name": "NVIDIA GeForce RTX 4090",
+      "architecture": "Ada Lovelace",
+      "category": "GeForce",
+      "cc": "8.9",
+      "form_factor": "PCIe reference / Founders Edition",
+      "memory_gb": 24,
+      "bandwidth_gbs": 1008,
+      "power_w": 450,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "NVIDIA RTX Blackwell白書V1.1の世代比較表を優先。Boost時の理論ピーク。FP16入力でも蓄積精度によりTensor性能が異なる。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA RTX Blackwell architecture V1.1: Appendix A",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada GPU architecture: Appendix A / SM throughput",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 82.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 82.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 1.290625,
+          "source": "ada",
+          "kind": "derived",
+          "note": "公称CUDA FP32 82.6 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_tf32_dense": {
+          "value": 82.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 165.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 165.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 330.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 165.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 330.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 330.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 660.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 660.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1321.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_dense": {
+          "value": 330.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 660.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 660.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 1321.2,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 1321.2,
+          "source": "ada",
+          "kind": "published"
+        },
+        "tensor_int4_sparse": {
+          "value": 2642.4,
+          "source": "ada",
+          "kind": "published"
+        },
+        "ai_tops": {
+          "value": 1321,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 16384,
+      "tensor_cores": 512,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": "reference / Founders Edition"
+    },
+    {
+      "id": "rtx5090",
+      "name": "NVIDIA GeForce RTX 5090",
+      "architecture": "Blackwell",
+      "category": "GeForce",
+      "cc": "12.0",
+      "form_factor": "PCIe reference / Founders Edition",
+      "memory_gb": 32,
+      "bandwidth_gbs": 1792,
+      "power_w": 575,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "NVIDIA RTX Blackwell白書V1.1の世代比較表を優先。Boost時の理論ピーク。FP16入力でも蓄積精度によりTensor性能が異なる。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA RTX Blackwell architecture V1.1: Appendix A",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "blackwell",
+          "title": "NVIDIA RTX Blackwell architecture V1.1: Appendix A",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 104.8,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 104.8,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 1.6375,
+          "source": "blackwell",
+          "kind": "derived",
+          "note": "公称CUDA FP32 104.8 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_tf32_dense": {
+          "value": 104.8,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 209.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 209.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 419,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 209.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 419,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 419,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 838,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 838,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1676,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_dense": {
+          "value": 419,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 838,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 838,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 1676,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp4_dense": {
+          "value": 1676,
+          "source": "spec",
+          "kind": "published",
+          "note": "FP4入力・FP32蓄積。"
+        },
+        "tensor_fp4_sparse": {
+          "value": 3352,
+          "source": "spec",
+          "kind": "published",
+          "note": "FP4入力・FP32蓄積。"
+        },
+        "ai_tops": {
+          "value": 3352,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        }
+      },
+      "cuda_cores": 21760,
+      "tensor_cores": 680,
+      "connection_type": "PCIe",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": "reference / Founders Edition"
+    },
+    {
+      "id": "v100-sxm2-16gb",
+      "name": "NVIDIA Tesla V100 16GB SXM2",
+      "architecture": "Volta",
+      "category": "Data Center",
+      "cc": "7.0",
+      "form_factor": "SXM2",
+      "memory_gb": 16,
+      "bandwidth_gbs": 900,
+      "power_w": 300,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "V100 SXM2 16GB構成。PCIe版・V100S・SXM3とは区別。非Tensor FP16はA100白書Table 2にも31.4と明記。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://images.nvidia.com/content/technologies/volta/pdf/volta-v100-datasheet-update-us-1165301-r5.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "legacy",
+          "title": "NVIDIA Legacy CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus/legacy",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "a100",
+          "title": "NVIDIA A100 architecture whitepaper: Tables 1 / 2",
+          "url": "https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 15.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 7.8,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 31.4,
+          "source": "a100",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 125,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 125,
+          "source": "a100",
+          "kind": "derived",
+          "note": "VoltaのFP16/FP16とFP16/FP32 MMAは同じ理論レート。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "legacy"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int8_dense": {
+          "status": "not_supported",
+          "reason": "Volta Tensor Coreは整数INT8/INT4 MMA非対応。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta Tensor Coreは整数INT8/INT4 MMA非対応。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_supported",
+          "reason": "Volta Tensor Coreは整数INT8/INT4 MMA非対応。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta Tensor Coreは整数INT8/INT4 MMA非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        }
+      },
+      "cuda_cores": 5120,
+      "tensor_cores": 640,
+      "connection_type": "SXM2",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "t4",
+      "name": "NVIDIA Tesla T4",
+      "architecture": "Turing",
+      "category": "Data Center",
+      "cc": "7.5",
+      "form_factor": "PCIe 3.0 x16 / passive",
+      "memory_gb": 16,
+      "bandwidth_gbs": 300,
+      "power_w": 70,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "MAR19データシートの帯域300 GB/sを採用。Ada白書Appendix Dでは320 GB/sで差異あり。電力70Wは同白書。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/Data-Center/tesla-t4/t4-tensor-core-datasheet-951643.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada GPU architecture: Appendix A / SM throughput",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cuda",
+          "title": "NVIDIA CUDA 12.6 Programming Guide: native instruction throughput",
+          "url": "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "turing",
+          "title": "NVIDIA GTC 2018 QUADRO RTX: Turing precision throughput",
+          "url": "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 8.1,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 16.2,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 8.1 TFLOPS × 当該GPUのネイティブ命令スループット比 2。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "cuda_fp64": {
+          "value": 0.253125,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 8.1 TFLOPS × 当該GPUのネイティブ命令スループット比 0.03125。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp16_dense": {
+          "value": 65,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 65,
+          "source": "turing",
+          "kind": "derived",
+          "note": "Turing TensorのFP16/FP16とFP16/FP32は同じレート。T4の公称FP16ピーク65を使用。"
+        },
+        "tensor_int8_dense": {
+          "value": 130,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 260,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "ada"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        }
+      },
+      "cuda_cores": 2560,
+      "tensor_cores": 320,
+      "connection_type": "PCIe 3.0 x16",
+      "cooling_type": "パッシブ",
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "t10",
+      "name": "NVIDIA Tesla T10 16GB",
+      "architecture": "Turing",
+      "category": "Data Center",
+      "cc": "7.5",
+      "form_factor": "PCIe 3.0 x16 / passive / 1 slot / cloud OEM",
+      "memory_gb": 16,
+      "bandwidth_gbs": 403.2,
+      "power_w": 150,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "実機GPU-Z公開画像で3584 cores、1395MHz、16GB/256bit、403.2GB/s、PCIe x16 3.0を確認。PCIe表示の@x8 1.1は撮影時の交渉状態であり、カード上限と区別。150Wは所有者報告。 CUDA・Tensor FP16/FP16蓄積・INT8/INT4は、出典のハードウェア構成とNVIDIAの命令レートから算出した参考理論ピーク。NVIDIAが当該SKU向けに保証した公称値や実測値ではない。FP16/FP32蓄積のSKU別上限は未確認で—を維持。BF16・TF32・FP8・FP4・構造化Sparse等の非対応はx。",
+      "sources": [
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "spec",
+          "title": "実機GPU-Z公開画像を含むTesla T10所有者の報告（NVIDIA公称資料ではない）",
+          "url": "https://post.smzdm.com/p/aoq4olv6/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "arch",
+          "title": "NVIDIA Turing Architecture In-Depth: Tensor per-core peak rates",
+          "url": "https://developer.nvidia.com/blog/nvidia-turing-architecture-in-depth/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "tuning",
+          "title": "NVIDIA Turing Tuning Guide: SM composition / supported Tensor operations",
+          "url": "https://docs.nvidia.com/cuda/archive/11.8.0/turing-tuning-guide/index.html",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cuda",
+          "title": "NVIDIA CUDA 12.6 native arithmetic throughput: CC 7.5",
+          "url": "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "hardware_image",
+          "title": "所有者のGPU-Z 2.58.0画像: 3584 shaders / 1395MHz / 403.2GB/s",
+          "url": "https://qnam.smzdm.com/202503/05/67c72db7e6e7a8439.png_e1080.jpg",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "owner",
+          "title": "Tesla T10所有者の構成・150W電力制限の報告",
+          "url": "https://campfires.cc/nas/upgrade-server",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 9.99936,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。3584 cores × 1395 MHz × FMA 2 / 10^6 = 9.99936 TFLOPS。Boostを維持した理論ピークであり、実測値ではない。"
+        },
+        "cuda_fp16": {
+          "value": 19.99872,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "cuda"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。上記CUDA FP32 × CC 7.5のFP16:FP32レート比2:1。packed FP16の理論ピーク。"
+        },
+        "cuda_fp64": {
+          "value": 0.31248,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "cuda",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。上記CUDA FP32 × CC 7.5のFP64:FP32レート比2:64 = 1/32。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 79.99488,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。56 SM × 8 Tensor/SM × 128 ops/Tensor/clock × 1395 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        },
+        "tensor_int8_dense": {
+          "value": 159.98976,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。56 SM × 8 Tensor/SM × 256 ops/Tensor/clock × 1395 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        },
+        "tensor_int4_dense": {
+          "value": 319.97952,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "hardware_image",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。56 SM × 8 Tensor/SM × 512 ops/Tensor/clock × 1395 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "inferred",
+          "source": "tuning",
+          "note": "実機/販売元のTU102 Turing識別に基づくCC 7.5。当該SKUの公式CC一覧掲載を意味しない。"
+        },
+        "memory_gb": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者による実機報告。NVIDIA公式SKUデータシートではない。"
+        },
+        "bandwidth_gbs": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "GPU-Zの理論帯域403.2 GB/s表示を確認。実測帯域ではない。"
+        },
+        "power_w": {
+          "status": "owner_reported",
+          "source": "owner",
+          "note": "所有者による150W電力制限の報告。NVIDIA公式データシートのTDPではない。"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "cuda_cores": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "base_clock_mhz": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "boost_clock_mhz": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "memory_bus_bits": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "memory_type": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "connection_type": {
+          "status": "reported_hardware",
+          "source": "hardware_image",
+          "note": "所有者が公開したGPU-Z画像のコア数・Boostクロックを使用。"
+        },
+        "sm_count": {
+          "status": "derived",
+          "source": "tuning",
+          "note": "CUDA cores / 64 = SM数、SM数 × 8 = Tensor数。コア数の対象SKU情報も参照。"
+        },
+        "tensor_cores": {
+          "status": "derived",
+          "source": "tuning",
+          "note": "CUDA cores / 64 = SM数、SM数 × 8 = Tensor数。コア数の対象SKU情報も参照。"
+        },
+        "cooling_type": {
+          "status": "reported_hardware",
+          "source": "spec",
+          "note": "所有者による実機報告。NVIDIA公式SKUデータシートではない。"
+        },
+        "slot_count": {
+          "status": "reported_hardware",
+          "source": "spec",
+          "note": "所有者による実機報告。NVIDIA公式SKUデータシートではない。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp16_dense": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "ai_tops": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        }
+      },
+      "connection_type": "PCIe 3.0 x16",
+      "cooling_type": "パッシブ",
+      "slot_count": 1,
+      "board_variant": "Turing cloud OEM / TU102",
+      "cuda_cores": 3584,
+      "sm_count": 56,
+      "tensor_cores": 448,
+      "boost_clock_mhz": 1395,
+      "base_clock_mhz": 1065,
+      "memory_clock_mhz": 1575,
+      "memory_bus_bits": 256,
+      "memory_type": "GDDR6",
+      "pci_device_id": "10DE:1E37"
+    },
+    {
+      "id": "t40",
+      "name": "NVIDIA Tesla T40 24GB",
+      "architecture": "Turing",
+      "category": "Data Center",
+      "cc": "7.5",
+      "form_factor": "PCIe 3.0 x16 / passive / 2 slot / cloud OEM",
+      "memory_gb": 24,
+      "bandwidth_gbs": 624.0,
+      "power_w": null,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "非一般販売のOEMカード。販売元の4608 cores / Boost 1560MHz / 24GB / 384bit / PCIe 3.0 x16を参考採用。帯域624GB/sは販売個体のメモリクロック1625MHzから換算。電力は販売元間で250W/260Wが食い違い未確定。 CUDA・Tensor FP16/FP16蓄積・INT8/INT4は、出典のハードウェア構成とNVIDIAの命令レートから算出した参考理論ピーク。NVIDIAが当該SKU向けに保証した公称値や実測値ではない。FP16/FP32蓄積のSKU別上限は未確認で—を維持。BF16・TF32・FP8・FP4・構造化Sparse等の非対応はx。",
+      "sources": [
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "spec",
+          "title": "Serverflow販売元のTesla T40仕様（NVIDIA公称資料ではない）",
+          "url": "https://serverflow.ru/catalog/komplektuyushchie/videokarty/videokarta-nvidia-tesla-t40-24-gb/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "arch",
+          "title": "NVIDIA Turing Architecture In-Depth: Tensor per-core peak rates",
+          "url": "https://developer.nvidia.com/blog/nvidia-turing-architecture-in-depth/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "tuning",
+          "title": "NVIDIA Turing Tuning Guide: SM composition / supported Tensor operations",
+          "url": "https://docs.nvidia.com/cuda/archive/11.8.0/turing-tuning-guide/index.html",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cuda",
+          "title": "NVIDIA CUDA 12.6 native arithmetic throughput: CC 7.5",
+          "url": "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "seller",
+          "title": "Backup Servers LLC販売個体の元説明: clocks / memory / 250W (帯域単位に誤記あり)",
+          "url": "https://itm.ebaydesc.com/itmdesc/306994369597?category=27386&cspheader=1&descgauge=1&domain=ebay.com&excSoj=1&excTrk=1&ittenable=true&lang=en&lsite=0&oneClk=2&secureDesc=1&seller=backup_servers&t=1748881557000&ver=1",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "vendor_forum",
+          "title": "NVIDIA Developer Forums: T40は非一般販売のdatacenter GPU",
+          "url": "https://forums.developer.nvidia.com/t/nvidia-t40-rtx-6000-drivers-support/279076",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 14.37696,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。4608 cores × 1560 MHz × FMA 2 / 10^6 = 14.37696 TFLOPS。Boostを維持した理論ピークであり、実測値ではない。"
+        },
+        "cuda_fp16": {
+          "value": 28.75392,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "cuda"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。上記CUDA FP32 × CC 7.5のFP16:FP32レート比2:1。packed FP16の理論ピーク。"
+        },
+        "cuda_fp64": {
+          "value": 0.44928,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "cuda",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。上記CUDA FP32 × CC 7.5のFP64:FP32レート比2:64 = 1/32。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 115.01568,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。72 SM × 8 Tensor/SM × 128 ops/Tensor/clock × 1560 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        },
+        "tensor_int8_dense": {
+          "value": 230.03136,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。72 SM × 8 Tensor/SM × 256 ops/Tensor/clock × 1560 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        },
+        "tensor_int4_dense": {
+          "value": 460.06272,
+          "source": "spec",
+          "kind": "derived",
+          "supporting_sources": [
+            "seller",
+            "arch",
+            "tuning"
+          ],
+          "confidence": "reported_hardware_architecture_peak",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。72 SM × 8 Tensor/SM × 512 ops/Tensor/clock × 1560 MHz / 10^6。NVIDIA Turingアーキテクチャの最大レートを当該構成に適用した理論上限。SKU固有の制限、電力・温度、ソフトウェアによって実性能は低下し得る。FP32蓄積のピークを保証する値ではない。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "inferred",
+          "source": "tuning",
+          "note": "実機/販売元のTU102 Turing識別に基づくCC 7.5。当該SKUの公式CC一覧掲載を意味しない。"
+        },
+        "memory_gb": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元による個体仕様。実機での検証・メーカー保証は未確認。"
+        },
+        "bandwidth_gbs": {
+          "status": "derived",
+          "source": "seller",
+          "note": "販売個体のメモリクロック1625 MHzをGPU-Z相当表記とし、GDDR6の実効8倍 × 384 bit / 8 / 1000 = 624 GB/sと換算。売主記載の624.0 GbpsをそのままGB/sへ読み替えた値ではない。仕様は参考値。"
+        },
+        "power_w": {
+          "status": "conflicting",
+          "sources": [
+            "seller",
+            "spec"
+          ],
+          "note": "販売元間で250Wと260Wの記載が異なり、同一構成を保証する公式資料・実機の既定power.limitが未確認。単一の比較用電力は確定しない。"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "cuda_cores": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "base_clock_mhz": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "boost_clock_mhz": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "memory_bus_bits": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "memory_type": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "connection_type": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元記載のCUDAコア数・Boostクロックを参考採用。メーカー保証値や実機検証済み仕様ではない。"
+        },
+        "sm_count": {
+          "status": "derived",
+          "source": "tuning",
+          "note": "CUDA cores / 64 = SM数、SM数 × 8 = Tensor数。コア数の対象SKU情報も参照。"
+        },
+        "tensor_cores": {
+          "status": "derived",
+          "source": "tuning",
+          "note": "CUDA cores / 64 = SM数、SM数 × 8 = Tensor数。コア数の対象SKU情報も参照。"
+        },
+        "cooling_type": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元による個体仕様。実機での検証・メーカー保証は未確認。"
+        },
+        "slot_count": {
+          "status": "seller_reported",
+          "source": "spec",
+          "note": "販売元による個体仕様。実機での検証・メーカー保証は未確認。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp16_dense": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "ai_tops": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_verified",
+          "reason": "当該OEM SKUの蓄積精度別Tensorレートまたは広告AI TOPSを確認できない。FP16蓄積の理論上限をFP32蓄積値へは流用しない。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "TU102 / Turing（CC 7.5）は当該Tensor入力精度、または構造化Sparse Tensor演算が非対応。FP32蓄積はIEEE FP32入力とは別。"
+        }
+      },
+      "connection_type": "PCIe 3.0 x16",
+      "cooling_type": "パッシブ",
+      "slot_count": 2,
+      "board_variant": "Turing cloud OEM / TU102",
+      "cuda_cores": 4608,
+      "sm_count": 72,
+      "tensor_cores": 576,
+      "boost_clock_mhz": 1560,
+      "base_clock_mhz": 1305,
+      "memory_clock_mhz": 1625,
+      "memory_bus_bits": 384,
+      "memory_type": "GDDR6",
+      "reported_power_w": {
+        "backup_servers": 250,
+        "serverflow": 260
+      }
+    },
+    {
+      "id": "quadro-rtx6000",
+      "name": "NVIDIA Quadro RTX 6000",
+      "architecture": "Turing",
+      "category": "Workstation",
+      "cc": "7.5",
+      "form_factor": "PCIe 3.0 x16 / active / dual slot",
+      "memory_gb": 24,
+      "bandwidth_gbs": 672,
+      "power_w": 295,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "アクティブ冷却の標準ボード。電力はTotal Board Power 295W。GPU単体TGP 260Wやパッシブ版249Wとは区別。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/quadro-rtx-6000-us-nvidia-704093-r4-web.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cuda",
+          "title": "NVIDIA CUDA 12.6 Programming Guide: native instruction throughput",
+          "url": "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "turing",
+          "title": "NVIDIA GTC 2018 QUADRO RTX: Turing precision throughput",
+          "url": "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 16.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 32.6,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 16.3 TFLOPS × 当該GPUのネイティブ命令スループット比 2。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "cuda_fp64": {
+          "value": 0.509375,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 16.3 TFLOPS × 当該GPUのネイティブ命令スループット比 0.03125。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp16_dense": {
+          "value": 130.5,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 130.5,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 261,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 522,
+          "source": "turing",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        }
+      },
+      "cuda_cores": 4608,
+      "tensor_cores": 576,
+      "connection_type": "PCIe 3.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": 2,
+      "board_variant": null
+    },
+    {
+      "id": "quadro-rtx8000",
+      "name": "NVIDIA Quadro RTX 8000",
+      "architecture": "Turing",
+      "category": "Workstation",
+      "cc": "7.5",
+      "form_factor": "PCIe 3.0 x16 / active / dual slot",
+      "memory_gb": 48,
+      "bandwidth_gbs": 672,
+      "power_w": 295,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "アクティブ冷却の標準ボード。電力はTotal Board Power 295W。GPU単体TGP 260Wやパッシブ版249Wとは区別。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.leadtek.com/eng/products/workstation_graphics%282%29/NVIDIA_Quadro_RTX8000%2820830%29/detail",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cuda",
+          "title": "NVIDIA CUDA 12.6 Programming Guide: native instruction throughput",
+          "url": "https://docs.nvidia.com/cuda/archive/12.6.0/cuda-c-programming-guide/index.html#arithmetic-instructions",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "turing",
+          "title": "NVIDIA GTC 2018 QUADRO RTX: Turing precision throughput",
+          "url": "https://www.nvidia.com/content/apac/gtc/ja/pdf/2018/2040.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 16.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 32.6,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 16.3 TFLOPS × 当該GPUのネイティブ命令スループット比 2。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "cuda_fp64": {
+          "value": 0.509375,
+          "source": "cuda",
+          "kind": "derived",
+          "note": "公称CUDA FP32 16.3 TFLOPS × 当該GPUのネイティブ命令スループット比 0.03125。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp16_dense": {
+          "value": 130.5,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 130.5,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 261,
+          "source": "turing",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 522,
+          "source": "turing",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Volta/Turingの当該Tensor入力精度、または構造化Sparse Tensor演算は非対応。"
+        }
+      },
+      "cuda_cores": 4608,
+      "tensor_cores": 576,
+      "connection_type": "PCIe 3.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": 2,
+      "board_variant": null
+    },
+    {
+      "id": "rtx4000-ada",
+      "name": "NVIDIA RTX 4000 Ada",
+      "architecture": "Ada Lovelace",
+      "category": "Workstation",
+      "cc": "8.9",
+      "form_factor": "PCIe 4.0 x16 / active",
+      "memory_gb": 20,
+      "bandwidth_gbs": 360,
+      "power_w": 130,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "デスクトップ版。Tensorの広告値はFP8 SparseでありFP16 Denseではない。NVIDIA APR24 line card脚注3はFP8入力、FP16またはFP32蓄積と明記。精度別の算出値は丸め済み公称値を起点とし、実測値ではない。 130Wフルハイト版。SFF 70W版ではない。製品ページおよびPNY現行仕様の427.6を優先。NVIDIAリンク先PDFには327.6の記載差異がある。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/en-us/products/workstations/rtx-4000/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada GPU architecture: Appendix A / SM throughput",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "linecard",
+          "title": "NVIDIA professional graphics line card APR24, document 3221166 (NVIDIA-authored mirror)",
+          "url": "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "datasheet",
+          "title": "NVIDIA RTX 4000 Ada datasheet (327.6の記載差異あり)",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/products/workstations/nvidia-rtx-4000-datasheet.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 26.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 26.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 0.4171875,
+          "source": "ada",
+          "kind": "derived",
+          "note": "公称CUDA FP32 26.7 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 213.8,
+          "source": "spec",
+          "kind": "derived",
+          "note": "製品のFP8 Sparse公称値からDense = Sparse / 2。蓄積FP16/FP32の条件はNVIDIA APR24 line card脚注3。公称値の丸めを含む。",
+          "supporting_sources": [
+            "linecard"
+          ]
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 427.6,
+          "source": "spec",
+          "kind": "derived",
+          "note": "製品のFP8 Sparse公称値からDense = Sparse / 2。蓄積FP16/FP32の条件はNVIDIA APR24 line card脚注3。公称値の丸めを含む。",
+          "supporting_sources": [
+            "linecard"
+          ]
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 106.9,
+          "source": "ada",
+          "kind": "derived",
+          "note": "当該SKUのFP8/FP16蓄積 Sparse公称値 427.6 に対し、AdaのFP8:FP16演算レート比2:1、Sparse:Dense比2:1を適用。製品仕様とlinecard脚注も参照。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 213.8,
+          "source": "ada",
+          "kind": "derived",
+          "note": "当該SKUのFP8/FP16蓄積 Sparse公称値 427.6 に対し、AdaのFP8:FP16演算レート比2:1、Sparse:Dense比2:1を適用。製品仕様とlinecard脚注も参照。"
+        },
+        "tensor_fp8_dense": {
+          "value": 213.8,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp8_sparse": {
+          "value": 427.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp16_dense": {
+          "value": 106.9,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 213.8,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_bf16_dense": {
+          "value": 106.9,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_bf16_sparse": {
+          "value": 213.8,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_tf32_dense": {
+          "value": 53.45,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_tf32_sparse": {
+          "value": 106.9,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_int8_dense": {
+          "value": 213.8,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_int8_sparse": {
+          "value": 427.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 427.6 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 6144,
+      "tensor_cores": 192,
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "rtx5000-ada",
+      "name": "NVIDIA RTX 5000 Ada",
+      "architecture": "Ada Lovelace",
+      "category": "Workstation",
+      "cc": "8.9",
+      "form_factor": "PCIe 4.0 x16 / active",
+      "memory_gb": 32,
+      "bandwidth_gbs": 576,
+      "power_w": 250,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "デスクトップ版。Tensorの広告値はFP8 SparseでありFP16 Denseではない。NVIDIA APR24 line card脚注3はFP8入力、FP16またはFP32蓄積と明記。精度別の算出値は丸め済み公称値を起点とし、実測値ではない。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/en-us/products/workstations/rtx-5000/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada GPU architecture: Appendix A / SM throughput",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "linecard",
+          "title": "NVIDIA professional graphics line card APR24, document 3221166 (NVIDIA-authored mirror)",
+          "url": "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 65.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 65.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 1.0203125,
+          "source": "ada",
+          "kind": "derived",
+          "note": "公称CUDA FP32 65.3 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 522.2,
+          "source": "spec",
+          "kind": "derived",
+          "note": "製品のFP8 Sparse公称値からDense = Sparse / 2。蓄積FP16/FP32の条件はNVIDIA APR24 line card脚注3。公称値の丸めを含む。",
+          "supporting_sources": [
+            "linecard"
+          ]
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 1044.4,
+          "source": "spec",
+          "kind": "derived",
+          "note": "製品のFP8 Sparse公称値からDense = Sparse / 2。蓄積FP16/FP32の条件はNVIDIA APR24 line card脚注3。公称値の丸めを含む。",
+          "supporting_sources": [
+            "linecard"
+          ]
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 261.1,
+          "source": "ada",
+          "kind": "derived",
+          "note": "当該SKUのFP8/FP16蓄積 Sparse公称値 1044.4 に対し、AdaのFP8:FP16演算レート比2:1、Sparse:Dense比2:1を適用。製品仕様とlinecard脚注も参照。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 522.2,
+          "source": "ada",
+          "kind": "derived",
+          "note": "当該SKUのFP8/FP16蓄積 Sparse公称値 1044.4 に対し、AdaのFP8:FP16演算レート比2:1、Sparse:Dense比2:1を適用。製品仕様とlinecard脚注も参照。"
+        },
+        "tensor_fp8_dense": {
+          "value": 522.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp8_sparse": {
+          "value": 1044.4,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp16_dense": {
+          "value": 261.1,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 522.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_bf16_dense": {
+          "value": 261.1,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_bf16_sparse": {
+          "value": 522.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_tf32_dense": {
+          "value": 130.55,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_tf32_sparse": {
+          "value": 261.1,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_int8_dense": {
+          "value": 522.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        },
+        "tensor_int8_sparse": {
+          "value": 1044.4,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "当該SKUの公称FP8 Sparse 1044.4 TFLOPSとline card脚注3のFP16/FP32蓄積条件を使用。Ada白書のFP8:FP16/BF16:TF32 = 4:2:1、FP8:INT8 = 1:1およびSparse:Dense = 2:1で算出。製品仕様とAda白書も参照。丸め済み値からの理論換算。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 12800,
+      "tensor_cores": 400,
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "rtx6000-ada",
+      "name": "NVIDIA RTX 6000 Ada",
+      "architecture": "Ada Lovelace",
+      "category": "Workstation",
+      "cc": "8.9",
+      "form_factor": "PCIe 4.0 x16 / active",
+      "memory_gb": 48,
+      "bandwidth_gbs": 960,
+      "power_w": 300,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "デスクトップ版。Tensorの広告値はFP8 SparseでありFP16 Denseではない。NVIDIA APR24 line card脚注3はFP8入力、FP16またはFP32蓄積と明記。精度別の算出値は丸め済み公称値を起点とし、実測値ではない。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/en-us/products/workstations/rtx-6000/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ada",
+          "title": "NVIDIA Ada GPU architecture: Appendix A / SM throughput",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "linecard",
+          "title": "NVIDIA professional graphics line card APR24, document 3221166 (NVIDIA-authored mirror)",
+          "url": "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "pro",
+          "title": "NVIDIA RTX PRO Blackwell architecture V1.1: Appendix A",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/design-visualization/quadro-product-literature/pdf/NVIDIA-RTX-Blackwell-PRO-GPU-Architecture-v1_1.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 91.1,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 91.1,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 1.4234375,
+          "source": "ada",
+          "kind": "derived",
+          "note": "公称CUDA FP32 91.1 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 728.5,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 1457,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 364,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 728,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp8_dense": {
+          "value": 728.5,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp8_sparse": {
+          "value": 1457,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 364,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 728,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 364,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 728,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 182.1,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 364.2,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 728.5,
+          "source": "pro",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1457,
+          "source": "pro",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ada Tensor CoreはFP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 18176,
+      "tensor_cores": 568,
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "rtx-a4500",
+      "name": "NVIDIA RTX A4500",
+      "architecture": "Ampere",
+      "category": "Workstation",
+      "cc": "8.6",
+      "form_factor": "PCIe 4.0 x16 / active / dual slot",
+      "memory_gb": 20,
+      "bandwidth_gbs": 640,
+      "power_w": 200,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "デスクトップ版20GB。公式PDFのファイル名はA5000だが本文はRTX A4500の仕様。Tensor公称189.2はSparse。NVIDIA APR24 line card脚注3でFP16入力・FP16またはFP32蓄積を確認。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://www.nvidia.com/content/dam/en-zz/Solutions/gtcs21/rtx-a5000/nvidia-rtx-a5000-datasheet.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ampere",
+          "title": "NVIDIA Ampere GA102 architecture: SM / precision throughput",
+          "url": "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "linecard",
+          "title": "NVIDIA professional graphics line card APR24, document 3221166 (NVIDIA-authored mirror)",
+          "url": "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 23.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 23.7,
+          "source": "ampere",
+          "kind": "derived",
+          "note": "公称CUDA FP32 23.7 TFLOPS × 当該GPUのネイティブ命令スループット比 1。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "cuda_fp64": {
+          "value": 0.3703125,
+          "source": "ampere",
+          "kind": "derived",
+          "note": "公称CUDA FP32 23.7 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp16_dense": {
+          "value": 94.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 189.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 94.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 189.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_bf16_dense": {
+          "value": 94.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_bf16_sparse": {
+          "value": 189.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_tf32_dense": {
+          "value": 47.3,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_tf32_sparse": {
+          "value": 94.6,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_int8_dense": {
+          "value": 189.2,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_int8_sparse": {
+          "value": 378.4,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_int4_dense": {
+          "value": 378.4,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        },
+        "tensor_int4_sparse": {
+          "value": 756.8,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "RTX A4500のSparse FP16公称189.2とline card脚注3のFP16/FP32蓄積条件を使用。Ampere白書の演算レート比（FP16/BF16:TF32=2:1、INT8:FP16=2:1、INT4:FP16=4:1）、Sparse:Dense=2:1で算出。製品仕様とAmpere白書も参照。元の公称値の丸めを含む。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 7168,
+      "tensor_cores": 224,
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "アクティブ",
+      "slot_count": 2,
+      "board_variant": null
+    },
+    {
+      "id": "a40",
+      "name": "NVIDIA A40",
+      "architecture": "Ampere",
+      "category": "Data Center",
+      "cc": "8.6",
+      "form_factor": "PCIe 4.0 x16 / passive / dual slot",
+      "memory_gb": 48,
+      "bandwidth_gbs": 696,
+      "power_w": 300,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "Mar22データシート。FP16の記載はFP16蓄積、BF16はFP32蓄積。未公表のFP16/FP32蓄積値に代入しない。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA / ボードメーカー 公式仕様",
+          "url": "https://images.nvidia.com/content/Solutions/data-center/a40/nvidia-a40-datasheet.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "ampere",
+          "title": "NVIDIA Ampere GA102 architecture: SM / precision throughput",
+          "url": "https://images.nvidia.com/aem-dam/en-zz/Solutions/geforce/ampere/pdf/NVIDIA-ampere-GA102-GPU-Architecture-Whitepaper-V1.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "linecard",
+          "title": "NVIDIA professional graphics line card APR24, document 3221166 (NVIDIA-authored mirror)",
+          "url": "https://fe5e0932bbdbee188a67-ade54de1bba9a4fe61c120942a09245b.ssl.cf1.rackcdn.com/brochure_RTX_Ada_Desktop.pdf",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 37.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 37.4,
+          "source": "ampere",
+          "kind": "derived",
+          "note": "公称CUDA FP32 37.4 TFLOPS × 当該GPUのネイティブ命令スループット比 1。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "cuda_fp64": {
+          "value": 0.584375,
+          "source": "ampere",
+          "kind": "derived",
+          "note": "公称CUDA FP32 37.4 TFLOPS × 当該GPUのネイティブ命令スループット比 0.015625。元のFP32の丸めを引き継ぐ。CUDA FP32の出典も参照。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 149.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 299.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 149.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 299.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 74.8,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 149.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 299.3,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 598.6,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 598.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_sparse": {
+          "value": 1197.4,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 149.7,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "NVIDIA APR24 line cardのA40 Sparse 299.4および脚注3のFP16入力・FP16またはFP32蓄積を使用。Dense=Sparse/2。FP16/FP16とBF16/FP32の明示値はA40データシートにも掲載。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 299.4,
+          "source": "linecard",
+          "kind": "derived",
+          "note": "NVIDIA APR24 line cardのA40 Sparse 299.4および脚注3のFP16入力・FP16またはFP32蓄積を使用。Dense=Sparse/2。FP16/FP16とBF16/FP32の明示値はA40データシートにも掲載。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 10752,
+      "tensor_cores": 336,
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "パッシブ",
+      "slot_count": 2,
+      "board_variant": null
+    },
+    {
+      "id": "a100-sxm4-40gb",
+      "name": "NVIDIA A100 40GB SXM4",
+      "architecture": "Ampere",
+      "category": "Data Center",
+      "cc": "8.0",
+      "form_factor": "SXM4",
+      "memory_gb": 40,
+      "bandwidth_gbs": 1555,
+      "power_w": 400,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "40GB SXM4版。80GB版・PCIe版とは区別。非Tensor FP16は白書の78 TFLOPS（BF16 39とは別）。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA A100 architecture whitepaper: Tables 1 / 2",
+          "url": "https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/nvidia-ampere-architecture-whitepaper.pdf",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp16": {
+          "value": 78,
+          "source": "spec",
+          "kind": "published"
+        },
+        "cuda_fp64": {
+          "value": 9.7,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp64_dense": {
+          "value": 19.5,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_dense": {
+          "value": 156,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_tf32_sparse": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_dense": {
+          "value": 312,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_bf16_sparse": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 624,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_sparse": {
+          "value": 1248,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_dense": {
+          "value": 1248,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int4_sparse": {
+          "value": 2496,
+          "source": "spec",
+          "kind": "published"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "Ampere Tensor CoreはFP8/FP4 MMA非対応。"
+        }
+      },
+      "cuda_cores": 6912,
+      "tensor_cores": 432,
+      "connection_type": "SXM4",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": null
+    },
+    {
+      "id": "jetson-agx-thor",
+      "name": "NVIDIA Jetson AGX Thor (T5000 128GB)",
+      "architecture": "Blackwell",
+      "category": "Jetson",
+      "cc": "11.0",
+      "form_factor": "Jetson T5000 module / AGX Thor developer kit",
+      "memory_gb": 128,
+      "bandwidth_gbs": 273,
+      "power_w": 130,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "Jetson T5000 128GBを対象。メモリはCPU/GPU共有LPDDR5X、130Wはモジュール全体の電力上限（GPUボード単体電力ではない）。CUDA FP32はMAXN 1575MHz、標準120Wモード1386MHzとは別。Tensorは公式ブログ公称値を採用し、丸め差を逆算で修正しない。蓄積精度未公表のため専用項目に格納。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA Technical Blog: Jetson Thor / T5000 specifications",
+          "url": "https://developer.nvidia.com/blog/introducing-nvidia-jetson-thor-the-ultimate-platform-for-physical-ai/",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA Compute Capability",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-11"
+        },
+        {
+          "id": "thor-clock",
+          "title": "NVIDIA Jetson Linux r38.2: T5000 MAXN / 120W clocks",
+          "url": "https://docs.nvidia.com/jetson/archives/r38.2/DeveloperGuide/SD/PlatformPowerAndPerformance/JetsonThor.html",
+          "checked_on": "2026-11-11"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 8.064,
+          "source": "thor-clock",
+          "kind": "derived",
+          "note": "2560 CUDA cores × MAXN GPU 1.575GHz × 2(FMA) / 1000 = 8.064 TFLOPS。コア数は公式ブログspec、クロックはJetson Linux r38.2。120W設定は1.386GHzで7.09632 TFLOPS。"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "value": 1035,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "value": 2070,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "value": 517,
+          "source": "spec",
+          "kind": "published",
+          "note": "公式ブログの公称丸め値を維持。Sparse値はDense値の厳密な2倍と一致しない。"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "value": 1035,
+          "source": "spec",
+          "kind": "published",
+          "note": "公式ブログの公称丸め値を維持。Sparse値はDense値の厳密な2倍と一致しない。"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "value": 517,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "value": 258.5,
+          "source": "spec",
+          "kind": "derived",
+          "note": "公式ブログのSparse FP16 517 / 2。蓄積精度は未公表。"
+        },
+        "tensor_int8_sparse": {
+          "value": 1035,
+          "source": "spec",
+          "kind": "published"
+        },
+        "tensor_int8_dense": {
+          "value": 517.5,
+          "source": "spec",
+          "kind": "derived",
+          "note": "公式ブログのSparse INT8 1035 / 2。FP8 Denseの公称517とは精度・丸めが異なるため別に算出。"
+        }
+      },
+      "results": {},
+      "field_provenance": {
+        "cc": {
+          "status": "published",
+          "source": "cc"
+        },
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "price_jpy": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        },
+        "purchase_url": {
+          "status": "not_collected",
+          "note": "現時点の購入条件を特定した価格・購入リンクは未登録。"
+        }
+      },
+      "metric_status": {
+        "cuda_fp64": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "cuda_fp16": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "ai_tops": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_published",
+          "reason": "対象SKU・当該入力精度・蓄積精度・Dense/Sparse条件を満たす公称ピーク値を公式資料で確認できない。"
+        }
+      },
+      "cuda_cores": 2560,
+      "power_scope": "module_including_cpu_and_memory",
+      "connection_type": "Jetsonモジュール",
+      "cooling_type": null,
+      "slot_count": null,
+      "board_variant": "T5000 / AGX Thor developer kit"
+    }
+  ],
+  "research_notes": "docs/catalog-research-2026-11-11.md。公開値と算出値はperformance.kind、欠測・非対応理由はmetric_status、基本仕様の確認状態はfield_provenanceに記録。実測値はresultsのみ。"
+}
