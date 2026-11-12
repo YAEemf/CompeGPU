@@ -3,10 +3,20 @@ import {TableUI, columnLabel} from './table-ui.mjs?v=20261112-accelerators';
 import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';
+import {CatalogStore} from './catalog-store.mjs?v=20261112-pages';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const today = () => new Date().toLocaleDateString('sv-SE');
+const staticHosting=document.documentElement.dataset.hosting==='static';
+let browserStorage;
+try {browserStorage=localStorage;} catch {}
+const catalog=new CatalogStore({staticHosting,baseURL:new URL('.',document.baseURI),storage:browserStorage});
+if (staticHosting) {
+  $('restorePublished').hidden=false;
+  $('storageNotice').hidden=false;
+  $('save').title='編集はこの端末のブラウザーに保存します。公開データや他の端末には反映されません。';
+}
 function setFiltersOpen(open, persist=true) {
   const sidebar=$('filterSidebar'), focusInside=sidebar.contains(document.activeElement);
   sidebar.hidden=!open;
@@ -53,10 +63,9 @@ function toast(message) {
 }
 function markDirty() {dirty = true; $('save').disabled = false; $('saveState').textContent = '未保存の変更あり';}
 async function api(path, body) {
-  const response = await fetch(path, {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
-  const result = await response.json();
-  if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
-  return result;
+  if (path==='/api/validate') return catalog.validate(body.data);
+  if (path==='/api/data') return catalog.save(body.data,body.revision);
+  throw new Error('未対応の操作です');
 }
 function download(name, contents, mime) {
   const link = document.createElement('a'), blob = new Blob([contents], {type:mime});
@@ -296,6 +305,7 @@ async function saveChanges() {
     const snapshot=dirty?JSON.stringify(data):null;
     const message=snapshot===null
       ?'表示設定と最後に手動で指定した並び順を保存しますか？'
+      :staticHosting?'この端末のブラウザーに編集内容を上書き保存しますか？\n公開データや他の端末には反映されません。'
       :'data/gpus.json を現在の編集内容で上書き保存しますか？\n変更前の内容はバックアップされます。';
     if (!confirm(message)) return;
     tableUI.saveLayout(); tableUI.saveModeColumns();
@@ -306,12 +316,20 @@ async function saveChanges() {
     $('save').disabled=true; $('saveState').textContent='保存中…';
     const result=await api('/api/data',{data:JSON.parse(snapshot),revision});
     revision=result.revision; dirty=snapshot!==JSON.stringify(data);
-    $('saveState').textContent=dirty?'未保存の変更あり':'ファイルに保存済み';
-    toast('data/gpus.json に保存しました。変更前のバックアップも作成しました。');
+    $('saveState').textContent=dirty?'未保存の変更あり':staticHosting?'この端末に保存済み':'ファイルに保存済み';
+    toast(staticHosting?'この端末のブラウザーに保存しました。別の端末へ移す場合はJSON出力を使ってください。':'data/gpus.json に保存しました。変更前のバックアップも作成しました。');
   } catch(error) {$('saveState').textContent='保存できませんでした'; toast(error.message);}
   finally {saving=false; $('save').disabled=false;}
 }
 $('save').onclick=saveChanges;
+$('restorePublished').onclick=()=>{
+  if (!catalog.published || !confirm('この端末で保存した編集内容を解除して、読み込み済みの公開データに戻しますか？\n必要な編集内容は、先にJSON出力で保存してください。')) return;
+  try {
+    const result=catalog.restorePublished(); data=result.data; revision=result.revision; dirty=false;
+    refreshOptions(); render(); $('saveState').textContent='公開データを表示中';
+    toast('この端末の編集を解除し、公開データに戻しました。');
+  } catch(error) {toast(error.message);}
+};
 window.addEventListener('keydown',event=>{
   if (event.ctrlKey && !event.altKey && event.key.toLowerCase()==='s') {
     event.preventDefault();
@@ -349,8 +367,11 @@ $('benchmarkForm').onsubmit = async event => {
 };
 window.addEventListener('beforeunload', event => {if (dirty) {event.preventDefault(); event.returnValue = '';}});
 try {
-  const response = await fetch('/api/data', {cache:'no-store'}); if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  const result = await response.json(); data = result.data; revision = result.revision;
+  const result = await catalog.load(); data = result.data; revision = result.revision;
   tableUI = new TableUI({getData:()=>({...data,gpus:data.gpus.map(viewGPU)}),getDefinitions:metricDefinitions,getMetric:selectedMetric,getBaseline:()=>data.gpus.find(g=>g.id===baselineId),getRows:()=>rows,getScopedGPU:viewGPU,onChange:render});
-  refreshOptions(); render(); $('saveState').textContent = 'ファイルから読込済み'; $('save').disabled=false;
-} catch(error) {$('saveState').textContent = '読込エラー'; toast(`python server.py で起動し、http://127.0.0.1:8765 を開いてください。${error.message}`);}
+  refreshOptions(); render();
+  $('saveState').textContent = staticHosting?(result.saved?(result.publicUpdated?'公開データ更新あり（端末の保存を表示中）':'この端末の保存を表示中'):'公開データを表示中'):'ファイルから読込済み';
+  $('save').disabled=false; $('restorePublished').disabled=false;
+  if (catalog.storageWarning) toast(catalog.storageWarning);
+  else if (result.publicUpdated) toast('公開データが更新されています。この端末の編集は保持しています。「公開データに戻す」で最新版へ切り替えられます。');
+} catch(error) {$('saveState').textContent = '読込エラー'; toast(staticHosting?`公開データを読み込めませんでした。再読み込みしてください。${error.message}`:`python server.py で起動し、http://127.0.0.1:8765 を開いてください。${error.message}`);}

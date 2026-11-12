@@ -1,0 +1,45 @@
+name: Deploy comparison page
+
+on:
+  push:
+    branches: [main]
+    paths: ['web/**', 'data/gpus.json', 'scripts/build_pages.py', 'server.py', 'tests/**', '.github/workflows/pages.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - name: Validate catalog and server
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Check browser models and storage
+        run: node --test tests/*.test.mjs
+      - name: Build static page
+        run: python3 scripts/build_pages.py
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

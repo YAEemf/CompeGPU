@@ -4,3 +4,4 @@ data/backups/
 test-results/
 .runtime/
 .research-cache/
+_site/
