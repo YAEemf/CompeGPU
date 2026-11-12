@@ -1,5 +1,5 @@
-import {compareCC, selectGPUs, csv, missingMetricMarker} from './model.mjs?v=20261112-accelerators';
-import {TableUI, columnLabel} from './table-ui.mjs?v=20261112-accelerators';
+import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261112-precision-audit';
+import {TableUI, columnLabel} from './table-ui.mjs?v=20261112-precision-audit';
 import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';
@@ -114,7 +114,8 @@ function cellHTML(g, c, metric) {
   const text=value==null?missingMetricMarker(viewGPU(g),c.id):c.type==='number'?formatNumericValue(value,c,metric):typeof value==='object'?JSON.stringify(value):String(value);
   const isPrice=c.id==='price_jpy', purchaseURL=isPrice&&value!=null?getPurchaseURL(g):null;
   const content=purchaseURL?`<a class="priceLink" href="${esc(purchaseURL)}" tabindex="-1" target="_blank" rel="noopener noreferrer">${esc(text)}</a>`:esc(text);
-  return `<td data-cell="${esc(c.id)}" data-gpu="${esc(g.id)}" class="${g.id===baselineId?'baseline ':''}${isPrice?'priceCell ':''}${['text','json'].includes(c.type)?'textCell':''}"${isPrice?' tabindex="0" title="ダブルクリックでリンクを編集、Ctrl＋クリックで購入ページを開く"':''}><span class="${c.id===metric.id?'value':''}">${content}</span></td>`;
+  const title=isPrice?'ダブルクリックでリンクを編集、Ctrl＋クリックで購入ページを開く':value==null?missingMetricDetail(viewGPU(g),c.id):'';
+  return `<td data-cell="${esc(c.id)}" data-gpu="${esc(g.id)}" class="${g.id===baselineId?'baseline ':''}${isPrice?'priceCell ':''}${['text','json'].includes(c.type)?'textCell':''}"${isPrice?' tabindex="0"':''}${title?` title="${esc(title)}"`:''}><span class="${c.id===metric.id?'value':''}">${content}</span></td>`;
 }
 function gpuNameHTML(g, baseline) {
   return `<button class="gpuName gpuNameButton" data-baseline="${esc(g.id)}" aria-pressed="${g.id===baseline?.id}" title="${esc(g.name)}：クリックで基準GPUを切替、Ctrl＋クリックで出典を開く、ダブルクリックで編集">${esc(displayGPUName(g.name))}</button>${g.id===baseline?.id?'<span class="baselineMark">基準</span>':''}`;

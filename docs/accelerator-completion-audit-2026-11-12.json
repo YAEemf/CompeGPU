@@ -1,0 +1,756 @@
+{
+  "checked_on": "2026-11-12",
+  "scope": "all 51 nominal metric definitions for Gaudi2 and MI250; no fabricated values for unpublished peaks",
+  "gpus": [
+    {
+      "id": "intel-gaudi2-hl225h",
+      "summary": {
+        "not_supported": 34,
+        "not_published": 5,
+        "not_applicable": 9,
+        "published": 3
+      },
+      "metrics": [
+        {
+          "id": "cuda_fp64",
+          "name": "CUDA FP64",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "cuda_fp32",
+          "name": "CUDA FP32",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "cuda_fp16",
+          "name": "CUDA FP16",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp32_sparse",
+          "name": "Tensor FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp32_dense",
+          "name": "Tensor FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp64_dense",
+          "name": "Tensor FP64 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp64_sparse",
+          "name": "Tensor FP64 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_tf32_dense",
+          "name": "Tensor TF32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_tf32_sparse",
+          "name": "Tensor TF32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_bf16_dense",
+          "name": "Tensor BF16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_bf16_sparse",
+          "name": "Tensor BF16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_dense",
+          "name": "Tensor FP16 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_sparse",
+          "name": "Tensor FP16 → FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_dense",
+          "name": "Tensor FP8 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_sparse",
+          "name": "Tensor FP8 → FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_dense",
+          "name": "Tensor FP4 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_sparse",
+          "name": "Tensor FP4 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int8_dense",
+          "name": "Tensor INT8 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int8_sparse",
+          "name": "Tensor INT8 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int4_dense",
+          "name": "Tensor INT4 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int4_sparse",
+          "name": "Tensor INT4 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "ai_tops",
+          "name": "広告 AI TOPS（条件別・単純比較不可）",
+          "state": "not_published",
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_acc16_dense",
+          "name": "Tensor FP16 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_acc16_sparse",
+          "name": "Tensor FP16 → FP16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_acc16_dense",
+          "name": "Tensor FP8 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_acc16_sparse",
+          "name": "Tensor FP8 → FP16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_unspecified_dense",
+          "name": "Tensor FP16 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_unspecified_sparse",
+          "name": "Tensor FP16 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_unspecified_dense",
+          "name": "Tensor FP8 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_unspecified_sparse",
+          "name": "Tensor FP8 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_unspecified_dense",
+          "name": "Tensor FP4 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_unspecified_sparse",
+          "name": "Tensor FP4 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp64",
+          "name": "GPU FP64（非行列）",
+          "state": "not_applicable",
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。 TPC-Cのfloat64は64要素のFP32ベクトルという型名であり、倍精度FP64ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp32",
+          "name": "GPU FP32（非行列）",
+          "state": "not_applicable",
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp16",
+          "name": "GPU FP16（非行列）",
+          "state": "not_applicable",
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_matrix_fp16_acc16_dense",
+          "name": "GPU Matrix FP16 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp32_single_issue",
+          "name": "GPU FP32 / single-issue",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp16_single_issue",
+          "name": "GPU FP16 / single-issue",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "npu_ai_tops",
+          "name": "NPU AI（公称）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "platform_ai_tops",
+          "name": "CPU＋GPU＋NPU AI（広告総合値）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_ai_fp16_advertised",
+          "name": "GPU FP16 AI（広告値）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_fp64_dense",
+          "name": "Matrix FP64 → FP64 / Dense",
+          "state": "not_supported",
+          "reason": "MME対応入力型はFP32/TF32/BF16/FP16/FP8、蓄積はFP32。FP64入出力のMMEなし（Gaudi2白書p.6）。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_fp32_dense",
+          "name": "Matrix FP32 → FP32 / Dense",
+          "state": "not_published",
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_tf32_acc32_dense",
+          "name": "Matrix TF32 → FP32 / Dense",
+          "state": "not_published",
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_fp16_acc32_dense",
+          "name": "Matrix FP16 → FP32 / Dense",
+          "state": "not_published",
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_bf16_acc32_dense",
+          "name": "Matrix BF16 → FP32 / Dense",
+          "state": "published",
+          "value": 432,
+          "source": "peak",
+          "note": "Gaudi2列のBF16 MME公称ピーク。MMEはFP32蓄積（Gaudi2白書p.6）。Sparse倍率を加えない。"
+        },
+        {
+          "id": "matrix_fp8_acc32_dense",
+          "name": "Matrix FP8 → FP32 / Dense",
+          "state": "published",
+          "value": 865,
+          "source": "peak",
+          "note": "Gaudi2列のFP8 MME公称ピーク、Dense。E4M3/E5M2対応、FP32蓄積。BF16出力のGEMM実測と出力型・蓄積型を区別。"
+        },
+        {
+          "id": "matrix_int8_acc32_dense",
+          "name": "Matrix INT8 → INT32 / Dense",
+          "state": "not_supported",
+          "reason": "この指標はINT8入力・INT32蓄積のネイティブ行列演算。Gaudi2白書p.6のMMEは全入力型をFP32へ蓄積するため、このINT32蓄積条件には該当しない。p.10のTPC INT8/INT32対応とは別。",
+          "source": "spec"
+        },
+        {
+          "id": "vector_bf16",
+          "name": "Vector BF16（非行列）",
+          "state": "published",
+          "value": 11,
+          "source": "peak",
+          "note": "Gaudi2列のBF16 Vector公表値。MMEではなくTPC。FP32の11 TFLOPSとは解釈しない。"
+        },
+        {
+          "id": "gpu_fp32_packed",
+          "name": "GPU FP32 / packed",
+          "state": "not_applicable",
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "source": "spec"
+        },
+        {
+          "id": "vendor_int4_tops_advertised",
+          "name": "INT4（メーカー公表値）",
+          "state": "not_published",
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "source": "spec"
+        }
+      ]
+    },
+    {
+      "id": "amd-instinct-mi250",
+      "summary": {
+        "not_supported": 35,
+        "not_published": 1,
+        "published": 9,
+        "derived": 1,
+        "not_applicable": 5
+      },
+      "metrics": [
+        {
+          "id": "cuda_fp64",
+          "name": "CUDA FP64",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "cuda_fp32",
+          "name": "CUDA FP32",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "cuda_fp16",
+          "name": "CUDA FP16",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp32_sparse",
+          "name": "Tensor FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp32_dense",
+          "name": "Tensor FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp64_dense",
+          "name": "Tensor FP64 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp64_sparse",
+          "name": "Tensor FP64 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_tf32_dense",
+          "name": "Tensor TF32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_tf32_sparse",
+          "name": "Tensor TF32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_bf16_dense",
+          "name": "Tensor BF16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_bf16_sparse",
+          "name": "Tensor BF16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_dense",
+          "name": "Tensor FP16 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_sparse",
+          "name": "Tensor FP16 → FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_dense",
+          "name": "Tensor FP8 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_sparse",
+          "name": "Tensor FP8 → FP32 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_dense",
+          "name": "Tensor FP4 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_sparse",
+          "name": "Tensor FP4 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int8_dense",
+          "name": "Tensor INT8 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int8_sparse",
+          "name": "Tensor INT8 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int4_dense",
+          "name": "Tensor INT4 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_int4_sparse",
+          "name": "Tensor INT4 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "ai_tops",
+          "name": "広告 AI TOPS（条件別・単純比較不可）",
+          "state": "not_published",
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_acc16_dense",
+          "name": "Tensor FP16 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_acc16_sparse",
+          "name": "Tensor FP16 → FP16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_acc16_dense",
+          "name": "Tensor FP8 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_acc16_sparse",
+          "name": "Tensor FP8 → FP16 / Sparse",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_unspecified_dense",
+          "name": "Tensor FP16 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp16_unspecified_sparse",
+          "name": "Tensor FP16 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_unspecified_dense",
+          "name": "Tensor FP8 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp8_unspecified_sparse",
+          "name": "Tensor FP8 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_unspecified_dense",
+          "name": "Tensor FP4 / Dense (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "tensor_fp4_unspecified_sparse",
+          "name": "Tensor FP4 / Sparse (蓄積精度未公表)",
+          "state": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp64",
+          "name": "GPU FP64（非行列）",
+          "state": "published",
+          "value": 45.3,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）の通常Vector公称ピーク。Matrixやpacked FP32と別。"
+        },
+        {
+          "id": "gpu_fp32",
+          "name": "GPU FP32（非行列）",
+          "state": "published",
+          "value": 45.3,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）の通常Vector公称ピーク。Matrixやpacked FP32と別。"
+        },
+        {
+          "id": "gpu_fp16",
+          "name": "GPU FP16（非行列）",
+          "state": "derived",
+          "value": 90.52159999999999,
+          "source": "cdna2-isa",
+          "note": "非行列packed FP16 FMAの参考理論上限。208 CU × 4 SIMD/CU × 16 lanes/SIMD × 2 FP16/lane × 2 FLOPs/FMA × 1.7GHz = 90.5216 TFLOPS。ISA §6.7のV_PK_FMA_F16の2半精度要素と、ROCmの4×16-wide SIMD構成から算出。各SIMDが毎周期packed FMAを実行し最大クロックを維持する条件。メーカーが直接公表した非行列ピークではなく実測でもない。362.1 TFLOPSのMFMAとは別。"
+        },
+        {
+          "id": "gpu_matrix_fp16_acc16_dense",
+          "name": "GPU Matrix FP16 → FP16 / Dense",
+          "state": "not_supported",
+          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp32_single_issue",
+          "name": "GPU FP32 / single-issue",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_fp16_single_issue",
+          "name": "GPU FP16 / single-issue",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "npu_ai_tops",
+          "name": "NPU AI（公称）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "platform_ai_tops",
+          "name": "CPU＋GPU＋NPU AI（広告総合値）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "gpu_ai_fp16_advertised",
+          "name": "GPU FP16 AI（広告値）",
+          "state": "not_applicable",
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_fp64_dense",
+          "name": "Matrix FP64 → FP64 / Dense",
+          "state": "published",
+          "value": 90.5,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）のMFMA公称ピーク。IEEE入力型。TF32やVectorへ転記しない。"
+        },
+        {
+          "id": "matrix_fp32_dense",
+          "name": "Matrix FP32 → FP32 / Dense",
+          "state": "published",
+          "value": 90.5,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）のMFMA公称ピーク。IEEE入力型。TF32やVectorへ転記しない。"
+        },
+        {
+          "id": "matrix_tf32_acc32_dense",
+          "name": "Matrix TF32 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_fp16_acc32_dense",
+          "name": "Matrix FP16 → FP32 / Dense",
+          "state": "published",
+          "value": 362.1,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）のDense MFMA公称ピーク。FP16/BF16入力、FP32蓄積はAMD命令表で確認。"
+        },
+        {
+          "id": "matrix_bf16_acc32_dense",
+          "name": "Matrix BF16 → FP32 / Dense",
+          "state": "published",
+          "value": 362.1,
+          "source": "arch",
+          "note": "1 OAM（2 GCD）のDense MFMA公称ピーク。FP16/BF16入力、FP32蓄積はAMD命令表で確認。"
+        },
+        {
+          "id": "matrix_fp8_acc32_dense",
+          "name": "Matrix FP8 → FP32 / Dense",
+          "state": "not_supported",
+          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。",
+          "source": "spec"
+        },
+        {
+          "id": "matrix_int8_acc32_dense",
+          "name": "Matrix INT8 → INT32 / Dense",
+          "state": "published",
+          "value": 362.1,
+          "source": "arch",
+          "note": "1 OAMのINT8 MFMA公称TOPS、INT32蓄積。Sparse倍率を加えない。"
+        },
+        {
+          "id": "vector_bf16",
+          "name": "Vector BF16（非行列）",
+          "state": "not_supported",
+          "reason": "この指標はネイティブBF16ベクトルFMA。MI200 ISAの通常VALU/VOP3P表にはBF16 FMAがなく、BF16演算はV_MFMA_F32_*BF16系列として掲載。FP32へ変換する実装やBF16行列演算362.1をVector BF16へ転記しない。",
+          "source": "cdna2-isa"
+        },
+        {
+          "id": "gpu_fp32_packed",
+          "name": "GPU FP32 / packed",
+          "state": "published",
+          "value": 90.5,
+          "source": "arch",
+          "note": "1 OAM合計、packed FP32命令を使う場合。通常Vector FP32 45.3と加算しない。"
+        },
+        {
+          "id": "vendor_int4_tops_advertised",
+          "name": "INT4（メーカー公表値）",
+          "state": "published",
+          "value": 362.1,
+          "source": "spec",
+          "note": "メーカー公表INT4 TOPS。CDNA2の公式ネイティブMatrix型表はINT8であり、INT4 DOT/packingとINT4 GEMMを同一視しない。"
+        }
+      ]
+    }
+  ]
+}

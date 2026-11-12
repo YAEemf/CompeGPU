@@ -549,6 +549,34 @@
       "unit": "TFLOPS",
       "direction": "higher",
       "conditions": "AMD Performance Labs 2022-11-02、HPCG3.0、1x MI250 128GB OAM（2 GCD）、560W、2P EPYC7763 SMT disabled、SBIOS M12、Ubuntu20.04.4、host ROCm5.2.0、MI200-70A。公式表1xMI250の488.8 GFLOPSを0.4888 TFLOPSへ単位換算。問題サイズ・全MPI設定は未掲載。HPLとは別ワークロード。"
+    },
+    {
+      "id": "gaudi124_fp16_gemm_8192_eager",
+      "name": "FP16 GEMM 8192³ / eager / Gaudi1.24",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "測定者changchinlan/gaudi-benchmark、HL-225H 1台、GaudiSW1.24.1、PyTorch2.11、FP16入力・FP32蓄積・FP16出力、Dense a@b、M=K=N=8192。eager、10 warmup。4組×15回の時刻測定、torch.hpu.synchronize、各組の平均時間の最小値から2*N^3でTFLOPS計算。原資料のmedian表記より実行コードの集計式を優先。600W上限設定のホストだが測定時電力・クロック・測定日・CPU型番は未確定。メーカー公称ピークではない。"
+    },
+    {
+      "id": "gaudi124_fp16_gemm_8192_compiled",
+      "name": "FP16 GEMM 8192³ / compiled / Gaudi1.24",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "測定者changchinlan/gaudi-benchmark、HL-225H 1台、GaudiSW1.24.1、PyTorch2.11、FP16入力・FP32蓄積・FP16出力、Dense a@b、M=K=N=8192。torch.compile(backend=hpu_backend)、独立プロセス/shape、25 warmup。4組×15回の時刻測定、torch.hpu.synchronize、各組の平均時間の最小値から2*N^3でTFLOPS計算。原資料のmedian表記より実行コードの集計式を優先。600W上限設定のホストだが測定時電力・クロック・測定日・CPU型番は未確定。メーカー公称ピークではない。"
+    },
+    {
+      "id": "gaudi124_fp16_gemm_16384_eager",
+      "name": "FP16 GEMM 16384³ / eager / Gaudi1.24",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "測定者changchinlan/gaudi-benchmark、HL-225H 1台、GaudiSW1.24.1、PyTorch2.11、FP16入力・FP32蓄積・FP16出力、Dense a@b、M=K=N=16384。eager、10 warmup。4組×15回の時刻測定、torch.hpu.synchronize、各組の平均時間の最小値から2*N^3でTFLOPS計算。原資料のmedian表記より実行コードの集計式を優先。600W上限設定のホストだが測定時電力・クロック・測定日・CPU型番は未確定。メーカー公称ピークではない。"
+    },
+    {
+      "id": "gaudi124_fp16_gemm_16384_compiled",
+      "name": "FP16 GEMM 16384³ / compiled / Gaudi1.24",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "測定者changchinlan/gaudi-benchmark、HL-225H 1台、GaudiSW1.24.1、PyTorch2.11、FP16入力・FP32蓄積・FP16出力、Dense a@b、M=K=N=16384。torch.compile(backend=hpu_backend)、独立プロセス/shape、25 warmup。4組×15回の時刻測定、torch.hpu.synchronize、各組の平均時間の最小値から2*N^3でTFLOPS計算。原資料のmedian表記より実行コードの集計式を優先。600W上限設定のホストだが測定時電力・クロック・測定日・CPU型番は未確定。メーカー公称ピークではない。"
     }
   ],
   "gpus": [
@@ -7405,6 +7433,21 @@
         "cc": {
           "status": "not_supported",
           "reason": "NVIDIA CUDA Compute Capabilityを持たない。"
+        },
+        "slot_count": {
+          "status": "not_applicable",
+          "reason": "OAMはPCIeスロット挿入式カードではないため、占有スロット数の定義は対象外。0スロットと数値補完しない。",
+          "checked_on": "2026-11-12"
+        },
+        "price_jpy": {
+          "status": "not_verified",
+          "reason": "購入時点・単体/システム・新品/中古・税条件が未指定のため価格未登録。計算性能の欠測ではない。",
+          "checked_on": "2026-11-12"
+        },
+        "purchase_url": {
+          "status": "not_verified",
+          "reason": "ユーザー指定の購入先は未登録。性能出典のリンクとは別。",
+          "checked_on": "2026-11-12"
         }
       },
       "field_provenance": {
@@ -7621,200 +7664,377 @@
           "accelerator_count": 1,
           "note": "公開資料の1 HPU行のみ。OS/PyTorch記載矛盾あり、詳細条件を確認。",
           "confidence": "vendor_report_with_environment_conflict"
+        },
+        "gaudi124_fp16_gemm_8192_eager": {
+          "value": 280.62,
+          "kind": "aggregate",
+          "source": "fp16-raw",
+          "accelerator_count": 1,
+          "execution_device": "intel-gaudi2-hl225h",
+          "supporting_sources": [
+            "fp16-code",
+            "fp16-environment",
+            "fp16-report",
+            "fp16-inventory",
+            "spec"
+          ],
+          "note": "測定者の生テキストとコードを照合。best-of-four window（各15反復）の平均時間から算出。原資料のmedianとの表記差を条件欄に明記。"
+        },
+        "gaudi124_fp16_gemm_8192_compiled": {
+          "value": 370.94,
+          "kind": "aggregate",
+          "source": "fp16-raw",
+          "accelerator_count": 1,
+          "execution_device": "intel-gaudi2-hl225h",
+          "supporting_sources": [
+            "fp16-code",
+            "fp16-environment",
+            "fp16-report",
+            "fp16-inventory",
+            "spec"
+          ],
+          "note": "測定者の生テキストとコードを照合。best-of-four window（各15反復）の平均時間から算出。原資料のmedianとの表記差を条件欄に明記。"
+        },
+        "gaudi124_fp16_gemm_16384_eager": {
+          "value": 283.51,
+          "kind": "aggregate",
+          "source": "fp16-raw",
+          "accelerator_count": 1,
+          "execution_device": "intel-gaudi2-hl225h",
+          "supporting_sources": [
+            "fp16-code",
+            "fp16-environment",
+            "fp16-report",
+            "fp16-inventory",
+            "spec"
+          ],
+          "note": "測定者の生テキストとコードを照合。best-of-four window（各15反復）の平均時間から算出。原資料のmedianとの表記差を条件欄に明記。"
+        },
+        "gaudi124_fp16_gemm_16384_compiled": {
+          "value": 335.73,
+          "kind": "aggregate",
+          "source": "fp16-raw",
+          "accelerator_count": 1,
+          "execution_device": "intel-gaudi2-hl225h",
+          "supporting_sources": [
+            "fp16-code",
+            "fp16-environment",
+            "fp16-report",
+            "fp16-inventory",
+            "spec"
+          ],
+          "note": "測定者の生テキストとコードを照合。best-of-four window（各15反復）の平均時間から算出。原資料のmedianとの表記差を条件欄に明記。"
         }
       },
       "metric_status": {
         "cuda_fp64": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "cuda_fp32": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "cuda_fp16": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp32_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp32_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp64_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp64_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_tf32_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_tf32_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_bf16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_bf16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int8_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int8_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int4_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int4_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "ai_tops": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_acc16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_acc16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_acc16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_acc16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "gpu_fp64": {
           "status": "not_applicable",
-          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。"
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。 TPC-Cのfloat64は64要素のFP32ベクトルという型名であり、倍精度FP64ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_fp32": {
           "status": "not_applicable",
-          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。"
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_fp16": {
           "status": "not_applicable",
-          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。"
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_matrix_fp16_acc16_dense": {
           "status": "not_supported",
-          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。"
+          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "gpu_fp32_single_issue": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_fp16_single_issue": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "npu_ai_tops": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "platform_ai_tops": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_ai_fp16_advertised": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "matrix_fp64_dense": {
           "status": "not_supported",
-          "reason": "MME対応入力型はFP32/TF32/BF16/FP16/FP8、蓄積はFP32。FP64入出力のMMEなし（Gaudi2白書p.6）。"
+          "reason": "MME対応入力型はFP32/TF32/BF16/FP16/FP8、蓄積はFP32。FP64入出力のMMEなし（Gaudi2白書p.6）。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "matrix_fp32_dense": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "supported": true,
+          "source": "spec",
+          "supporting_sources": [
+            "peak"
+          ],
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "checked_on": "2026-11-12"
         },
         "matrix_tf32_acc32_dense": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "supported": true,
+          "source": "spec",
+          "supporting_sources": [
+            "peak"
+          ],
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "checked_on": "2026-11-12"
         },
         "matrix_fp16_acc32_dense": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "supported": true,
+          "source": "spec",
+          "supporting_sources": [
+            "peak"
+          ],
+          "reason": "入力型とFP32蓄積はGaudi2白書p.6で対応確認済み。Gaudi3技術資料のGaudi2比較列が公表するMMEピークはBF16 432とFP8 865のみで、この型のSKU保証ピークは確認できない。Gaudi3の比率やBF16値から推定転記しない。FP16は別の実測定義に370.94/335.73等を登録。",
+          "checked_on": "2026-11-12"
         },
         "matrix_int8_acc32_dense": {
-          "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "status": "not_supported",
+          "source": "spec",
+          "reason": "この指標はINT8入力・INT32蓄積のネイティブ行列演算。Gaudi2白書p.6のMMEは全入力型をFP32へ蓄積するため、このINT32蓄積条件には該当しない。p.10のTPC INT8/INT32対応とは別。",
+          "checked_on": "2026-11-12"
         },
         "gpu_fp32_packed": {
           "status": "not_applicable",
-          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。"
+          "reason": "Gaudi2はGPUではない。MME/TPC性能をGPU VectorやNVIDIA CUDAへ代入しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "vendor_int4_tops_advertised": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         }
       },
       "sources": [
@@ -7855,6 +8075,42 @@
           "title": "Intel Gaudi2 inference performance, software 1.19.0",
           "url": "https://www.intel.com/content/www/us/en/developer/platform/gaudi/model-performance-gaudi2-inference-1-19.html",
           "checked_on": "2026-11-12"
+        },
+        {
+          "id": "tpc-types",
+          "title": "Intel TPC-C supported types: float64 is 64 FP32 lanes, not FP64",
+          "url": "https://docs.habana.ai/en/latest/TPC/TPC_C_Language_Spec/Supported_Data_Types.html",
+          "checked_on": "2026-11-12"
+        },
+        {
+          "id": "fp16-raw",
+          "title": "Measurement author: single-card compiled/eager GEMM raw results",
+          "url": "https://github.com/changchinlan/gaudi-benchmark/blob/master/artifacts/07-gemm-gap/compiled-vs-eager.txt",
+          "checked_on": "2026-11-12"
+        },
+        {
+          "id": "fp16-code",
+          "title": "Measurement author: exact warmup, timing and minimum-of-four protocol",
+          "url": "https://github.com/changchinlan/gaudi-benchmark/blob/master/scripts/09_gemm_compiled.py",
+          "checked_on": "2026-11-12"
+        },
+        {
+          "id": "fp16-environment",
+          "title": "Measurement author: Gaudi software 1.24.1 / PyTorch2.11 dtype tests",
+          "url": "https://github.com/changchinlan/gaudi-benchmark/blob/master/docs/07-dtype-results.md",
+          "checked_on": "2026-11-12"
+        },
+        {
+          "id": "fp16-report",
+          "title": "Measurement author: separate eager/compiled precision results",
+          "url": "https://github.com/changchinlan/gaudi-benchmark/blob/master/docs/10-closing-the-gemm-gap.md",
+          "checked_on": "2026-11-12"
+        },
+        {
+          "id": "fp16-inventory",
+          "title": "Measurement author: HL-225H inventory, firmware/driver and 600W cap",
+          "url": "https://github.com/changchinlan/gaudi-benchmark/blob/master/docs/03-phase0-1-results.md",
+          "checked_on": "2026-11-12"
         }
       ],
       "memory_gb": 96,
@@ -7870,7 +8126,7 @@
       "ethernet_ports": 24,
       "ethernet_port_gbps": 100,
       "memory_scope": "One Gaudi2 accelerator HBM2e, excludes CPU host RAM",
-      "notes": "Gaudi2 HL-225H OAM 1台。GPUではなくMME＋TPCのAIアクセラレータ。BF16 MME 432 / FP8 MME 865 / BF16 TPC 11 TFLOPSを分離。MMEの蓄積はFP32、出力BF16の実測も蓄積BF16とはしない。FP16/TF32/FP32は型対応を確認したが同条件ピーク未公表のため空欄。帯域はGaudi2白書2.45TB/sを採用、Gaudi3比較表の2.46TB/sは別値として保持。600Wは上限TDP。LLMは高バッチ合計スループットで単一ユーザーの生成速度やllama-bench tg512と比較しない。"
+      "notes": "Gaudi2 HL-225H OAM 1台。GPUではなくMME＋TPCのAIアクセラレータ。BF16 MME 432 / FP8 MME 865 / BF16 TPC 11 TFLOPSを分離。MMEの蓄積はFP32、出力BF16の実測も蓄積BF16とはしない。FP16/TF32/FP32は型対応を確認したが同条件ピーク未公表のため空欄。帯域はGaudi2白書2.45TB/sを採用、Gaudi3比較表の2.46TB/sは別値として保持。600Wは上限TDP。LLMは高バッチ合計スループットで単一ユーザーの生成速度やllama-bench tg512と比較しない。 再調査でもFP16/TF32/FP32のSKU保証MMEピークは確認できない。FP16の公開実測4件を公称欄とは別に追加。INT8→INT32行列はMME全型FP32蓄積と異なるためx。全欠測・対象外は項目別に根拠・確認日を記録。"
     },
     {
       "id": "amd-instinct-mi250",
@@ -7892,6 +8148,21 @@
         "cc": {
           "status": "not_supported",
           "reason": "NVIDIA CUDA Compute Capabilityを持たない。"
+        },
+        "slot_count": {
+          "status": "not_applicable",
+          "reason": "OAMはPCIeスロット挿入式カードではないため、占有スロット数の定義は対象外。0スロットと数値補完しない。",
+          "checked_on": "2026-11-12"
+        },
+        "price_jpy": {
+          "status": "not_verified",
+          "reason": "購入時点・単体/システム・新品/中古・税条件が未指定のため価格未登録。計算性能の欠測ではない。",
+          "checked_on": "2026-11-12"
+        },
+        "purchase_url": {
+          "status": "not_verified",
+          "reason": "ユーザー指定の購入先は未登録。性能出典のリンクとは別。",
+          "checked_on": "2026-11-12"
         }
       },
       "field_provenance": {
@@ -7985,6 +8256,17 @@
           "source": "spec",
           "kind": "published",
           "note": "メーカー公表INT4 TOPS。CDNA2の公式ネイティブMatrix型表はINT8であり、INT4 DOT/packingとINT4 GEMMを同一視しない。"
+        },
+        "gpu_fp16": {
+          "value": 90.52159999999999,
+          "source": "cdna2-isa",
+          "kind": "derived",
+          "confidence": "architecture_model_max_clock",
+          "supporting_sources": [
+            "arch",
+            "spec"
+          ],
+          "note": "非行列packed FP16 FMAの参考理論上限。208 CU × 4 SIMD/CU × 16 lanes/SIMD × 2 FP16/lane × 2 FLOPs/FMA × 1.7GHz = 90.5216 TFLOPS。ISA §6.7のV_PK_FMA_F16の2半精度要素と、ROCmの4×16-wide SIMD構成から算出。各SIMDが毎周期packed FMAを実行し最大クロックを維持する条件。メーカーが直接公表した非行列ピークではなく実測でもない。362.1 TFLOPSのMFMAとは別。"
         }
       },
       "results": {
@@ -8012,171 +8294,254 @@
       "metric_status": {
         "cuda_fp64": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "cuda_fp32": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "cuda_fp16": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp32_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp32_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp64_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp64_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_tf32_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_tf32_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_bf16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_bf16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int8_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int8_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int4_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_int4_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "ai_tops": {
           "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_acc16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_acc16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_acc16_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_acc16_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp16_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp8_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_unspecified_dense": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "tensor_fp4_unspecified_sparse": {
           "status": "not_supported",
-          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。"
-        },
-        "gpu_fp16": {
-          "status": "not_published",
-          "reason": "SKU英語表のFP16 362.1はMatrix値。非行列FP16の同条件ピークを独立に確認できず、Matrixから流用しない。"
+          "reason": "NVIDIA CUDA/Tensor Core固有項目。共通Matrix/GPU項目に対応する演算を記録しており、行列機能そのものがない意味ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "gpu_matrix_fp16_acc16_dense": {
           "status": "not_supported",
-          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。"
+          "reason": "確認した行列命令はFP32蓄積。FP16蓄積の行列演算ではない。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "gpu_fp32_single_issue": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_fp16_single_issue": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "npu_ai_tops": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "platform_ai_tops": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "gpu_ai_fp16_advertised": {
           "status": "not_applicable",
-          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。"
+          "reason": "Ryzen APU/専用NPU/AMD RDNA3.5の発行条件に関する項目で、この製品へ流用しない。",
+          "checked_on": "2026-11-12",
+          "source": "spec",
+          "review": "この製品に定義が適用されない対象外。未調査とは区別。"
         },
         "matrix_tf32_acc32_dense": {
           "status": "not_supported",
-          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。"
+          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "matrix_fp8_acc32_dense": {
           "status": "not_supported",
-          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。"
+          "reason": "AMD公式CDNA2対応表でFP8/BF8 GEMMとTF32 GEMMは非対応。FP32 GEMMと区別。",
+          "checked_on": "2026-11-12",
+          "source": "spec"
         },
         "vector_bf16": {
-          "status": "not_published",
-          "reason": "同じ入力・蓄積・演算器条件の公称ピークを確認できない。対応するデータ型がないとは断定しない。"
+          "status": "not_supported",
+          "source": "cdna2-isa",
+          "reason": "この指標はネイティブBF16ベクトルFMA。MI200 ISAの通常VALU/VOP3P表にはBF16 FMAがなく、BF16演算はV_MFMA_F32_*BF16系列として掲載。FP32へ変換する実装やBF16行列演算362.1をVector BF16へ転記しない。",
+          "checked_on": "2026-11-12"
         }
       },
       "sources": [
@@ -8217,6 +8582,12 @@
           "checked_on": "2026-11-12",
           "verification": "public_url_index_only; live_body_unverified",
           "note": "公開URL索引から参照先を確認。性能値の根拠はAMD一次資料。索引のFP16 362.1は行列、帯域3280は丸め差のため非行列や採用帯域へ流用しない。"
+        },
+        {
+          "id": "cdna2-isa",
+          "title": "AMD MI200 ISA, 2022-02-04: packed half FMA and complete VALU/MFMA opcode lists",
+          "url": "https://developer.amd.com/wp-content/resources/CDNA2_Shader_ISA_18November2021.pdf",
+          "checked_on": "2026-11-12"
         }
       ],
       "memory_gb": 128,
@@ -8238,7 +8609,7 @@
       "power_max_w": 560,
       "power_scope": "One OAM: 500W TDP / 560W peak; imported benchmarks use 560W configuration",
       "memory_scope": "128GB per OAM = 2 GCD x 64GB. Two logical GPU devices; not one flat 128GB allocation by default.",
-      "notes": "MI250（MI250Xではない）1 OAMの2 GCD合計。208 CU = 104 CU×2、128GB = 64GB×2。通常は2論理GPUとして認識され、単一デバイスから128GB全体が自動利用できる意味ではない。Vector FP32/FP64 45.3、packed FP32/Matrix FP32/FP64 90.5、Matrix FP16/BF16 362.1を分離。英語SKUのFP16 362.1は行列ピークであり非行列FP16へ代入しない。帯域3.2TB/sは公式掲載の丸め値を採用。500W公称/560Wピーク、実測は560W構成。HPL/HPCGはCPUホストを含むサーバーで測定された1 OAM結果。INT4公表TOPSはネイティブINT4行列演算とは別の広告項目に保持。"
+      "notes": "MI250（MI250Xではない）1 OAMの2 GCD合計。208 CU = 104 CU×2、128GB = 64GB×2。通常は2論理GPUとして認識され、単一デバイスから128GB全体が自動利用できる意味ではない。Vector FP32/FP64 45.3、packed FP32/Matrix FP32/FP64 90.5、Matrix FP16/BF16 362.1を分離。非行列FP16はpacked FMAの命令構成から90.5216 TFLOPSを算出（最大クロック・発行条件付き）。英語SKUのFP16 362.1は行列ピークであり流用しない。帯域3.2TB/sは公式掲載の丸め値を採用。500W公称/560Wピーク、実測は560W構成。HPL/HPCGはCPUホストを含むサーバーで測定された1 OAM結果。INT4公表TOPSはネイティブINT4行列演算とは別の広告項目に保持。"
     }
   ],
   "research_notes": "docs/catalog-research-2026-11-11.md。公開値と算出値はperformance.kind、欠測・非対応理由はmetric_status、基本仕様の確認状態はfield_provenanceに記録。実測値はresultsのみ。"

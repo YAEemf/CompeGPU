@@ -22,6 +22,14 @@ export function missingMetricMarker(gpu, key) {
   return (gpu.metric_status?.[key] || gpu.field_status?.[key])?.status === 'not_supported' ? 'x' : '—';
 }
 
+export function missingMetricDetail(gpu, key) {
+  const field=key.startsWith('field:/')?key.slice(7).replaceAll('~1','/').replaceAll('~0','~'):key;
+  const status=gpu.metric_status?.[key] || gpu.field_status?.[field];
+  if (!status) return 'この項目・測定条件の値は未登録です。';
+  const label={not_supported:'非対応（未搭載）',not_applicable:'対象外',not_published:'同条件の公表値なし',not_verified:'未確認'}[status.status] || '未確認';
+  return `${label}${status.supported===true?'（型の対応は確認済み）':''}：${status.reason || ''}${status.checked_on?` 確認日：${status.checked_on}`:''}`;
+}
+
 export function matchesRange(value, range, isCC = false) {
   if (range?.invalid) return false;
   const hasMin = range?.min != null && range.min !== '';

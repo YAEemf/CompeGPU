@@ -90,7 +90,7 @@ GPUをドラッグ・矢印キーで動かすと「GPUの表示順」が「手�
 
 2026-11-12時点で19構成を収録しています。追加調査したA2は依頼により削除しました。RTX 3090/4090/5090、V100 16GB SXM2、Tesla T4/T10/T40、Quadro RTX 6000/8000、RTX 4000/5000/6000 Ada、RTX A4500、A40、A100 40GB SXM4、Jetson AGX Thor（T5000 128GB）、Ryzen AI Max+ 395 / Radeon 8060S（128GB共有メモリ）、Intel Gaudi2（HL-225H 96GB）、AMD Instinct MI250（128GB OAM）が対象です。
 
-公称・算出演算性能363レコードを登録しています（Ryzen追加までの295件、共通行列項目への対応56件、Gaudi2・MI250の12件）。共通項目は既存値の別項目への対応を含みます。対象構成・出典・計算式・資料間の差異は [カタログ調査記録](docs/catalog-research-2026-11-11.md) を参照してください。**T10/T40は実機公開画像・販売元仕様とNVIDIAの命令レートから参考理論性能を追加しました。メーカー保証の公称値ではありません。** [T10/T40再調査](docs/t10-t40-research-2026-11-11.md)に根拠と限界を記録しています。FP16/FP32蓄積のSKU別TensorピークとT40の電力は未確定、CC 7.5はTU102/Turing識別からの推定です。
+公称・算出演算性能364レコードを登録しています（Ryzen追加までの295件、共通行列項目への対応56件、Gaudi2・MI250の13件）。共通項目は既存値の別項目への対応を含みます。対象構成・出典・計算式・資料間の差異は [カタログ調査記録](docs/catalog-research-2026-11-11.md) を参照してください。**T10/T40は実機公開画像・販売元仕様とNVIDIAの命令レートから参考理論性能を追加しました。メーカー保証の公称値ではありません。** [T10/T40再調査](docs/t10-t40-research-2026-11-11.md)に根拠と限界を記録しています。FP16/FP32蓄積のSKU別TensorピークとT40の電力は未確定、CC 7.5はTU102/Turing識別からの推定です。
 
 Thorは公式Technical BriefでFP16 Dense 258 TFLOPS、INT8 Dense 517 TOPSの直接公表を確認しました。**蓄積精度別のTensor値とBF16/TF32の一部は、命令の対応・NVIDIA公開参考モデルに基づく仮定付きの推定です。** 出典の公表値・推定値・その前提を [Thor再調査](docs/thor-research-2026-11-11.md) に分けて記録しています。追加調査でCUDA FP64は公式CC 11.0のFP32:FP64比64:1から0.126 TFLOPSを登録し、Tensor FP64・INT4は公式の入力型対応表に基づいて非対応 `x` に更新しました。非Tensor CUDA FP16はNVIDIA公式資料では未確認ですが、参照リンクのTechPowerUp掲載値8.064 TFLOPS（FP32と1:1）を第三者データベース値として登録しました。
 
@@ -98,11 +98,13 @@ Thorは公式Technical BriefでFP16 Dense 258 TFLOPS、INT8 Dense 517 TOPSの直
 
 **Ryzen AI Max+ 395には公開CPU実測2件とLLM実測の集計8件を収録しました。** 「実測値」でGeekbench 6.4.0のCPU single/multi、llama.cppのVulkan/ROCm、モデル・prefill/generation別の結果を比較できます。「公称値」にはCPU構成、GPUの共通演算項目、NPU TOPS等を追加しています。CPU・GPU・NPUの数値は足し合わせず、測定条件を分けて管理します。構成・出典・GPUのsingle/dual issue条件・共有メモリの扱いは [Ryzen AI Max+ 395調査記録](docs/ryzen-ai-max-395-research-2026-11-12.md) を参照してください。従来のNVIDIA構成には実測値を補完していません。
 
-**Gaudi2にはGEMM 11件と高バッチLLM 4件、MI250にはHPL/HPCG 2件を追加し、全体の実測・集計値は27件です。** 公称値の共通Matrix項目と実測の新項目は、既存の手動順を保ち初回だけ末尾へ追加します。Gaudi2のFP16/TF32/FP32対応とピーク未確認を区別し、MI250はMI250Xや単一GCDの値と混同しません。128GBは2 GCD×64GB、電力は500W公称/560Wピークです。Gaudi2のLLM合計tokens/sは単一ユーザーの生成速度とは異なります。出典・測定条件・公式ページ内の版表記の矛盾は [Gaudi2 / MI250調査記録](docs/gaudi2-mi250-research-2026-11-12.md) を参照してください。
+**Gaudi2にはGEMM 15件と高バッチLLM 4件、MI250にはHPL/HPCG 2件を追加し、全体の実測・集計値は31件です。** 公称値の共通Matrix項目と実測の新項目は、既存の手動順を保ち初回だけ末尾へ追加します。Gaudi2のFP16/TF32/FP32対応とピーク未確認を区別し、MI250はMI250Xや単一GCDの値と混同しません。128GBは2 GCD×64GB、電力は500W公称/560Wピークです。Gaudi2のLLM合計tokens/sは単一ユーザーの生成速度とは異なります。出典・測定条件・公式ページ内の版表記の矛盾は [Gaudi2 / MI250調査記録](docs/gaudi2-mi250-research-2026-11-12.md) を参照してください。
 
 RTX 4090/5090のFP32はNVIDIA RTX Blackwell白書の公表値82.6/104.8へ更新しました。Tensorの蓄積精度、Dense/Sparseを分け、丸めのある公称値は資料の記載を維持しています。Thorの128GBは共有メモリ、130WはCPUやメモリを含むモジュール電力です。
 
 「広告AI TOPS」は精度条件が異なる可能性があるため独立項目です。基準倍率を表示しません。CUDAとTensor、DenseとSparse、異なる入力精度や蓄積精度を混ぜないでください。TFLOPSは毎秒10¹²浮動小数点演算、整数のTOPSも毎秒10¹²演算です。FMAは2演算として扱います。
+
+Gaudi2・MI250の全51公称項目を再点検し、MI250非行列FP16の参考理論値90.5216 TFLOPS、Gaudi2 FP16実測4件、非対応・対象外・未公表の根拠を補完しました。欠測セルにマウスを合わせると理由が分かります。Gaudi2のFP16/TF32/FP32公称ピークは未公表のため—を維持しています。[欠測再調査と全件監査](docs/accelerator-completion-2026-11-12.md)を参照してください。
 
 ## GPUの追加・項目別の出典
 

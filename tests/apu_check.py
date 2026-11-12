@@ -55,10 +55,11 @@ def run():
                     expect(cell(metric)).to_have_text(text)
                 for gpu, values in {
                     'intel-gaudi2-hl225h':{'matrix_bf16_acc32_dense':'432','matrix_fp8_acc32_dense':'865','vector_bf16':'11','matrix_fp16_acc32_dense':'—','matrix_fp64_dense':'x'},
-                    'amd-instinct-mi250':{'matrix_bf16_acc32_dense':'362.1','matrix_fp64_dense':'90.5','gpu_fp32':'45.3','gpu_fp32_packed':'90.5','matrix_fp8_acc32_dense':'x'},
+                    'amd-instinct-mi250':{'matrix_bf16_acc32_dense':'362.1','matrix_fp64_dense':'90.5','gpu_fp32':'45.3','gpu_fp16':'90.5','gpu_fp32_packed':'90.5','matrix_fp8_acc32_dense':'x','vector_bf16':'x'},
                 }.items():
                     for key,value in values.items():
                         expect(page.locator(f'[data-cell="{key}"][data-gpu="{gpu}"]')).to_have_text(value)
+                assert '型の対応は確認済み' in page.locator('[data-cell="matrix_fp16_acc32_dense"][data-gpu="intel-gaudi2-hl225h"]').get_attribute('title')
                 page.select_option('#exactCC', '8.9')
                 expect(page.locator(f'[data-baseline="{apu}"]')).to_have_count(0)
                 page.click('#reset')
@@ -80,6 +81,7 @@ def run():
                 expect(page.locator('[data-cell="gpu_fp32"], [data-cell="cc"]')).to_have_count(0)
                 expect(page.locator('#tableBody > tr[data-column]')).to_have_count(len(original['benchmarks']))
                 expect(page.locator('[data-cell="gaudi_paper_v1_fp8_gemm_8192_tensor_hw"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('851.2')
+                expect(page.locator('[data-cell="gaudi124_fp16_gemm_8192_compiled"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('370.9')
                 expect(page.locator('[data-cell="amd_mi250_rochpl6_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('40.5')
                 expect(page.locator('[data-cell="amd_mi250_hpcg3_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('0.5')
                 page.click('#transpose')

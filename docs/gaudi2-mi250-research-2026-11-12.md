@@ -1,5 +1,7 @@
 # Intel Gaudi2 / AMD Instinct MI250 調査・登録記録
 
+後続更新: [欠測の再調査](accelerator-completion-2026-11-12.md)でMI250非行列FP16の参考算出値、非対応判定、Gaudi2 FP16実測4件を追加した。以下は初回登録時の記録。
+
 調査日: 2026-11-12。`intel-gaudi2-hl225h` と `amd-instinct-mi250` を追加した。各1 OAMを比較単位とし、公称・算出ピークと公開実測を分離した。ローカルで実機測定した結果ではない。
 
 ## 採用仕様

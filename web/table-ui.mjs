@@ -1,5 +1,5 @@
-import {compareCC, speedup} from './model.mjs?v=20261112-accelerators';
-import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261112-accelerators';
+import {compareCC, speedup} from './model.mjs?v=20261112-precision-audit';
+import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261112-precision-audit';
 import {displayGPUName} from './gpu-name.mjs';
 
 const $ = id => document.getElementById(id);
@@ -30,6 +30,8 @@ export class TableUI {
     try {this.addAcceleratorColumns=localStorage.getItem('gpu-compare.accelerator-columns.v1')!=='true';} catch {}
     this.addAcceleratorMeasurements=true;
     try {this.addAcceleratorMeasurements=localStorage.getItem('gpu-compare.accelerator-measurements.v1')!=='true';} catch {}
+    this.addPrecisionAuditResults=true;
+    try {this.addPrecisionAuditResults=localStorage.getItem('gpu-compare.precision-audit-results.v1')!=='true';} catch {}
     $('valueMode').value=this.mode;
     this.transposed = layout?.transposed !== false;
     this.gpuOrder = Array.isArray(layout?.gpuOrder) ? layout.gpuOrder.filter(id=>typeof id==='string') : [];
@@ -188,6 +190,13 @@ export class TableUI {
       this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
       this.addAcceleratorMeasurements=false;
       try {localStorage.setItem('gpu-compare.accelerator-measurements.v1','true');} catch {}
+    }
+    const precisionIds=Object.keys(this.getData().gpus.find(g=>g.id==='intel-gaudi2-hl225h')?.results || {}).filter(id=>id.startsWith('gaudi124_fp16_gemm_'));
+    if (this.mode==='measured' && this.addPrecisionAuditResults && precisionIds.length) {
+      for (const id of precisionIds) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+      this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
+      this.addPrecisionAuditResults=false;
+      try {localStorage.setItem('gpu-compare.precision-audit-results.v1','true');} catch {}
     }
     this.rangeIds = this.rangeIds.filter(id=>this.byId.has(id));
     for (const id of Object.keys(this.ranges)) if (!this.byId.has(id)) delete this.ranges[id];

@@ -1,12 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {compareCC, metricValue, selectGPUs, speedup, csv, matchesRange, missingMetricMarker} from '../web/model.mjs';
+import {compareCC, metricValue, selectGPUs, speedup, csv, matchesRange, missingMetricMarker, missingMetricDetail} from '../web/model.mjs';
 import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, orderGPUs, mergeVisibleOrder} from '../web/columns.mjs';
 import {scopedGPU, modeMetrics, gpuReferenceURL} from '../web/value-modes.mjs';
 import {formatNumericValue} from '../web/number-format.mjs';
 
 const gpu = (id, cc, value, power=100) => ({id,name:id,cc,architecture:'A',category:'test',form_factor:'PCIe',memory_gb:16,power_w:power,price_jpy:null,performance:value == null ? {} : {cuda_fp32:{value}},results:{}});
 const gpus = [gpu('old','8.9',10),gpu('new','12.0',100),gpu('unknown','9.0',null),gpu('minor','8.10',50)];
+
+test('missing values expose researched reasons without changing the numeric marker',()=>{
+  const card={metric_status:{fp16:{status:'not_published',supported:true,reason:'公称ピーク未公表',checked_on:'2026-11-12'}},field_status:{slot_count:{status:'not_applicable',reason:'OAM'}}};
+  assert.equal(missingMetricMarker(card,'fp16'),'—');
+  assert.match(missingMetricDetail(card,'fp16'),/型の対応は確認済み/);
+  assert.match(missingMetricDetail(card,'fp16'),/2026-11-12/);
+  assert.match(missingMetricDetail(card,'field:/slot_count'),/対象外：OAM/);
+});
 
 test('non-CUDA APU has no invented CC and is excluded by CC filters in either ordering', () => {
   const apu={...gpu('apu',null,null),field_status:{cc:{status:'not_supported'}}};

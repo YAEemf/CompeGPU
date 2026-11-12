@@ -1,4 +1,4 @@
-import {metricValue} from './model.mjs?v=20261112-accelerators';
+import {metricValue} from './model.mjs?v=20261112-precision-audit';
 
 export const GPU_DETAIL_COLUMNS = ['field:/architecture', 'field:/connection_type', 'field:/cooling_type', 'field:/board_variant', 'field:/slot_count'];
 export const APU_COLUMNS = ['gpu_fp64','gpu_fp32','gpu_fp16','gpu_matrix_fp16_acc16_dense','field:/cpu_cores','field:/cpu_threads','npu_ai_tops','platform_ai_tops'];
