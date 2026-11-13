@@ -32,6 +32,8 @@ export class TableUI {
     try {this.addAcceleratorMeasurements=localStorage.getItem('gpu-compare.accelerator-measurements.v1')!=='true';} catch {}
     this.addPrecisionAuditResults=true;
     try {this.addPrecisionAuditResults=localStorage.getItem('gpu-compare.precision-audit-results.v1')!=='true';} catch {}
+    this.addNewDeviceResults=true;
+    try {this.addNewDeviceResults=localStorage.getItem('gpu-compare.5070ti-mi100-mi210-results.v1')!=='true';} catch {}
     $('valueMode').value=this.mode;
     this.transposed = layout?.transposed !== false;
     this.gpuOrder = Array.isArray(layout?.gpuOrder) ? layout.gpuOrder.filter(id=>typeof id==='string') : [];
@@ -197,6 +199,13 @@ export class TableUI {
       this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
       this.addPrecisionAuditResults=false;
       try {localStorage.setItem('gpu-compare.precision-audit-results.v1','true');} catch {}
+    }
+    const newDeviceResults=this.getData().gpus.filter(g=>['rtx5070ti','amd-instinct-mi100','amd-instinct-mi210'].includes(g.id)).flatMap(g=>Object.keys(g.results || {}));
+    if (this.mode==='measured' && this.addNewDeviceResults && newDeviceResults.length) {
+      for (const id of newDeviceResults) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+      this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
+      this.addNewDeviceResults=false;
+      try {localStorage.setItem('gpu-compare.5070ti-mi100-mi210-results.v1','true');} catch {}
     }
     this.rangeIds = this.rangeIds.filter(id=>this.byId.has(id));
     for (const id of Object.keys(this.ranges)) if (!this.byId.has(id)) delete this.ranges[id];

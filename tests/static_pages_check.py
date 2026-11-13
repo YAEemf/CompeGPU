@@ -37,7 +37,7 @@ def run():
                 page.on('dialog', confirm)
                 url = f'http://127.0.0.1:{server.server_port}/CompeGPU/'
                 page.goto(url)
-                expect(page.locator('[data-baseline]')).to_have_count(19)
+                expect(page.locator('[data-baseline]')).to_have_count(len(json.loads((ROOT/'data/gpus.json').read_bytes())['gpus']))
                 expect(page.locator('#saveState')).to_have_text('公開データを表示中')
                 expect(page.locator('#restorePublished')).to_be_visible()
                 price = page.locator('[data-cell="price_jpy"][data-gpu="rtx4090"]')
@@ -55,7 +55,7 @@ def run():
                 separate = browser.new_context(viewport={'width':390,'height':844})
                 mobile = separate.new_page()
                 mobile.goto(url)
-                expect(mobile.locator('[data-baseline]')).to_have_count(19)
+                expect(mobile.locator('[data-baseline]')).to_have_count(len(json.loads((ROOT/'data/gpus.json').read_bytes())['gpus']))
                 expect(mobile.locator('[data-cell="price_jpy"][data-gpu="rtx4090"]')).to_have_text('—')
                 page.select_option('#valueMode','measured')
                 expect(page.locator('[data-cell="amd_mi250_rochpl6_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('40.5')
@@ -76,7 +76,7 @@ def run():
                 assert not any('/api/' in request for request in requests), requests
                 assert not errors, errors
                 browser.close()
-                print('Static Pages OK: repository subpath, 19 devices, no API, browser save/reload, JSON transfer, public reset, independent mobile browser')
+                print('Static Pages OK: repository subpath, catalog devices, no API, browser save/reload, JSON transfer, public reset, independent mobile browser')
         finally:
             server.shutdown()
             server.server_close()

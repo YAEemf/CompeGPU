@@ -24,7 +24,7 @@ test('the published mixed-vendor catalog passes browser validation; invalid impo
 });
 test('static save persists on one browser, checks revisions and preserves published data separately',async()=>{
   const storage=new Storage(), store=fixture(storage), loaded=await store.load();
-  assert.equal(loaded.data.gpus.length,19); assert.equal(loaded.saved,false);
+  assert.equal(loaded.data.gpus.length,original.gpus.length); assert.equal(loaded.saved,false);
   const other=fixture(storage), stale=await other.load();
   loaded.data.gpus[0].price_jpy=12345;
   const saved=await store.save(loaded.data,loaded.revision);
@@ -40,17 +40,17 @@ test('static save persists on one browser, checks revisions and preserves publis
 test('a new deployment preserves saved edits and signals an updated public catalog',async()=>{
   const storage=new Storage(), store=fixture(storage), loaded=await store.load();
   await store.save(loaded.data,loaded.revision);
-  const changed=structuredClone(original); changed.research_date='2026-11-13';
+  const changed=structuredClone(original); changed.research_date='2026-11-14';
   const reopened=fixture(storage,changed), result=await reopened.load();
   assert.equal(result.publicUpdated,true); assert.equal(result.data.research_date,original.research_date);
-  assert.equal(reopened.restorePublished().data.research_date,'2026-11-13');
+  assert.equal(reopened.restorePublished().data.research_date,'2026-11-14');
 });
 test('corrupt or blocked browser storage leaves public viewing available',async()=>{
   const storage=new Storage(),store=fixture(storage);
   storage.setItem(store.key,'invalid JSON');
   assert.equal((await store.load()).saved,false); assert.ok(store.storageWarning);
   const blocked=fixture({getItem(){throw new Error('blocked');}});
-  const loaded=await blocked.load(); assert.equal(loaded.data.gpus.length,19);
+  const loaded=await blocked.load(); assert.equal(loaded.data.gpus.length,original.gpus.length);
   const quota=fixture({getItem(){return null;},setItem(){throw new Error('quota');}});
   const initial=await quota.load(); await assert.rejects(()=>quota.save(initial.data,initial.revision),/保存できません/);
 });

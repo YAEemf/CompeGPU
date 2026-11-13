@@ -23,7 +23,7 @@ def run():
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.goto(f'http://127.0.0.1:{server.server_port}')
             expect(page.locator('[data-baseline]')).to_have_count(len(catalog['gpus']))
-            assert sum(g['reference_url'].startswith('https://www.techpowerup.com/gpu-specs/') for g in catalog['gpus']) == 17
+            assert sum(g['reference_url'].startswith('https://www.techpowerup.com/gpu-specs/') for g in catalog['gpus']) == len(catalog['gpus']) - 2
             page.evaluate('() => {window.open = url => {window.openedReference = url;};}')
             for orientation in range(2):
                 for gpu in catalog['gpus']:

@@ -72,8 +72,9 @@ def run():
                 expect(cell('gpu_fp32')).to_have_text('29.7')
                 page.click('#reset')
                 page.locator('[data-sort="cc"]').click()
-                unknown_cc = page.locator('#tableHead > th[data-gpu]').evaluate_all('(els)=>els.slice(-3).map(el=>el.dataset.gpu)')
-                assert set(unknown_cc) == {apu,'intel-gaudi2-hl225h','amd-instinct-mi250'}
+                expected_unknown = {g['id'] for g in original['gpus'] if g['cc'] is None}
+                unknown_cc = page.locator('#tableHead > th[data-gpu]').evaluate_all('(els,n)=>els.slice(-n).map(el=>el.dataset.gpu)', len(expected_unknown))
+                assert set(unknown_cc) == expected_unknown
                 page.select_option('#valueMode', 'measured')
                 expect(cell('gb640_cpu_single')).to_have_text('2,957')
                 expect(cell('gb640_cpu_multi')).to_have_text('22,313')
@@ -86,6 +87,8 @@ def run():
                 expect(page.locator('[data-cell="amd_mi250_hpcg3_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('0.5')
                 page.click('#transpose')
                 expect(cell('gb640_cpu_multi')).to_have_text('22,313')
+                expect(page.locator('[data-cell="paper2601_qwen3_nvfp4_api_i256_o256_c64_tps"][data-gpu="rtx5070ti"]')).to_have_text('2,899.1')
+                expect(page.locator('[data-cell="dell2022_hpl_single"][data-gpu="amd-instinct-mi210"]')).to_have_text('18.2')
                 page.select_option('#valueMode', 'nominal')
                 page.locator(f'[data-baseline="{apu}"]').dblclick()
                 expect(page.locator('#gpuForm [name="cc"]')).to_have_value('')

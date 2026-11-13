@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "research_date": "2026-11-12",
+  "research_date": "2026-11-13",
   "metrics": [
     {
       "id": "cuda_fp64",
@@ -577,6 +577,83 @@
       "unit": "TFLOPS",
       "direction": "higher",
       "conditions": "測定者changchinlan/gaudi-benchmark、HL-225H 1台、GaudiSW1.24.1、PyTorch2.11、FP16入力・FP32蓄積・FP16出力、Dense a@b、M=K=N=16384。torch.compile(backend=hpu_backend)、独立プロセス/shape、25 warmup。4組×15回の時刻測定、torch.hpu.synchronize、各組の平均時間の最小値から2*N^3でTFLOPS計算。原資料のmedian表記より実行コードの集計式を優先。600W上限設定のホストだが測定時電力・クロック・測定日・CPU型番は未確定。メーカー公称ピークではない。"
+    },
+    {
+      "id": "dell2022_dgemm_single",
+      "name": "DGEMM / Dell R750xa / ROCm5.1.3",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "Dell Performance Labs、2022-08-12公表、PowerEdge R750xa、2x Xeon Gold6338、512GB RAM、RockyLinux8.4、ROCm/rocBLAS5.1.3、GPUdriver5.13.20.5.1、SMT無効、Performance profile、単一GPU。300WはTDPで測定電力ではない。問題サイズ・反復回数・実測日は未掲載。FP64、rocBLAS GEMM、本文で明示された値のみ。"
+    },
+    {
+      "id": "dell2022_sgemm_single",
+      "name": "SGEMM / Dell R750xa / ROCm5.1.3",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "Dell Performance Labs、2022-08-12公表、PowerEdge R750xa、2x Xeon Gold6338、512GB RAM、RockyLinux8.4、ROCm/rocBLAS5.1.3、GPUdriver5.13.20.5.1、SMT無効、Performance profile、単一GPU。300WはTDPで測定電力ではない。問題サイズ・反復回数・実測日は未掲載。FP32、rocBLAS GEMM、本文で明示された値のみ。"
+    },
+    {
+      "id": "dell2022_hpl_single",
+      "name": "HPL / Dell R750xa / ROCm5.1.3",
+      "unit": "TFLOPS",
+      "direction": "higher",
+      "conditions": "Dell Performance Labs、2022-08-12公表、PowerEdge R750xa、2x Xeon Gold6338、512GB RAM、RockyLinux8.4、ROCm/rocBLAS5.1.3、GPUdriver5.13.20.5.1、SMT無効、Performance profile、単一GPU。300WはTDPで測定電力ではない。問題サイズ・反復回数・実測日は未掲載。FP64、ROCm5.1.3でコンパイルしたHPLの1GPU Rmax。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c32_tps",
+      "name": "Qwen3-8B NVFP4 API C32 / 出力合計",
+      "unit": "tokens/s",
+      "direction": "higher",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=32。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c32_ttft",
+      "name": "Qwen3-8B NVFP4 API C32 / TTFT",
+      "unit": "ms",
+      "direction": "lower",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=32。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c64_tps",
+      "name": "Qwen3-8B NVFP4 API C64 / 出力合計",
+      "unit": "tokens/s",
+      "direction": "higher",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=64。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c64_ttft",
+      "name": "Qwen3-8B NVFP4 API C64 / TTFT",
+      "unit": "ms",
+      "direction": "lower",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=64。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c128_tps",
+      "name": "Qwen3-8B NVFP4 API C128 / 出力合計",
+      "unit": "tokens/s",
+      "direction": "higher",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=128。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_api_i256_o256_c128_ttft",
+      "name": "Qwen3-8B NVFP4 API C128 / TTFT",
+      "unit": "ms",
+      "direction": "lower",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table16、API、入力256/出力256tokens、concurrency=128。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_rag_i8192_o512_c8_tps",
+      "name": "Qwen3-8B NVFP4 RAG8k C8 / 出力合計",
+      "unit": "tokens/s",
+      "direction": "higher",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table15、RAG、入力8192/最大出力512tokens、concurrency8、Poisson到着。資料でTTFTの集計統計が明確ではなくP95/P99列とは区別。"
+    },
+    {
+      "id": "paper2601_qwen3_nvfp4_rag_i8192_o512_c8_ttft",
+      "name": "Qwen3-8B NVFP4 RAG8k C8 / TTFT",
+      "unit": "ms",
+      "direction": "lower",
+      "conditions": "arXiv2601.09527v1 AppendixA、RTX5070Ti 16GB 1枚、Qwen3-8B NVFP4、vLLM0.12、CUDA12.9、cuDNN9.x、driver570.x以上、AIPerf0.3.0、VAST.ai実機ホスト。max_num_batched_tokens8192、dynamic batching。CPU/OS/ドライバ完全版/ボードOC/電力/モデルhash/試行反復数は未特定。同時実行の合計出力tokens/sで単一ユーザーの生成速度でもllama-bench tg512でもない。Table15、RAG、入力8192/最大出力512tokens、concurrency8、Poisson到着。資料でTTFTの集計統計が明確ではなくP95/P99列とは区別。"
     }
   ],
   "gpus": [
@@ -8610,6 +8687,1398 @@
       "power_scope": "One OAM: 500W TDP / 560W peak; imported benchmarks use 560W configuration",
       "memory_scope": "128GB per OAM = 2 GCD x 64GB. Two logical GPU devices; not one flat 128GB allocation by default.",
       "notes": "MI250（MI250Xではない）1 OAMの2 GCD合計。208 CU = 104 CU×2、128GB = 64GB×2。通常は2論理GPUとして認識され、単一デバイスから128GB全体が自動利用できる意味ではない。Vector FP32/FP64 45.3、packed FP32/Matrix FP32/FP64 90.5、Matrix FP16/BF16 362.1を分離。非行列FP16はpacked FMAの命令構成から90.5216 TFLOPSを算出（最大クロック・発行条件付き）。英語SKUのFP16 362.1は行列ピークであり流用しない。帯域3.2TB/sは公式掲載の丸め値を採用。500W公称/560Wピーク、実測は560W構成。HPL/HPCGはCPUホストを含むサーバーで測定された1 OAM結果。INT4公表TOPSはネイティブINT4行列演算とは別の広告項目に保持。"
+    },
+    {
+      "id": "rtx5070ti",
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "architecture": "Blackwell",
+      "category": "GeForce",
+      "cc": "12.0",
+      "form_factor": "PCIe / reference clocks (partner boards; not Laptop GPU)",
+      "memory_gb": 16,
+      "bandwidth_gbs": 896,
+      "power_w": 300,
+      "price_jpy": null,
+      "purchase_url": null,
+      "notes": "デスクトップRTX5070Ti。Laptop版・特定OCモデルではない。NVIDIA RTX Blackwell白書V1.1 Table5の基準2452MHz・43.9TFLOPS等を採用。FP16/FP8の蓄積精度・Dense/Sparseを分離。寸法/スロット数はメーカー依存で未指定、Founders Editionとは登録しない。公称1406AI TOPSはFP4/FP32蓄積SparseでありINT8へ転記しない。LLM実測は論文の1GPU・同時実行サーバー合計速度で、単一ユーザーの生成速度ではない。",
+      "sources": [
+        {
+          "id": "spec",
+          "title": "NVIDIA RTX Blackwell V1.1 Table 5, RTX5070Ti column, pp.51-53",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-13",
+          "verification": "cached_primary_pdf_read",
+          "note": "既存保存PDF/.txtのV1.1 Table5を照合。今回の同URL再取得はタイムアウト。基準値は現行製品ページとも照合。"
+        },
+        {
+          "id": "blackwell",
+          "title": "NVIDIA RTX Blackwell V1.1 FP64 ratio / SM and Tensor precision definitions",
+          "url": "https://images.nvidia.com/aem-dam/Solutions/geforce/blackwell/nvidia-rtx-blackwell-gpu-architecture.pdf",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "product",
+          "title": "NVIDIA GeForce RTX5070 family full specifications (desktop Ti column)",
+          "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5070-family/",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "cc",
+          "title": "NVIDIA CUDA GPU compute capability 12.0",
+          "url": "https://developer.nvidia.com/cuda/gpus",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "cuda-cc-specifications",
+          "title": "CUDA Programming Guide precision support by compute capability",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/05-appendices/compute-capabilities.html",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "llm-paper",
+          "title": "Private LLM Inference on Consumer Blackwell GPUs, arXiv2601.09527v1 Appendix A",
+          "url": "https://arxiv.org/html/2601.09527v1",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "techpowerup",
+          "title": "TechPowerUp RTX5070Ti reference (URL verified in public index)",
+          "url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-5070-ti.c4243",
+          "checked_on": "2026-11-13",
+          "verification": "public_url_index_only; live_body_unverified"
+        }
+      ],
+      "performance": {
+        "cuda_fp32": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "cuda_fp16": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_tf32_dense": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_tf32_sparse": {
+          "value": 87.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp16_dense": {
+          "value": 87.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp16_sparse": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_bf16_dense": {
+          "value": 87.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_bf16_sparse": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp16_acc16_dense": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "value": 351.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_int8_dense": {
+          "value": 351.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_int8_sparse": {
+          "value": 703,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp8_dense": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp8_sparse": {
+          "value": 351.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp8_acc16_dense": {
+          "value": 351.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "value": 703,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp4_dense": {
+          "value": 703,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "tensor_fp4_sparse": {
+          "value": 1406,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "ai_tops": {
+          "value": 1406,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "vector_bf16": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。"
+        },
+        "cuda_fp64": {
+          "value": 0.6859375,
+          "source": "blackwell",
+          "kind": "derived",
+          "note": "公称FP32 43.9 × Blackwellの非行列FP64/FP32比1/64 = 0.6859375 TFLOPS。公称FP32の丸めを引き継ぐ。",
+          "supporting_sources": [
+            "spec"
+          ]
+        },
+        "gpu_fp64": {
+          "value": 0.6859375,
+          "source": "blackwell",
+          "kind": "derived",
+          "note": "公称FP32 43.9 × Blackwellの非行列FP64/FP32比1/64 = 0.6859375 TFLOPS。公称FP32の丸めを引き継ぐ。 同条件のベンダー共通項目への対応。合算する別の性能ではない。",
+          "supporting_sources": [
+            "spec"
+          ]
+        },
+        "gpu_fp32": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "gpu_fp16": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "gpu_matrix_fp16_acc16_dense": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "matrix_tf32_acc32_dense": {
+          "value": 43.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "matrix_fp16_acc32_dense": {
+          "value": 87.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "matrix_bf16_acc32_dense": {
+          "value": 87.9,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "matrix_fp8_acc32_dense": {
+          "value": 175.8,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        },
+        "matrix_int8_acc32_dense": {
+          "value": 351.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "NVIDIA白書Table5のRTX5070Ti列。入力・蓄積・疎性の条件別公表値を保持。丸め値を機械的に2倍して置換しない。 同条件のベンダー共通項目への対応。合算する別の性能ではない。"
+        }
+      },
+      "results": {
+        "paper2601_qwen3_nvfp4_api_i256_o256_c32_tps": {
+          "value": 1986.6,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_api_i256_o256_c32_ttft": {
+          "value": 170,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_api_i256_o256_c64_tps": {
+          "value": 2899.1,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_api_i256_o256_c64_ttft": {
+          "value": 237,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_api_i256_o256_c128_tps": {
+          "value": 3553.6,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_api_i256_o256_c128_ttft": {
+          "value": 361,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table16の1GPU行を保持。Table11等の要約丸め値は使わない。"
+        },
+        "paper2601_qwen3_nvfp4_rag_i8192_o512_c8_tps": {
+          "value": 210.8,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table15の1GPU RAG8k行。2GPU行・エネルギー推定は流用しない。"
+        },
+        "paper2601_qwen3_nvfp4_rag_i8192_o512_c8_ttft": {
+          "value": 5228,
+          "source": "llm-paper",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "Table15の1GPU RAG8k行。2GPU行・エネルギー推定は流用しない。"
+        }
+      },
+      "metric_status": {
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_published",
+          "source": "cuda-cc-specifications",
+          "reason": "Blackwell白書は「プログラムの正しい動作のためごく少数のFP64 Tensor Coreを含む」と述べるがピーク値は未公表。CUDA Programming Guide Table 36ではCC 12.xのTensorアクセラレーション入力型にFP64は含まれない。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "FP64の構造化Sparse Tensorピークは提供されていない。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_dense": {
+          "status": "not_supported",
+          "source": "cuda-cc-specifications",
+          "reason": "CUDA Programming Guide Table 36でCC 12.xのTensor Core入力型にINT4はない（CC 8.9まで対応、9.0以降は非対応）。Blackwell白書Appendix AにもINT4 Tensorの行はない。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "source": "cuda-cc-specifications",
+          "reason": "CUDA Programming Guide Table 36でCC 12.xのTensor Core入力型にINT4はない（CC 8.9まで対応、9.0以降は非対応）。Blackwell白書Appendix AにもINT4 Tensorの行はない。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_applicable",
+          "reason": "蓄積精度が明示された別項目に収録済み。",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp32_single_issue": {
+          "status": "not_applicable",
+          "reason": "この比較対象の構成・演算器に対応する同条件の値は未登録。CPUやNPUを外部GPUの性能へ加算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp16_single_issue": {
+          "status": "not_applicable",
+          "reason": "この比較対象の構成・演算器に対応する同条件の値は未登録。CPUやNPUを外部GPUの性能へ加算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "npu_ai_tops": {
+          "status": "not_applicable",
+          "reason": "この比較対象の構成・演算器に対応する同条件の値は未登録。CPUやNPUを外部GPUの性能へ加算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "platform_ai_tops": {
+          "status": "not_applicable",
+          "reason": "この比較対象の構成・演算器に対応する同条件の値は未登録。CPUやNPUを外部GPUの性能へ加算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_ai_fp16_advertised": {
+          "status": "not_applicable",
+          "reason": "この比較対象の構成・演算器に対応する同条件の値は未登録。CPUやNPUを外部GPUの性能へ加算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_fp64_dense": {
+          "status": "not_published",
+          "source": "cuda-cc-specifications",
+          "reason": "Blackwell白書は「プログラムの正しい動作のためごく少数のFP64 Tensor Coreを含む」と述べるがピーク値は未公表。CUDA Programming Guide Table 36ではCC 12.xのTensorアクセラレーション入力型にFP64は含まれない。",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_fp32_dense": {
+          "status": "not_supported",
+          "reason": "IEEE FP32を丸めず入力するネイティブTensor MMAの公称対応なし。FP32蓄積やTF32入力とは異なる。",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp32_packed": {
+          "status": "not_verified",
+          "reason": "この定義と同じ入力・蓄積・演算器条件の性能は未確認。別の精度から換算しない。",
+          "checked_on": "2026-11-13"
+        },
+        "vendor_int4_tops_advertised": {
+          "status": "not_verified",
+          "reason": "この定義と同じ入力・蓄積・演算器条件の性能は未確認。別の精度から換算しない。",
+          "checked_on": "2026-11-13"
+        }
+      },
+      "cuda_cores": 8960,
+      "tensor_cores": 280,
+      "connection_type": "PCIe 5.0 x16",
+      "cooling_type": "ボードメーカー依存",
+      "slot_count": null,
+      "board_variant": "基準クロック・メーカー別寸法",
+      "reference_url": "https://www.techpowerup.com/gpu-specs/geforce-rtx-5070-ti.c4243",
+      "boost_clock_mhz": 2452,
+      "vendor": "NVIDIA",
+      "memory_type": "GDDR7",
+      "memory_bus_bits": 256,
+      "memory_speed_gbps": 28,
+      "power_scope": "Total Graphics Power; board design and OC depend on manufacturer",
+      "sm_count": 70,
+      "rt_cores": 70,
+      "field_provenance": {
+        "memory_gb": {
+          "status": "published",
+          "source": "spec"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec"
+        },
+        "boost_clock_mhz": {
+          "status": "published",
+          "source": "spec"
+        },
+        "cuda_cores": {
+          "status": "published",
+          "source": "spec"
+        },
+        "tensor_cores": {
+          "status": "published",
+          "source": "spec"
+        },
+        "slot_count": {
+          "status": "not_verified",
+          "source": "product",
+          "note": "メーカーによって異なる。"
+        }
+      },
+      "field_status": {
+        "slot_count": {
+          "status": "not_verified",
+          "reason": "NVIDIA仕様表はVaries by manufacturer。基準スロット数を一律に設定しない。",
+          "source": "product",
+          "checked_on": "2026-11-13"
+        }
+      }
+    },
+    {
+      "id": "amd-instinct-mi100",
+      "name": "AMD Instinct MI100 (32GB PCIe)",
+      "vendor": "AMD",
+      "architecture": "CDNA",
+      "category": "Data Center",
+      "cc": null,
+      "cuda_supported": false,
+      "form_factor": "MI100 / PCIe add-in card / single GPU",
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "パッシブ",
+      "board_variant": "Full-height full-length / dual-slot",
+      "slot_count": 2,
+      "gcd_count": 1,
+      "logical_device_count": 1,
+      "memory_gb": 32,
+      "memory_type": "HBM2",
+      "memory_bus_bits": 4096,
+      "bandwidth_gbs": 1200,
+      "power_w": 300,
+      "power_scope": "single PCIe accelerator board TDP, excludes host CPU/system power",
+      "compute_units": 120,
+      "stream_processors": 7680,
+      "matrix_cores": 480,
+      "boost_clock_mhz": 1502,
+      "llvm_target": "gfx908",
+      "price_jpy": null,
+      "purchase_url": null,
+      "reference_url": "https://www.techpowerup.com/gpu-specs/radeon-instinct-mi100.c3496",
+      "field_status": {
+        "cc": {
+          "status": "not_supported",
+          "reason": "AMD GPUはNVIDIA CUDA Compute Capabilityを持たない。",
+          "checked_on": "2026-11-13"
+        }
+      },
+      "field_provenance": {
+        "memory_gb": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "slot_count": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "boost_clock_mhz": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        }
+      },
+      "performance": {
+        "gpu_fp64": {
+          "value": 11.5,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "gpu_fp32": {
+          "value": 23.1,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "matrix_fp32_dense": {
+          "value": 46.1,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_fp16_acc32_dense": {
+          "value": 184.6,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_bf16_acc32_dense": {
+          "value": 92.3,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_int8_acc32_dense": {
+          "value": 184.6,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "vendor_int4_tops_advertised": {
+          "value": 184.6,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "gpu_fp16": {
+          "value": 46.14144,
+          "source": "arch",
+          "kind": "derived",
+          "note": "120 CU × 4 SIMD × 16 lanes × 2 packed FP16 × 2 FLOPs/FMA × 1502MHz = 46.14144 TFLOPS。最大クロック・毎周期発行の参考モデルで、メーカー公称Matrix FP16や実測ではない。",
+          "supporting_sources": [
+            "matrix-types",
+            "spec"
+          ]
+        }
+      },
+      "results": {
+        "dell2022_dgemm_single": {
+          "value": 7.9,
+          "source": "bench",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "本文のMI100測定値。MI210 DGEMMの本文28.3はMI250誤記があり未転記。"
+        },
+        "dell2022_hpl_single": {
+          "value": 6.4,
+          "source": "bench",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "本文の1GPU HPL。複数GPU性能を割り算した値ではない。"
+        }
+      },
+      "metric_status": {
+        "cuda_fp64": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "cuda_fp32": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "cuda_fp16": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int8_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_acc16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_matrix_fp16_acc16_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp32_single_issue": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp16_single_issue": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "npu_ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "platform_ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_ai_fp16_advertised": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_fp64_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1 Matrix CoreはFP64入力非対応。非行列FP64は別欄11.5TFLOPS。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_tf32_acc32_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_fp8_acc32_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "vector_bf16": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp32_packed": {
+          "status": "not_supported",
+          "reason": "packed FP32の倍レート命令はCDNA2以降。CDNA1の通常FP32とMatrix FP32は別の項目。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        }
+      },
+      "sources": [
+        {
+          "id": "spec",
+          "title": "AMD MI100 product brief: performance, memory, board design",
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/product-briefs/instinct-mi100-brochure.pdf",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "sku",
+          "title": "AMD MI100 official SKU page (cross-check)",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi100.html",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "matrix-types",
+          "title": "AMD Lab Notes: CDNA1/2 MFMA input/output formats and FLOPs/CU/cycle",
+          "url": "https://github.com/amd/amd-lab-notes/blob/release/matrix-cores/README.md",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "precision",
+          "title": "AMD CDNA1/2 support table: FP64 matrix / TF32 / FP8 / packed FP32",
+          "url": "https://rocm.docs.amd.com/projects/rocprofiler-compute/en/docs-10.1.0/conceptual/cdna/cdna-performance-model.html",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "bench",
+          "title": "Dell Performance Labs: single GPU rocBLAS/HPL, R750xa, 2022-08-12",
+          "url": "https://infohub.delltechnologies.com/es-es/p/hpc-application-performance-on-dell-poweredge-r750xa-servers-with-the-amd-instinct-tm-mi210-accelerator/",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "techpowerup",
+          "title": "TechPowerUp MI100 GPU reference",
+          "url": "https://www.techpowerup.com/gpu-specs/radeon-instinct-mi100.c3496",
+          "checked_on": "2026-11-13",
+          "verification": "public_url_index_only; live_body_unverified"
+        },
+        {
+          "id": "arch",
+          "title": "AMD MI100 microarchitecture: vector and matrix rates",
+          "url": "https://rocm.docs.amd.com/en/latest/reference/gpu-arch/mi100.html",
+          "checked_on": "2026-11-13"
+        }
+      ],
+      "memory_scope": "32GB on one GPU; not the dual-GCD MI250 aggregate",
+      "memory_clock_mhz": 1200,
+      "bandwidth_theoretical_gbs": 1228.8,
+      "reported_alternate_peaks": {
+        "sku_matrix_fp32_tflops": 23.1,
+        "sku_int8_tops": 92.3,
+        "brochure_matrix_fp32_tflops": 46.1,
+        "brochure_int8_tops": 184.6
+      },
+      "notes": "MI100 32GB PCIe、単一GPU。AMD製品ページのMatrix FP32 23.1とINT8 92.3は製品PDF・ROCm命令表と食い違う。公式PDFと命令レートが一致するMatrix FP32 46.1 / INT8 184.6を採用し別表記も保持。Vector FP32 23.1とMatrix FP32 46.1を区別。帯域1.2TB/s掲載値を採用、メモリクロックからの算出1228.8GB/sは別欄。非行列FP16はpacked FMAの最大クロック参考算出値。実測はDellの単一GPU結果、他SKU誤記や図だけの未確認値は転記しない。"
+    },
+    {
+      "id": "amd-instinct-mi210",
+      "name": "AMD Instinct MI210 (64GB PCIe)",
+      "vendor": "AMD",
+      "architecture": "CDNA 2",
+      "category": "Data Center",
+      "cc": null,
+      "cuda_supported": false,
+      "form_factor": "MI210 / PCIe add-in card / single GPU",
+      "connection_type": "PCIe 4.0 x16",
+      "cooling_type": "パッシブ",
+      "board_variant": "Full-height full-length / dual-slot",
+      "slot_count": 2,
+      "gcd_count": 1,
+      "logical_device_count": 1,
+      "memory_gb": 64,
+      "memory_type": "HBM2e",
+      "memory_bus_bits": 4096,
+      "bandwidth_gbs": 1600,
+      "power_w": 300,
+      "power_scope": "single PCIe accelerator board TDP, excludes host CPU/system power",
+      "compute_units": 104,
+      "stream_processors": 6656,
+      "matrix_cores": 416,
+      "boost_clock_mhz": 1700,
+      "llvm_target": "gfx90a",
+      "price_jpy": null,
+      "purchase_url": null,
+      "reference_url": "https://www.techpowerup.com/gpu-specs/radeon-instinct-mi210.c3857",
+      "field_status": {
+        "cc": {
+          "status": "not_supported",
+          "reason": "AMD GPUはNVIDIA CUDA Compute Capabilityを持たない。",
+          "checked_on": "2026-11-13"
+        }
+      },
+      "field_provenance": {
+        "memory_gb": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "bandwidth_gbs": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "power_w": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "slot_count": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        },
+        "boost_clock_mhz": {
+          "status": "published",
+          "source": "spec",
+          "note": "公式製品PDF。帯域は公表丸め値。"
+        }
+      },
+      "performance": {
+        "gpu_fp64": {
+          "value": 22.6,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "gpu_fp32": {
+          "value": 22.6,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "gpu_fp32_packed": {
+          "value": 45.3,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "matrix_fp64_dense": {
+          "value": 45.3,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_fp32_dense": {
+          "value": 45.3,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_fp16_acc32_dense": {
+          "value": 181,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_bf16_acc32_dense": {
+          "value": 181,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "matrix_int8_acc32_dense": {
+          "value": 181,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。",
+          "supporting_sources": [
+            "matrix-types"
+          ]
+        },
+        "vendor_int4_tops_advertised": {
+          "value": 181,
+          "source": "spec",
+          "kind": "published",
+          "note": "単一PCIe GPUのメーカー公表ピーク。Vector/Matrix、入力・蓄積型、広告INT4を分離。"
+        },
+        "gpu_fp16": {
+          "value": 45.2608,
+          "source": "arch",
+          "kind": "derived",
+          "note": "104 CU × 4 SIMD × 16 lanes × 2 packed FP16 × 2 FLOPs/FMA × 1700MHz = 45.2608 TFLOPS。最大クロック・毎周期発行の参考モデルで、メーカー公称Matrix FP16や実測ではない。",
+          "supporting_sources": [
+            "matrix-types",
+            "spec"
+          ]
+        }
+      },
+      "results": {
+        "dell2022_sgemm_single": {
+          "value": 32.2,
+          "source": "bench",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "本文のMI210 FP32 GEMM測定値。MI100側は約9%差から逆算しない。"
+        },
+        "dell2022_hpl_single": {
+          "value": 18.2,
+          "source": "bench",
+          "kind": "measured",
+          "accelerator_count": 1,
+          "note": "本文の1GPU HPL。図の多GPU結果は未転記。"
+        }
+      },
+      "metric_status": {
+        "cuda_fp64": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "cuda_fp32": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "cuda_fp16": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp32_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp32_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp64_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_tf32_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_tf32_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_bf16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_bf16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int8_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int8_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_int4_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_acc16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_acc16_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_acc16_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp16_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp8_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_dense": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "tensor_fp4_unspecified_sparse": {
+          "status": "not_supported",
+          "reason": "NVIDIA CUDA/Tensor固有欄。AMDの性能は共通GPU/Matrix欄に記録。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_matrix_fp16_acc16_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp32_single_issue": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_fp16_single_issue": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "npu_ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "platform_ai_tops": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "gpu_ai_fp16_advertised": {
+          "status": "not_applicable",
+          "reason": "APU総合/専用NPU広告値/RDNA3.5 single-issueの定義はこの単体CDNA GPUの比較項目に該当しない。",
+          "source": "spec",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_tf32_acc32_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "matrix_fp8_acc32_dense": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        },
+        "vector_bf16": {
+          "status": "not_supported",
+          "reason": "CDNA1/2のネイティブ対応型・蓄積型と一致しない。FP16/BF16のMFMAはFP32蓄積、TF32/FP8 MFMAなし。通常Vector BF16 FMAをMFMAと混同しない。",
+          "source": "precision",
+          "checked_on": "2026-11-13"
+        }
+      },
+      "sources": [
+        {
+          "id": "spec",
+          "title": "AMD MI210 product brief: performance, memory, board design",
+          "url": "https://www.amd.com/content/dam/amd/en/documents/instinct-business-docs/product-briefs/instinct-mi210-brochure.pdf",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "sku",
+          "title": "AMD MI210 official SKU page (cross-check)",
+          "url": "https://www.amd.com/en/products/accelerators/instinct/mi200/mi210.html",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "matrix-types",
+          "title": "AMD Lab Notes: CDNA1/2 MFMA input/output formats and FLOPs/CU/cycle",
+          "url": "https://github.com/amd/amd-lab-notes/blob/release/matrix-cores/README.md",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "precision",
+          "title": "AMD CDNA1/2 support table: FP64 matrix / TF32 / FP8 / packed FP32",
+          "url": "https://rocm.docs.amd.com/projects/rocprofiler-compute/en/docs-10.1.0/conceptual/cdna/cdna-performance-model.html",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "bench",
+          "title": "Dell Performance Labs: single GPU rocBLAS/HPL, R750xa, 2022-08-12",
+          "url": "https://infohub.delltechnologies.com/es-es/p/hpc-application-performance-on-dell-poweredge-r750xa-servers-with-the-amd-instinct-tm-mi210-accelerator/",
+          "checked_on": "2026-11-13"
+        },
+        {
+          "id": "techpowerup",
+          "title": "TechPowerUp MI210 GPU reference",
+          "url": "https://www.techpowerup.com/gpu-specs/radeon-instinct-mi210.c3857",
+          "checked_on": "2026-11-13",
+          "verification": "public_url_index_only; live_body_unverified"
+        },
+        {
+          "id": "arch",
+          "title": "AMD CDNA2 ISA: packed half FMA / MFMA",
+          "url": "https://developer.amd.com/wp-content/resources/CDNA2_Shader_ISA_18November2021.pdf",
+          "checked_on": "2026-11-13"
+        }
+      ],
+      "memory_scope": "64GB on one GPU; not the dual-GCD MI250 aggregate",
+      "memory_clock_mhz": 1600,
+      "bandwidth_theoretical_gbs": 1638.4,
+      "external_power": "EPS12V 8-pin",
+      "notes": "MI210 64GB PCIe、単一GCD/単一GPU。MI250 128GB OAMの半分のGPU構成だが実測値を単純に半分へ換算しない。Vector FP32/FP64 22.6、Matrix FP32/FP64 45.3、FP16/BF16 Matrix 181を分離。帯域1.6TB/s掲載値を採用、算出1638.4GB/sは別欄。非行列FP16とpacked FP32は別命令条件。実測Dell本文にはDGEMM28.3でMI250の誤記があり、図の直接照合ができないためこの数値は不採用。"
     }
   ],
   "research_notes": "docs/catalog-research-2026-11-11.md。公開値と算出値はperformance.kind、欠測・非対応理由はmetric_status、基本仕様の確認状態はfield_provenanceに記録。実測値はresultsのみ。"

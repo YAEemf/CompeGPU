@@ -1,5 +1,5 @@
-import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261112-precision-audit';
-import {TableUI, columnLabel} from './table-ui.mjs?v=20261112-precision-audit';
+import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261113-new-devices';
+import {TableUI, columnLabel} from './table-ui.mjs?v=20261113-new-devices';
 import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';

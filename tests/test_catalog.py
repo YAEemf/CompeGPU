@@ -20,7 +20,38 @@ class CatalogTests(unittest.TestCase):
             'rtx3090', 'rtx4090', 'rtx5090', 'v100-sxm2-16gb', 't4', 't10', 't40',
             'quadro-rtx6000', 'quadro-rtx8000', 'rtx4000-ada', 'rtx5000-ada',
             'rtx6000-ada', 'rtx-a4500', 'a40', 'a100-sxm4-40gb', 'jetson-agx-thor',
-            'ryzen-ai-max-plus-395', 'intel-gaudi2-hl225h', 'amd-instinct-mi250'})
+            'ryzen-ai-max-plus-395', 'intel-gaudi2-hl225h', 'amd-instinct-mi250', 'rtx5070ti', 'amd-instinct-mi100', 'amd-instinct-mi210'})
+
+    def test_new_devices_preserve_precision_and_single_gpu_scope(self):
+        rtx, mi100, mi210 = [self.gpus[k] for k in ['rtx5070ti','amd-instinct-mi100','amd-instinct-mi210']]
+        self.assertEqual((rtx['cc'],rtx['memory_gb'],rtx['bandwidth_gbs'],rtx['power_w'],rtx['tensor_cores']), ('12.0',16,896,300,280))
+        self.assertIsNone(rtx['slot_count'])
+        for key,value in {'cuda_fp32':43.9,'tensor_fp16_dense':87.9,'tensor_fp16_acc16_sparse':351.5,'tensor_fp8_acc16_dense':351.5,'tensor_fp4_sparse':1406}.items():
+            self.assertEqual(rtx['performance'][key]['value'],value)
+        self.assertAlmostEqual(rtx['performance']['cuda_fp64']['value'],43.9/64)
+        for gpu,memory,cu,native,matrix,half in [(mi100,32,120,23.1,46.1,46.14144),(mi210,64,104,22.6,45.3,45.2608)]:
+            self.assertEqual((gpu['memory_gb'],gpu['compute_units'],gpu['gcd_count'],gpu['power_w']), (memory,cu,1,300))
+            self.assertEqual(gpu['performance']['gpu_fp32']['value'],native)
+            self.assertEqual(gpu['performance']['matrix_fp32_dense']['value'],matrix)
+            self.assertAlmostEqual(gpu['performance']['gpu_fp16']['value'],half)
+            self.assertEqual(gpu['performance']['gpu_fp16']['kind'],'derived')
+            self.assertEqual(gpu['metric_status']['vector_bf16']['status'],'not_supported')
+            self.assertTrue(all(r['accelerator_count']==1 for r in gpu['results'].values()))
+        self.assertEqual(mi100['performance']['matrix_int8_acc32_dense']['value'],184.6)
+        self.assertEqual(mi100['reported_alternate_peaks']['sku_int8_tops'],92.3)
+        self.assertEqual(mi100['performance']['matrix_bf16_acc32_dense']['value'],92.3)
+        self.assertEqual(mi100['metric_status']['matrix_fp64_dense']['status'],'not_supported')
+        self.assertEqual(mi210['performance']['matrix_fp16_acc32_dense']['value'],181)
+        self.assertEqual(mi100['results']['dell2022_hpl_single']['value'],6.4)
+        self.assertEqual(mi210['results']['dell2022_hpl_single']['value'],18.2)
+        self.assertEqual(mi100['results']['dell2022_dgemm_single']['value'],7.9)
+        self.assertEqual(mi210['results']['dell2022_sgemm_single']['value'],32.2)
+        self.assertNotIn('dell2022_dgemm_single',mi210['results'])
+        self.assertNotIn('dell2022_sgemm_single',mi100['results'])
+        self.assertEqual(len(rtx['results']),8)
+        self.assertEqual(rtx['results']['paper2601_qwen3_nvfp4_api_i256_o256_c64_tps']['value'],2899.1)
+        self.assertEqual(rtx['results']['paper2601_qwen3_nvfp4_api_i256_o256_c64_ttft']['value'],237)
+        self.assertEqual(rtx['results']['paper2601_qwen3_nvfp4_rag_i8192_o512_c8_tps']['value'],210.8)
 
     def test_gaudi_mme_precision_and_mi250_module_scope(self):
         gaudi = self.gpus['intel-gaudi2-hl225h']
