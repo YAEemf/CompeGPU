@@ -118,6 +118,15 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(gpu['results']['gb640_cpu_multi']['value'],22313)
         self.assertEqual(len(gpu['results']),10)
 
+    def test_names_do_not_repeat_memory_or_form_factor(self):
+        import re
+        for gpu in self.gpus.values():
+            with self.subTest(gpu=gpu['id']):
+                self.assertNotRegex(gpu['name'], r'\d+\s*GB|(?:OAM|SXM\d?|PCIe)|\(')
+        self.assertEqual((self.gpus['intel-gaudi2-hl225h']['name'], self.gpus['intel-gaudi2-hl225h']['model_number']), ('Intel Gaudi 2', 'HL-225H'))
+        self.assertEqual((self.gpus['jetson-agx-thor']['name'], self.gpus['jetson-agx-thor']['model_number']), ('NVIDIA Jetson AGX Thor', 'T5000'))
+        self.assertEqual(self.gpus['amd-instinct-mi250x']['name'], 'AMD Instinct MI250X')
+
     def test_vendor_specific_rows_are_merged(self):
         ids = {m['id'] for m in self.data['metrics']}
         self.assertFalse({i for i in ids if i.startswith(('cuda_', 'tensor_'))})

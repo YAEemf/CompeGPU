@@ -47,7 +47,7 @@ export function matchesRange(value, range, isCC = false) {
 
 export function selectGPUs(gpus, filters, key, direction = 'desc', getValue = metricValue) {
   const rows = gpus.filter(g =>
-    (!filters.query || `${g.name} ${displayGPUName(g.name)} ${g.architecture} ${g.form_factor} ${g.connection_type||''} ${g.cooling_type||''} ${g.board_variant||''}`.toLowerCase().includes(filters.query.toLowerCase())) &&
+    (!filters.query || `${g.name} ${displayGPUName(g.name)} ${g.model_number||''} ${g.architecture} ${g.form_factor} ${g.connection_type||''} ${g.cooling_type||''} ${g.board_variant||''}`.toLowerCase().includes(filters.query.toLowerCase())) &&
     (!filters.architecture || g.architecture === filters.architecture) &&
     (!filters.category || g.category === filters.category) &&
     (!filters.cc || (g.cc != null && compareCC(g.cc, filters.cc) >= 0)) &&

@@ -1,10 +1,10 @@
-import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261119-merged-metrics';
-import {TableUI, columnLabel} from './table-ui.mjs?v=20261119-merged-metrics';
+import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261119-model-number';
+import {TableUI, columnLabel} from './table-ui.mjs?v=20261119-model-number';
 import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';
 import {CatalogStore} from './catalog-store.mjs?v=20261112-pages';
-import {migrateId} from './columns.mjs?v=20261119-merged-metrics';
+import {migrateId} from './columns.mjs?v=20261119-model-number';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -148,7 +148,7 @@ function render() {
 }
 
 const basicFields = [
-  ['id','GPU ID（重複不可）','text',true],['name','GPU名','text',true],
+  ['id','GPU ID（重複不可）','text',true],['name','GPU名（容量・接続形式は含めない）','text',true],['model_number','型番（例：HL-225H）','text'],
   ['architecture','世代（アーキテクチャ）','text',true],['category','カテゴリ（例：GeForce / Data Center）','text',true],
   ['cc','Compute Capability（CUDA非対応は空欄）','text'],['form_factor','構成（例：PCIe / SXM）','text',true],
   ['connection_type','接続形式（例：PCIe 4.0 x16 / SXM4）','text'],['cooling_type','冷却方式（例：アクティブ / パッシブ）','text'],
@@ -181,6 +181,7 @@ function openEditor(id) {
 function readEditor() {
   const next = structuredClone(draft), form = new FormData($('gpuForm'));
   for (const [key,,type] of basicFields) next[key] = type === 'number' ? (form.get(key) === '' ? null : Number(form.get(key))) : type==='url' ? String(form.get(key)).trim()||null : String(form.get(key)).trim();
+  if (!next.model_number) delete next.model_number;
   for (const key of ['connection_type','cooling_type','board_variant']) if (!next[key]) next[key]=null;
   if (!next.cc) next.cc=null;
   next.notes = String(form.get('notes'));

@@ -1158,7 +1158,7 @@
     },
     {
       "id": "v100-sxm2-16gb",
-      "name": "NVIDIA Tesla V100 16GB SXM2",
+      "name": "NVIDIA Tesla V100",
       "architecture": "Volta",
       "category": "Data Center",
       "cc": "7.0",
@@ -1620,7 +1620,7 @@
     },
     {
       "id": "t10",
-      "name": "NVIDIA Tesla T10 16GB",
+      "name": "NVIDIA Tesla T10",
       "architecture": "Turing",
       "category": "Data Center",
       "cc": "7.5",
@@ -1954,7 +1954,7 @@
     },
     {
       "id": "t40",
-      "name": "NVIDIA Tesla T40 24GB",
+      "name": "NVIDIA Tesla T40",
       "architecture": "Turing",
       "category": "Data Center",
       "cc": "7.5",
@@ -4132,7 +4132,7 @@
     },
     {
       "id": "a100-sxm4-40gb",
-      "name": "NVIDIA A100 40GB SXM4",
+      "name": "NVIDIA A100",
       "architecture": "Ampere",
       "category": "Data Center",
       "cc": "8.0",
@@ -4358,7 +4358,8 @@
     },
     {
       "id": "jetson-agx-thor",
-      "name": "NVIDIA Jetson AGX Thor (T5000 128GB)",
+      "name": "NVIDIA Jetson AGX Thor",
+      "model_number": "T5000",
       "architecture": "Blackwell",
       "category": "Jetson",
       "cc": "11.0",
@@ -5295,7 +5296,8 @@
     },
     {
       "id": "intel-gaudi2-hl225h",
-      "name": "Intel Gaudi 2 (HL-225H 96GB)",
+      "name": "Intel Gaudi 2",
+      "model_number": "HL-225H",
       "vendor": "Intel",
       "architecture": "Gaudi 2",
       "category": "AI Accelerator",
@@ -5710,7 +5712,7 @@
     },
     {
       "id": "amd-instinct-mi250x",
-      "name": "AMD Instinct MI250X (128GB OAM)",
+      "name": "AMD Instinct MI250X",
       "vendor": "AMD",
       "architecture": "CDNA 2",
       "category": "Data Center",
@@ -6392,7 +6394,7 @@
     },
     {
       "id": "amd-instinct-mi100",
-      "name": "AMD Instinct MI100 (32GB PCIe)",
+      "name": "AMD Instinct MI100",
       "vendor": "AMD",
       "architecture": "CDNA",
       "category": "Data Center",
@@ -6709,7 +6711,7 @@
     },
     {
       "id": "amd-instinct-mi210",
-      "name": "AMD Instinct MI210 (64GB PCIe)",
+      "name": "AMD Instinct MI210",
       "vendor": "AMD",
       "architecture": "CDNA 2",
       "category": "Data Center",

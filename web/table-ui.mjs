@@ -1,5 +1,5 @@
-import {compareCC, speedup} from './model.mjs?v=20261119-merged-metrics';
-import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261119-merged-metrics';
+import {compareCC, speedup} from './model.mjs?v=20261119-model-number';
+import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261119-model-number';
 import {displayGPUName} from './gpu-name.mjs';
 
 const $ = id => document.getElementById(id);
@@ -34,6 +34,8 @@ export class TableUI {
     try {this.addPrecisionAuditResults=localStorage.getItem('gpu-compare.precision-audit-results.v1')!=='true';} catch {}
     this.addNewDeviceResults=true;
     try {this.addNewDeviceResults=localStorage.getItem('gpu-compare.5070ti-mi100-mi210-results.v1')!=='true';} catch {}
+    this.addModelNumberColumn=true;
+    try {this.addModelNumberColumn=localStorage.getItem('gpu-compare.model-number-column.v1')!=='true';} catch {}
     this.addMergedColumns=true;
     try {this.addMergedColumns=localStorage.getItem('gpu-compare.merged-metrics.v1')!=='true';} catch {}
     $('valueMode').value=this.mode;
@@ -218,6 +220,16 @@ export class TableUI {
       }
       this.addMergedColumns=false;
       try {localStorage.setItem('gpu-compare.merged-metrics.v1','true');} catch {}
+    }
+    // 2026-11-19: model numbers moved out of GPU names into their own column; show it once.
+    if (this.mode==='nominal' && this.addModelNumberColumn) {
+      if (this.saved && this.byId.has('field:/model_number') && !this.selected.includes('field:/model_number')) {
+        const at=this.selected.indexOf('field:/architecture');
+        this.selected.splice(at<0?this.selected.length:at,0,'field:/model_number');
+        this.saved=[...this.selected]; this.modeSelections.nominal=[...this.selected]; this.saveModeColumns();
+      }
+      this.addModelNumberColumn=false;
+      try {localStorage.setItem('gpu-compare.model-number-column.v1','true');} catch {}
     }
     this.rangeIds = this.rangeIds.filter(id=>this.byId.has(id));
     for (const id of Object.keys(this.ranges)) if (!this.byId.has(id)) delete this.ranges[id];
