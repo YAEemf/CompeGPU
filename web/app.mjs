@@ -1,9 +1,10 @@
-import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261113-new-devices';
-import {TableUI, columnLabel} from './table-ui.mjs?v=20261113-new-devices';
+import {compareCC, selectGPUs, csv, missingMetricMarker, missingMetricDetail} from './model.mjs?v=20261119-merged-metrics';
+import {TableUI, columnLabel} from './table-ui.mjs?v=20261119-merged-metrics';
 import {modeMetrics, scopedGPU, gpuReferenceURL} from './value-modes.mjs?v=20261111-reference-links';
 import {displayGPUName} from './gpu-name.mjs';
 import {formatNumericValue} from './number-format.mjs';
 import {CatalogStore} from './catalog-store.mjs?v=20261112-pages';
+import {migrateId} from './columns.mjs?v=20261119-merged-metrics';
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -37,17 +38,17 @@ const baseMetrics = [
   {id:'bandwidth_gbs',name:'メモリ帯域',unit:'GB/s',direction:'higher'},
   {id:'power_w',name:'TDP / TGP',unit:'W',direction:'lower'},
   {id:'price_jpy',name:'価格',unit:'円',direction:'lower',note:'ユーザー入力の購入・見積価格。価格をダブルクリックすると購入リンクを編集、Ctrl＋クリックで購入ページを開きます。税・時点・GPU単体/システム全体などの条件をGPUメモに記録してください。'},
-  {id:'fp32_per_w',name:'CUDA FP32 / TDP・TGP',unit:'TFLOPS/W',direction:'higher',note:'CUDA FP32理論値 ÷ 公称TDP/TGP。実測電力効率ではありません。'},
-  {id:'fp32_per_10k_jpy',name:'CUDA FP32 / 1万円',unit:'TFLOPS/万円',direction:'higher',note:'CUDA FP32理論値 ÷ 入力価格 × 10,000。価格条件をそろえてください。'}
+  {id:'fp32_per_w',name:'FP32 汎用 / TDP・TGP',unit:'TFLOPS/W',direction:'higher',note:'FP32 汎用（非行列）理論値 ÷ 公称TDP/TGP。実測電力効率ではありません。'},
+  {id:'fp32_per_10k_jpy',name:'FP32 汎用 / 1万円',unit:'TFLOPS/万円',direction:'higher',note:'FP32 汎用（非行列）理論値 ÷ 入力価格 × 10,000。価格条件をそろえてください。'}
 ];
-let data, revision, dirty = false, sortKey = 'cuda_fp32', editingId = null, draft, rows = [], toastTimer, tableUI;
-let metricId='cuda_fp32', baselineId='', metricByMode={nominal:'cuda_fp32',measured:''};
+let data, revision, dirty = false, sortKey = 'gpu_fp32', editingId = null, draft, rows = [], toastTimer, tableUI;
+let metricId='gpu_fp32', baselineId='', metricByMode={nominal:'gpu_fp32',measured:''};
 try {
   const saved=JSON.parse(localStorage.getItem('gpu-compare.selection.v1'));
   if (typeof saved?.baselineId==='string') baselineId=saved.baselineId;
-  if (typeof saved?.sortKey==='string') sortKey=saved.sortKey;
+  if (typeof saved?.sortKey==='string') sortKey=migrateId(saved.sortKey);
   if (['asc','desc'].includes(saved?.direction)) $('sortDirection').value=saved.direction;
-  for (const mode of ['nominal','measured']) if (typeof saved?.metrics?.[mode]==='string') metricByMode[mode]=saved.metrics[mode];
+  for (const mode of ['nominal','measured']) if (typeof saved?.metrics?.[mode]==='string') metricByMode[mode]=migrateId(saved.metrics[mode]);
 } catch {}
 function saveSelection() {
   metricByMode[currentMode()]=metricId;

@@ -78,7 +78,7 @@ class ServerTests(unittest.TestCase):
         bad['gpus'].append(bad['gpus'][0])
         self.assertEqual(self.request('/api/data', {'data': bad})[0], 400)
         bad = copy.deepcopy(self.original)
-        bad['gpus'][0]['performance']['cuda_fp32']['source'] = 'missing'
+        bad['gpus'][0]['performance']['gpu_fp32']['source'] = 'missing'
         self.assertEqual(self.request('/api/validate', {'data': bad})[0], 400)
         for invalid_link in ('javascript:alert(1)', 'data:text/html,bad', ['https://example.org/one', 'https://example.org/two']):
             bad = copy.deepcopy(self.original)

@@ -7,11 +7,11 @@ export function compareCC(a, b) {
 
 export function metricValue(gpu, key) {
   if (key === 'fp32_per_w') {
-    const value = gpu.performance.cuda_fp32?.value;
+    const value = gpu.performance.gpu_fp32?.value;
     return value != null && gpu.power_w > 0 ? value / gpu.power_w : null;
   }
   if (key === 'fp32_per_10k_jpy') {
-    const value = gpu.performance.cuda_fp32?.value;
+    const value = gpu.performance.gpu_fp32?.value;
     return value != null && gpu.price_jpy > 0 ? value / gpu.price_jpy * 10000 : null;
   }
   if (key in gpu && (typeof gpu[key] === 'number' || gpu[key] === null)) return gpu[key];

@@ -1,5 +1,5 @@
-import {compareCC, speedup} from './model.mjs?v=20261112-precision-audit';
-import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261112-precision-audit';
+import {compareCC, speedup} from './model.mjs?v=20261119-merged-metrics';
+import {discoverColumns, cleanColumns, columnValue, moveColumn, DEFAULT_COLUMNS, GPU_DETAIL_COLUMNS, APU_COLUMNS, ACCELERATOR_COLUMNS, orderGPUs, mergeVisibleOrder} from './columns.mjs?v=20261119-merged-metrics';
 import {displayGPUName} from './gpu-name.mjs';
 
 const $ = id => document.getElementById(id);
@@ -34,6 +34,8 @@ export class TableUI {
     try {this.addPrecisionAuditResults=localStorage.getItem('gpu-compare.precision-audit-results.v1')!=='true';} catch {}
     this.addNewDeviceResults=true;
     try {this.addNewDeviceResults=localStorage.getItem('gpu-compare.5070ti-mi100-mi210-results.v1')!=='true';} catch {}
+    this.addMergedColumns=true;
+    try {this.addMergedColumns=localStorage.getItem('gpu-compare.merged-metrics.v1')!=='true';} catch {}
     $('valueMode').value=this.mode;
     this.transposed = layout?.transposed !== false;
     this.gpuOrder = Array.isArray(layout?.gpuOrder) ? layout.gpuOrder.filter(id=>typeof id==='string') : [];
@@ -206,6 +208,16 @@ export class TableUI {
       this.saved=[...this.selected]; this.modeSelections.measured=[...this.selected]; this.saveModeColumns();
       this.addNewDeviceResults=false;
       try {localStorage.setItem('gpu-compare.5070ti-mi100-mi210-results.v1','true');} catch {}
+    }
+    // 2026-11-19: CUDA/Tensor rows were merged into vendor-neutral rows. Old ids are mapped by
+    // cleanColumns(); add the merged default rows once to selections saved by older versions.
+    if (this.mode==='nominal' && this.addMergedColumns) {
+      if (this.saved) {
+        for (const id of DEFAULT_COLUMNS) if (this.byId.has(id) && !this.selected.includes(id)) this.selected.push(id);
+        this.saved=[...this.selected]; this.modeSelections.nominal=[...this.selected]; this.saveModeColumns();
+      }
+      this.addMergedColumns=false;
+      try {localStorage.setItem('gpu-compare.merged-metrics.v1','true');} catch {}
     }
     this.rangeIds = this.rangeIds.filter(id=>this.byId.has(id));
     for (const id of Object.keys(this.ranges)) if (!this.byId.has(id)) delete this.ranges[id];

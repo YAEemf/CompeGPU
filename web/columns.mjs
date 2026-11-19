@@ -1,10 +1,37 @@
-import {metricValue} from './model.mjs?v=20261112-precision-audit';
+import {metricValue} from './model.mjs?v=20261119-merged-metrics';
 
 export const GPU_DETAIL_COLUMNS = ['field:/architecture', 'field:/connection_type', 'field:/cooling_type', 'field:/board_variant', 'field:/slot_count'];
-export const APU_COLUMNS = ['gpu_fp64','gpu_fp32','gpu_fp16','gpu_matrix_fp16_acc16_dense','field:/cpu_cores','field:/cpu_threads','npu_ai_tops','platform_ai_tops'];
-export const ACCELERATOR_COLUMNS = ['matrix_fp64_dense','matrix_fp32_dense','matrix_tf32_acc32_dense','matrix_fp16_acc32_dense','matrix_bf16_acc32_dense','matrix_fp8_acc32_dense','matrix_int8_acc32_dense','vector_bf16','gpu_fp32_packed'];
-export const DEFAULT_COLUMNS = ['cc', 'memory_gb', 'bandwidth_gbs', 'cuda_fp64', 'cuda_fp32', 'cuda_fp16',
-  'tensor_fp32_dense', 'tensor_tf32_dense', 'tensor_fp16_dense', 'tensor_bf16_dense', 'price_jpy', ...GPU_DETAIL_COLUMNS];
+export const APU_COLUMNS = ['matrix_fp16_acc16_dense','field:/cpu_cores','field:/cpu_threads','npu_ai_tops','platform_ai_tops'];
+export const ACCELERATOR_COLUMNS = ['matrix_fp32_dense','vector_bf16'];
+export const DEFAULT_COLUMNS = ['cc', 'memory_gb', 'bandwidth_gbs', 'gpu_fp64', 'gpu_fp32', 'gpu_fp16',
+  'matrix_fp64_dense', 'matrix_tf32_acc32_dense', 'matrix_fp16_acc32_dense', 'matrix_bf16_acc32_dense',
+  'matrix_fp8_acc32_dense', 'matrix_int8_acc32_dense', 'price_jpy', ...GPU_DETAIL_COLUMNS];
+// 2026-11-19: vendor-specific rows (CUDA/Tensor) were merged into vendor-neutral rows.
+// Saved column lists, sort keys and range filters from older versions are mapped here.
+export const METRIC_ALIASES = {
+  cuda_fp64:'gpu_fp64', cuda_fp32:'gpu_fp32', cuda_fp16:'gpu_fp16',
+  gpu_fp32_single_issue:'gpu_fp32', gpu_fp16_single_issue:'gpu_fp16', gpu_fp32_packed:'gpu_fp32',
+  tensor_fp64_dense:'matrix_fp64_dense', tensor_fp64_sparse:'matrix_fp64_dense',
+  tensor_fp32_dense:'matrix_fp32_dense', tensor_fp32_sparse:'matrix_fp32_dense',
+  tensor_tf32_dense:'matrix_tf32_acc32_dense', tensor_tf32_sparse:'matrix_tf32_acc32_sparse',
+  tensor_fp16_dense:'matrix_fp16_acc32_dense', tensor_fp16_sparse:'matrix_fp16_acc32_sparse',
+  tensor_fp16_acc16_dense:'matrix_fp16_acc16_dense', tensor_fp16_acc16_sparse:'matrix_fp16_acc16_sparse',
+  gpu_matrix_fp16_acc16_dense:'matrix_fp16_acc16_dense', gpu_ai_fp16_advertised:'matrix_fp16_acc16_dense',
+  tensor_bf16_dense:'matrix_bf16_acc32_dense', tensor_bf16_sparse:'matrix_bf16_acc32_sparse',
+  tensor_fp8_dense:'matrix_fp8_acc32_dense', tensor_fp8_sparse:'matrix_fp8_acc32_sparse',
+  tensor_fp8_acc16_dense:'matrix_fp8_acc16_dense', tensor_fp8_acc16_sparse:'matrix_fp8_acc16_sparse',
+  tensor_fp4_dense:'matrix_fp4_dense', tensor_fp4_sparse:'matrix_fp4_sparse',
+  tensor_int8_dense:'matrix_int8_acc32_dense', tensor_int8_sparse:'matrix_int8_acc32_sparse',
+  tensor_int4_dense:'matrix_int4_dense', tensor_int4_sparse:'matrix_int4_sparse', vendor_int4_tops_advertised:'matrix_int4_dense',
+  tensor_fp16_unspecified_dense:'matrix_fp16_acc32_dense', tensor_fp16_unspecified_sparse:'matrix_fp16_acc32_sparse',
+  tensor_fp8_unspecified_dense:'matrix_fp8_acc32_dense', tensor_fp8_unspecified_sparse:'matrix_fp8_acc32_sparse',
+  tensor_fp4_unspecified_dense:'matrix_fp4_dense', tensor_fp4_unspecified_sparse:'matrix_fp4_sparse',
+  ...Object.fromEntries(['4096_tensor_hw','4096_tensor_sw','4096_channel_sw','6144_tensor_hw','6144_tensor_sw','6144_channel_sw','8192_tensor_hw','8192_tensor_sw','8192_channel_sw'].map(s=>['gaudi_paper_v1_fp8_gemm_'+s,'gemm_fp8_1gpu'])),
+  gaudi_author_bf16_gemm_4096:'gemm_bf16_1gpu', gaudi_author_bf16_gemm_8192:'gemm_bf16_1gpu',
+  ...Object.fromEntries(['8192_eager','8192_compiled','16384_eager','16384_compiled'].map(s=>['gaudi124_fp16_gemm_'+s,'gemm_fp16_1gpu'])),
+  dell2022_dgemm_single:'gemm_fp64_1gpu', dell2022_sgemm_single:'gemm_fp32_1gpu', dell2022_hpl_single:'hpl_fp64_1gpu',
+};
+export const migrateId = id => METRIC_ALIASES[id] ?? id;
 const names = {id:'GPU ID', architecture:'世代（アーキテクチャ）', category:'カテゴリ', form_factor:'構成（元の表記）',
   connection_type:'接続形式', cooling_type:'冷却方式', board_variant:'ボード仕様', slot_count:'占有スロット数', notes:'GPUメモ',
   sources:'出典一覧 (JSON)', performance:'理論性能一覧 (JSON)', results:'実測結果一覧 (JSON)',purchase_url:'購入リンク',reference_url:'GPU名から開く出典URL',
@@ -54,7 +81,7 @@ export function columnValue(gpu, column) {
 
 export function cleanColumns(saved, available) {
   const allowed = new Set(available.map(c=>c.id));
-  return [...new Set((Array.isArray(saved) ? saved : DEFAULT_COLUMNS).filter(id=>allowed.has(id)))];
+  return [...new Set((Array.isArray(saved) ? saved : DEFAULT_COLUMNS).map(migrateId).filter(id=>allowed.has(id)))];
 }
 
 export function moveColumn(ids, source, target) {

@@ -3,158 +3,145 @@
   "research_date": "2026-11-11",
   "metrics": [
     {
-      "id": "cuda_fp64",
-      "name": "CUDA FP64",
+      "id": "gpu_fp64",
+      "name": "FP64 汎用（非行列）",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "CUDAコアの倍精度理論ピーク。Tensor FP64とは別です。"
+      "note": "ベンダー共通の非行列FP64ピーク。NVIDIA CUDAコア、AMD Vector/VALUを同じ行で比較する。Tensor/Matrix FP64とは別行。"
     },
     {
-      "id": "cuda_fp32",
-      "name": "CUDA FP32",
+      "id": "gpu_fp32",
+      "name": "FP32 汎用（非行列）",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "CUDAコアの単精度理論ピーク。FMAを2演算として数えます。RTX 5090は公式のコア数と丸められたBoostクロックから算出しています。"
+      "note": "ベンダー共通の非行列FP32ピーク（FMA=2演算）。NVIDIA CUDAコア、AMD Vector（CDNAは通常命令、RDNA3.5はAMD慣例のdual-issue値）。packed/single-issue等の命令条件付き値は各GPUの注記に記載。"
     },
     {
-      "id": "cuda_fp16",
-      "name": "CUDA FP16",
+      "id": "gpu_fp16",
+      "name": "FP16 汎用（非行列）",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "CUDAコアによるFP16。Tensor FP16と混同しないでください。初期データは未収集です。"
+      "note": "packed FP16を含む非行列FP16ピーク。Tensor/Matrix/WMMAとは別行。"
     },
     {
-      "id": "tensor_fp32_sparse",
-      "name": "Tensor FP32 / Sparse",
+      "id": "matrix_fp32_dense",
+      "name": "Matrix FP32 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "FP32入力のTensor演算として別途仕様・蓄積精度を確認して登録します。TF32とは別項目です。初期データは未収集です。"
+      "note": "IEEE FP32入力・FP32蓄積の行列演算（AMD MFMA FP32等）。TF32入力とは別行。NVIDIAはIEEE FP32入力のTensor MMAがないためx。"
     },
     {
-      "id": "tensor_fp32_dense",
-      "name": "Tensor FP32 / Dense",
+      "id": "matrix_fp64_dense",
+      "name": "Matrix FP64 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "FP32入力のTensor演算として別途仕様・蓄積精度を確認して登録します。TF32とは別項目です。初期データは未収集です。"
+      "note": "NVIDIA Tensor Core・AMD Matrix Core・Intel MMEの行列演算をベンダー共通で比較。FP64入力・FP64蓄積。"
     },
     {
-      "id": "tensor_fp64_dense",
-      "name": "Tensor FP64 / Dense",
+      "id": "matrix_tf32_acc32_dense",
+      "name": "Matrix TF32→FP32 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "TF32入力・FP32蓄積の行列演算。"
     },
     {
-      "id": "tensor_fp64_sparse",
-      "name": "Tensor FP64 / Sparse",
+      "id": "matrix_tf32_acc32_sparse",
+      "name": "Matrix TF32→FP32 / Sparse",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_tf32_dense",
-      "name": "Tensor TF32 / Dense",
+      "id": "matrix_bf16_acc32_dense",
+      "name": "Matrix BF16→FP32 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "BF16入力・FP32蓄積の行列演算。"
     },
     {
-      "id": "tensor_tf32_sparse",
-      "name": "Tensor TF32 / Sparse",
+      "id": "matrix_bf16_acc32_sparse",
+      "name": "Matrix BF16→FP32 / Sparse",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_bf16_dense",
-      "name": "Tensor BF16 / Dense",
+      "id": "matrix_fp16_acc32_dense",
+      "name": "Matrix FP16→FP32 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "FP16入力・FP32蓄積の行列演算。GeForceはプロ向け製品の半分のレート。"
     },
     {
-      "id": "tensor_bf16_sparse",
-      "name": "Tensor BF16 / Sparse",
+      "id": "matrix_fp16_acc32_sparse",
+      "name": "Matrix FP16→FP32 / Sparse",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_fp16_dense",
-      "name": "Tensor FP16 / Dense",
+      "id": "matrix_fp8_acc32_dense",
+      "name": "Matrix FP8→FP32 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "FP8入力・FP32蓄積の行列演算。FP8形式・スケーリング条件は各値の注記を参照。"
     },
     {
-      "id": "tensor_fp16_sparse",
-      "name": "Tensor FP16 / Sparse",
+      "id": "matrix_fp8_acc32_sparse",
+      "name": "Matrix FP8→FP32 / Sparse",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_fp8_dense",
-      "name": "Tensor FP8 / Dense",
+      "id": "matrix_fp4_dense",
+      "name": "Matrix FP4 / Dense",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "FP4入力の行列演算（NVIDIA Blackwell: FP32蓄積）。"
     },
     {
-      "id": "tensor_fp8_sparse",
-      "name": "Tensor FP8 / Sparse",
+      "id": "matrix_fp4_sparse",
+      "name": "Matrix FP4 / Sparse",
       "unit": "TFLOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_fp4_dense",
-      "name": "Tensor FP4 / Dense",
-      "unit": "TFLOPS",
-      "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
-    },
-    {
-      "id": "tensor_fp4_sparse",
-      "name": "Tensor FP4 / Sparse",
-      "unit": "TFLOPS",
-      "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
-    },
-    {
-      "id": "tensor_int8_dense",
-      "name": "Tensor INT8 / Dense",
+      "id": "matrix_int8_acc32_dense",
+      "name": "Matrix INT8→INT32 / Dense",
       "unit": "TOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "INT8入力・INT32蓄積の行列演算。"
     },
     {
-      "id": "tensor_int8_sparse",
-      "name": "Tensor INT8 / Sparse",
+      "id": "matrix_int8_acc32_sparse",
+      "name": "Matrix INT8→INT32 / Sparse",
       "unit": "TOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
-      "id": "tensor_int4_dense",
-      "name": "Tensor INT4 / Dense",
+      "id": "matrix_int4_dense",
+      "name": "Matrix INT4 / Dense",
       "unit": "TOPS",
       "direction": "higher",
-      "note": "密行列の理論ピーク。入力精度・蓄積精度・クロック条件の違いにも注意してください。"
+      "note": "ネイティブINT4入力の行列演算。INT8と同レートの広告INT4値（ネイティブ命令なし）は含めず注記に記載。"
     },
     {
-      "id": "tensor_int4_sparse",
-      "name": "Tensor INT4 / Sparse",
+      "id": "matrix_int4_sparse",
+      "name": "Matrix INT4 / Sparse",
       "unit": "TOPS",
       "direction": "higher",
-      "note": "所定の構造化疎行列を使った実効理論ピーク。通常の密行列には適用できません。"
+      "note": "2:4構造化スパース行列での公称値（通常の密行列には適用されない）。CDNA1/2・Gaudi2・RDNA3.5は非対応または未公表。"
     },
     {
       "id": "ai_tops",
-      "name": "広告 AI TOPS（条件別・単純比較不可）",
+      "name": "広告 AI TOPS（精度条件混在・倍率比較不可）",
       "unit": "AI TOPS",
       "direction": "higher",
-      "note": "製品ページの広告値。精度・疎性・蓄積条件がこのページだけでは確定しないため、INT8 TOPSや精度別Tensor性能には転記していません。世代間の倍率を性能向上率とみなさないでください。"
+      "note": "製品ページの広告値。精度・疎性・蓄積条件が製品ごとに異なるため倍率比較しない。",
+      "comparable": false
     }
   ],
   "benchmarks": [],
@@ -192,22 +179,22 @@
         }
       ],
       "performance": {
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 8.1,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_dense": {
+        "matrix_fp16_acc32_dense": {
           "value": 65,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_dense": {
+        "matrix_int8_acc32_dense": {
           "value": 130,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int4_dense": {
+        "matrix_int4_dense": {
           "value": 260,
           "source": "spec",
           "kind": "published"
@@ -247,67 +234,67 @@
         }
       ],
       "performance": {
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 30.3,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_dense": {
+        "matrix_tf32_acc32_dense": {
           "value": 60,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_sparse": {
+        "matrix_tf32_acc32_sparse": {
           "value": 120,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_dense": {
+        "matrix_bf16_acc32_dense": {
           "value": 121,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_sparse": {
+        "matrix_bf16_acc32_sparse": {
           "value": 242,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_dense": {
+        "matrix_fp16_acc32_dense": {
           "value": 121,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_sparse": {
+        "matrix_fp16_acc32_sparse": {
           "value": 242,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp8_dense": {
+        "matrix_fp8_acc32_dense": {
           "value": 242,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp8_sparse": {
+        "matrix_fp8_acc32_sparse": {
           "value": 485,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_dense": {
+        "matrix_int8_acc32_dense": {
           "value": 242,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_sparse": {
+        "matrix_int8_acc32_sparse": {
           "value": 485,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int4_dense": {
+        "matrix_int4_dense": {
           "value": 484,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int4_sparse": {
+        "matrix_int4_sparse": {
           "value": 969,
           "source": "spec",
           "kind": "published"
@@ -347,59 +334,59 @@
         }
       ],
       "performance": {
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 91.6,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_dense": {
+        "matrix_tf32_acc32_dense": {
           "value": 183,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_sparse": {
+        "matrix_tf32_acc32_sparse": {
           "value": 366,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_dense": {
+        "matrix_bf16_acc32_dense": {
           "value": 362.05,
           "source": "spec",
           "kind": "published",
           "note": "要確認：公式記載362.05を転記。Sparse 733の半分と一致しない。"
         },
-        "tensor_bf16_sparse": {
+        "matrix_bf16_acc32_sparse": {
           "value": 733,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_dense": {
+        "matrix_fp16_acc32_dense": {
           "value": 362.05,
           "source": "spec",
           "kind": "published",
           "note": "要確認：公式記載362.05を転記。Sparse 733の半分と一致しない。"
         },
-        "tensor_fp16_sparse": {
+        "matrix_fp16_acc32_sparse": {
           "value": 733,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp8_dense": {
+        "matrix_fp8_acc32_dense": {
           "value": 733,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp8_sparse": {
+        "matrix_fp8_acc32_sparse": {
           "value": 1466,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_dense": {
+        "matrix_int8_acc32_dense": {
           "value": 733,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_sparse": {
+        "matrix_int8_acc32_sparse": {
           "value": 1466,
           "source": "spec",
           "kind": "published"
@@ -439,57 +426,57 @@
         }
       ],
       "performance": {
-        "cuda_fp64": {
+        "gpu_fp64": {
           "value": 9.7,
           "source": "spec",
           "kind": "published"
         },
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 19.5,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp64_dense": {
+        "matrix_fp64_dense": {
           "value": 19.5,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_dense": {
+        "matrix_tf32_acc32_dense": {
           "value": 156,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_sparse": {
+        "matrix_tf32_acc32_sparse": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_dense": {
+        "matrix_bf16_acc32_dense": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_sparse": {
+        "matrix_bf16_acc32_sparse": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_dense": {
+        "matrix_fp16_acc32_dense": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_sparse": {
+        "matrix_fp16_acc32_sparse": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_dense": {
+        "matrix_int8_acc32_dense": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_sparse": {
+        "matrix_int8_acc32_sparse": {
           "value": 1248,
           "source": "spec",
           "kind": "published"
@@ -529,57 +516,57 @@
         }
       ],
       "performance": {
-        "cuda_fp64": {
+        "gpu_fp64": {
           "value": 9.7,
           "source": "spec",
           "kind": "published"
         },
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 19.5,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp64_dense": {
+        "matrix_fp64_dense": {
           "value": 19.5,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_dense": {
+        "matrix_tf32_acc32_dense": {
           "value": 156,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_sparse": {
+        "matrix_tf32_acc32_sparse": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_dense": {
+        "matrix_bf16_acc32_dense": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_sparse": {
+        "matrix_bf16_acc32_sparse": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_dense": {
+        "matrix_fp16_acc32_dense": {
           "value": 312,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_sparse": {
+        "matrix_fp16_acc32_sparse": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_dense": {
+        "matrix_int8_acc32_dense": {
           "value": 624,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_sparse": {
+        "matrix_int8_acc32_sparse": {
           "value": 1248,
           "source": "spec",
           "kind": "published"
@@ -619,42 +606,42 @@
         }
       ],
       "performance": {
-        "cuda_fp64": {
+        "gpu_fp64": {
           "value": 34,
           "source": "spec",
           "kind": "published"
         },
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 67,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp64_dense": {
+        "matrix_fp64_dense": {
           "value": 67,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_tf32_sparse": {
+        "matrix_tf32_acc32_sparse": {
           "value": 989,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_bf16_sparse": {
+        "matrix_bf16_acc32_sparse": {
           "value": 1979,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp16_sparse": {
+        "matrix_fp16_acc32_sparse": {
           "value": 1979,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_fp8_sparse": {
+        "matrix_fp8_acc32_sparse": {
           "value": 3958,
           "source": "spec",
           "kind": "published"
         },
-        "tensor_int8_sparse": {
+        "matrix_int8_acc32_sparse": {
           "value": 3958,
           "source": "spec",
           "kind": "published"
@@ -694,7 +681,7 @@
         }
       ],
       "performance": {
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 83,
           "source": "spec",
           "kind": "published"
@@ -739,7 +726,7 @@
         }
       ],
       "performance": {
-        "cuda_fp32": {
+        "gpu_fp32": {
           "value": 104.8832,
           "source": "spec",
           "kind": "derived",

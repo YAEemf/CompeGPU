@@ -44,18 +44,20 @@ def run():
                 actual_order = page.locator('#tableHead > th[data-gpu]').evaluate_all('(els)=>els.map(el=>el.dataset.gpu)')
                 assert actual_order == old_order + ['ryzen-ai-max-plus-395']
                 columns = page.locator('#tableBody > tr[data-column]').evaluate_all('(els)=>els.map(el=>el.dataset.column)')
-                assert columns[:2] == ['cuda_fp32', 'cc'] and len(columns) == 19
+                assert columns[:2] == ['gpu_fp32', 'cc'], columns  # old cuda_fp32 selection maps to the merged row
+                assert len(columns) == len(set(columns)) and {'matrix_fp16_acc16_dense','matrix_int8_acc32_dense','npu_ai_tops','vector_bf16'} <= set(columns), columns
                 apu = 'ryzen-ai-max-plus-395'
                 def cell(metric):
                     return page.locator(f'[data-cell="{metric}"][data-gpu="{apu}"]')
-                for metric, text in {'cc':'x','cuda_fp32':'x','gpu_fp64':'0.5','gpu_fp32':'29.7',
-                                     'gpu_fp16':'59.4','gpu_matrix_fp16_acc16_dense':'59.4',
+                for metric, text in {'cc':'x','gpu_fp64':'0.5','gpu_fp32':'29.7',
+                                     'gpu_fp16':'59.4','matrix_fp16_acc16_dense':'59.4','matrix_fp8_acc32_dense':'x',
                                      'field:/cpu_cores':'16','field:/cpu_threads':'32',
                                      'npu_ai_tops':'50','platform_ai_tops':'126'}.items():
                     expect(cell(metric)).to_have_text(text)
                 for gpu, values in {
                     'intel-gaudi2-hl225h':{'matrix_bf16_acc32_dense':'432','matrix_fp8_acc32_dense':'865','vector_bf16':'11','matrix_fp16_acc32_dense':'—','matrix_fp64_dense':'x'},
-                    'amd-instinct-mi250':{'matrix_bf16_acc32_dense':'362.1','matrix_fp64_dense':'90.5','gpu_fp32':'45.3','gpu_fp16':'90.5','gpu_fp32_packed':'90.5','matrix_fp8_acc32_dense':'x','vector_bf16':'x'},
+                    'amd-instinct-mi250x':{'matrix_bf16_acc32_dense':'383','matrix_fp64_dense':'95.7','gpu_fp32':'47.9','gpu_fp16':'95.7','matrix_fp8_acc32_dense':'x','vector_bf16':'x'},
+                    'a100-sxm4-40gb':{'gpu_fp64':'9.7','matrix_fp16_acc32_dense':'312','vector_bf16':'39'},
                 }.items():
                     for key,value in values.items():
                         expect(page.locator(f'[data-cell="{key}"][data-gpu="{gpu}"]')).to_have_text(value)
@@ -81,14 +83,13 @@ def run():
                 expect(cell('llama_5b59b83f4_gpt-oss-120b-mxfp4_vulkan_tg512')).to_have_text('55.3')
                 expect(page.locator('[data-cell="gpu_fp32"], [data-cell="cc"]')).to_have_count(0)
                 expect(page.locator('#tableBody > tr[data-column]')).to_have_count(len(original['benchmarks']))
-                expect(page.locator('[data-cell="gaudi_paper_v1_fp8_gemm_8192_tensor_hw"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('851.2')
-                expect(page.locator('[data-cell="gaudi124_fp16_gemm_8192_compiled"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('370.9')
-                expect(page.locator('[data-cell="amd_mi250_rochpl6_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('40.5')
-                expect(page.locator('[data-cell="amd_mi250_hpcg3_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('0.5')
+                expect(page.locator('[data-cell="gemm_fp8_1gpu"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('851.2')
+                expect(page.locator('[data-cell="gemm_fp16_1gpu"][data-gpu="intel-gaudi2-hl225h"]')).to_have_text('370.9')
+                expect(page.locator('[data-cell="hpl_fp64_1gpu"][data-gpu="amd-instinct-mi100"]')).to_have_text('6.4')
                 page.click('#transpose')
                 expect(cell('gb640_cpu_multi')).to_have_text('22,313')
                 expect(page.locator('[data-cell="paper2601_qwen3_nvfp4_api_i256_o256_c64_tps"][data-gpu="rtx5070ti"]')).to_have_text('2,899.1')
-                expect(page.locator('[data-cell="dell2022_hpl_single"][data-gpu="amd-instinct-mi210"]')).to_have_text('18.2')
+                expect(page.locator('[data-cell="hpl_fp64_1gpu"][data-gpu="amd-instinct-mi210"]')).to_have_text('18.2')
                 page.select_option('#valueMode', 'nominal')
                 page.locator(f'[data-baseline="{apu}"]').dblclick()
                 expect(page.locator('#gpuForm [name="cc"]')).to_have_value('')

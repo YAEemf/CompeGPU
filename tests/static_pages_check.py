@@ -58,7 +58,7 @@ def run():
                 expect(mobile.locator('[data-baseline]')).to_have_count(len(json.loads((ROOT/'data/gpus.json').read_bytes())['gpus']))
                 expect(mobile.locator('[data-cell="price_jpy"][data-gpu="rtx4090"]')).to_have_text('—')
                 page.select_option('#valueMode','measured')
-                expect(page.locator('[data-cell="amd_mi250_rochpl6_single_oam"][data-gpu="amd-instinct-mi250"]')).to_have_text('40.5')
+                expect(page.locator('[data-cell="hpl_fp64_1gpu"][data-gpu="amd-instinct-mi210"]')).to_have_text('18.2')
                 page.select_option('#valueMode','nominal')
                 # JSON transfer and client-side validation are available without POST endpoints.
                 imported = json.loads((ROOT/'data/gpus.json').read_bytes())
